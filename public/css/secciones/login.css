@@ -1,0 +1,60 @@
+.fondo_principal{
+    background: url('../../img/fondos/login/fondo1.jpg') no-repeat center center fixed !important; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+input[type=text],input[type=password]{
+    width: 100%;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+    background-color: #d3d3d3;
+}
+
+input[type=text]:focus,input[type=password]:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+.inputWithIcon input[type=text],.inputWithIcon input[type=password]{
+    padding-left: 40px;
+}
+
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding:10px 8px;
+    color:#aaa;
+}
+
+.inputWithIcon.inputIconBg i{
+    background-color: #003c54;
+    color:#fff;
+    padding:11px 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.inputIconBg input[type=text]:focus + i{
+    color:#fff;
+    background-color: dodgerblue;
+}
+
+.m-b{
+    width:150px;
+    background:#003c54;
+    color:white;
+    font-weight: bold;
+    margin-left: 30%;
+}
