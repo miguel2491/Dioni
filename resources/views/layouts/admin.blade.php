@@ -18,29 +18,35 @@
         .select2-dropdown{
             z-index: 9001;
         }
+        .skin-3 .navbar-static-top{
+            background:#bfbfbf;
+        }
+        .skin-3 #page-wrapper, .footer{
+            background:#bfbfbf !important;
+        }
+        .border-bottom, .skin-3 #page-wrapper, .footer{
+            border-bottom:0px solid #e7eaec !important;
+        }
+        .footer{
+            border-top:0px solid #e7eaec;
+        }
     </style>
     @yield('main-css')
 </head>
 
 <body class="skin-3">
     <div id="wrapper">
-        @include('layouts.sidebar')
         <div id="page-wrapper" class="gray-bg">
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                    </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
                             <span class="m-r-sm text-muted welcome-message">EDUCACIÓN MÓVIL MX</span>
                         </li>
-                        <li>
+                        <li style="margin-left:80%">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Cerrar Sesión
+                                <img src="img/fondos/login/unimovil.png" style="width:50px" />
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
@@ -51,11 +57,8 @@
             </div>
             @yield('main-content')
             <div class="footer">
-                <div class="pull-right">
-                    <strong>Sistema Administración</strong>.
-                </div>
                 <div>
-                    <strong>Copyright</strong> &copy; 2018
+                <img src="img/fondos/principal/regresar1.png" style="width:15px" />
                 </div>
             </div>
         </div>
