@@ -6,18 +6,20 @@ Inicio
 @section('main-content')
     <div class="row">
         <div class="col-xs-6 col-md-6">
-            <a href="{{ URL::to('profesor') }}">
+            <a href="{{ URL::to('pan_maestro') }}">
                 <div align="center">
-                    <img src="img/fondos/principal/derecho1.png" style="width:75px" />
+                    <img src="img/fondos/principal/derecho1.png" style="width:75px" /><br>
                     <label class="titulos_menu">DERECHO</label>
                 </div>
             </a>        
         </div>
         <div class="col-xs-6 col-md-6">
+        <a href="{{ URL::to('pan_alumno') }}">
             <div align="center">
                 <img src="img/fondos/principal/administracion1.png" style="width:70px" />
                 <label class="titulos_menu">ADMINISTRACIÓN</label>
-            </div>        
+            </div>  
+        </a>          
         </div>
     </div>
     <div class="row">
