@@ -76,3 +76,6 @@ Route::resource('pan_alumno', 'Alumno\AlumnoController', ['except' => ['create',
 Route::get('pan_alumno/clases', 'Alumno\AlumnoController@clase_vista');
 Route::get('evaluacion_alumno', 'Alumno\AlumnoController@evalua_alumno_vista');
 Route::get('cuestionario_alumno', 'Alumno\AlumnoController@cuestionario_alumno_vista');
+/*MATERIAS*/
+Route::get('materia/{id}', 'Materias\MateriasController@materia');
+Route::get('materia/clase/{id}', 'Materias\MateriasController@materia_clase');
