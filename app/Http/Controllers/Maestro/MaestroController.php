@@ -31,6 +31,16 @@ class MaestroController extends Controller {
     public function asignatura_clase()
     {
         return view('Maestro/clase');
-    }
+	}
+	
+	public function evalua_maestro_vista()
+	{
+		return view('Maestro/evaluacion');
+	}
+
+	public function cuestionario_maestro_vista()
+	{
+		return view('Maestro/cuestionario');
+	}
 
 }

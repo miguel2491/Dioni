@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -69,5 +69,10 @@ Route::get('clases/lista_asignadas', 'Catalogos\ClasesController@lista_asignadas
 Route::resource('pan_maestro', 'Maestro\MaestroController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('pan_maestro/asignatura', 'Maestro\MaestroController@asignatura');
 Route::get('pan_maestro/asignatura_clase', 'Maestro\MaestroController@asignatura_clase');
+Route::get('evaluacion_maestro', 'Maestro\MaestroController@evalua_maestro_vista');
+Route::get('cuestionario_maestro', 'Maestro\MaestroController@cuestionario_maestro_vista');
 /***PANTALLA ALUMNO***/
 Route::resource('pan_alumno', 'Alumno\AlumnoController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
+Route::get('pan_alumno/clases', 'Alumno\AlumnoController@clase_vista');
+Route::get('evaluacion_alumno', 'Alumno\AlumnoController@evalua_alumno_vista');
+Route::get('cuestionario_alumno', 'Alumno\AlumnoController@cuestionario_alumno_vista');

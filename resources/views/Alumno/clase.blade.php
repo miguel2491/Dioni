@@ -13,13 +13,25 @@
         padding:0px 5px;
     }
     .botons{
-		background:#ff931e;
-        text-transform:uppercase;
-        border-radius:20px;
+        background:#003c54;
+        border-radius:5px;
         color:white;
-        width:70%;
+        width:80%;
         margin-left:10%;
+        padding:5px 5px 5px 5px;
         margin-bottom:5%;
+    }
+    .inputs{
+        background:#ff931e;
+        border-color:#ff931e;
+        border-radius:5px;
+        color:white;
+    }
+    .btnVer{
+        width:100%;
+        background:#ff931e;
+        color:white;
+        font-weight:bold;
     }
     a{
         color:white;
@@ -37,41 +49,49 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">
-            <p><b>ALUMNO(A):</b></p>
-            <span id="">JUAN PEREZ LOPEZ</span>
+            <p><b>CLASE 2</b></p>
+            <span id="">10/04/2020</span>
 		</div>
 	</div>
     <div class="row">
-		<div class="col-lg-12">
-            <div align="center">
-                <img src="img/fondos/maestro/profe.png" style="width:75px" />
+        <div class="form-group">
+            <label class="control-label col-sm-2">VIDEO</label>
+            <div class="col-sm-8">
+            <iframe width="100%" height="250"
+                src="https://www.youtube.com/embed/py96K-pT9_I">
+            </iframe> 
             </div>
-            <div align="center" style="margin-top:3%">
-                <b>ASIGNATURA:</b>
-            </div>
-			<div align="center" style="margin-top:3%">
-                <b>METODOLOGÍA DE LA INVESTIGACIÓN</b>
-            </div>
-		</div>
-	</div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-lg-12" style="margin-top:5%">
-            <div align="center" class="botons">
-            <a href="{{ URL::to('pan_maestro/asignatura')}}">
-                <label>
-                	CLASE 1
-                </label>
-            </a>    
+        <div class="form-group">
+            <label class="control-label col-sm-2">ACTIVIDAD</label>
+            <div class="col-sm-8">
+                <textarea class="form-control inputs" rows="5"></textarea> 
             </div>
-            <div align="center" class="botons">
-                <label>
-                    CLASE 2
-                </label>    
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">ANEXOS</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control inputs" /> 
             </div>
-            <div align="center" class="botons">
-                <label> CLASE 3</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label col-sm-2">TAREA</label>
+            <div class="col-sm-8">
+                <select class="form-control select2 select inputs"></select> 
             </div>
-        </div>    
+        </div>
+    </div>
+    <div class="row" style="padding-bottom:50px">
+        <div class="form-group">
+            <label class="control-label col-sm-2">CUESTIONARIO</label>
+            <div class="col-sm-8" style="margin-bottom:3%">
+                <button class="btn btnVer" style="letter-spacing: 3px">CONTESTAR</button>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

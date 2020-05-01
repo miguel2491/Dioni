@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('main-title')
-   ALUMNO
+   EVALUACIONES
 @endsection
 @section('main-css')
 <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -13,17 +13,30 @@
         padding:0px 5px;
     }
     .botons{
-		background:#ff931e;
-        text-transform:uppercase;
-        border-radius:20px;
+        background:#003c54;
+        border-radius:5px;
         color:white;
-        width:70%;
+        width:80%;
         margin-left:10%;
+        padding:5px 5px 5px 5px;
         margin-bottom:5%;
     }
-    a{
+    .inputs{
+        background:#ff931e;
+        border-color:#ff931e;
+        border-radius:5px;
         color:white;
     }
+    .btnVer{
+        width:100%;
+        background:#ff931e;
+        color:white;
+        font-weight:bold;
+    }
+    #tbl_body tr td{
+        text-align:center;
+        height:50px;
+    } 
 </style>
 @endsection
 @section('main-content')
@@ -37,41 +50,39 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">
-            <p><b>ALUMNO(A):</b></p>
-            <span id="">JUAN PEREZ LOPEZ</span>
+            <p><b>EVLUACIÓN DEL CUESTIONARIO</b></p>
 		</div>
 	</div>
     <div class="row">
-		<div class="col-lg-12">
-            <div align="center">
-                <img src="img/fondos/maestro/profe.png" style="width:75px" />
-            </div>
-            <div align="center" style="margin-top:3%">
-                <b>ASIGNATURA:</b>
-            </div>
-			<div align="center" style="margin-top:3%">
-                <b>METODOLOGÍA DE LA INVESTIGACIÓN</b>
-            </div>
-		</div>
-	</div>
-    <div class="row">
-        <div class="col-lg-12" style="margin-top:5%">
-            <div align="center" class="botons">
-            <a href="{{ URL::to('pan_maestro/asignatura')}}">
-                <label>
-                	CLASE 1
-                </label>
-            </a>    
-            </div>
-            <div align="center" class="botons">
-                <label>
-                    CLASE 2
-                </label>    
-            </div>
-            <div align="center" class="botons">
-                <label> CLASE 3</label>
-            </div>
-        </div>    
+        <div class="table-responsives">
+        <table id="table-datos">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">ALUMNO</th>
+                                <th style="text-align:center">CALIFICACIÓN</th>
+                                <th style="text-align:center"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_body">
+                            <tr>
+                                <td>ÁLVARO GONZÁLEZ ROSAS</td>
+                                <td>9</td>
+                                <td style="width:30%"><button class="btn btn-xs btn-warning"><i class="fa fa-eye"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>LIDIA ROJAS FUERTES</td>
+                                <td>8</td>
+                                <td style="width:30%"><button class="btn btn-xs btn-warning"><i class="fa fa-eye"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>ANDREA FIERRO LOPEZ</td>
+                                <td>N/P</td>
+                                <td style="width:30%"><button class="btn btn-xs btn-warning"><i class="fa fa-eye-slash"></i></button></td>
+                            </tr>
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+        </div>
     </div>
 </div>
 @endsection
