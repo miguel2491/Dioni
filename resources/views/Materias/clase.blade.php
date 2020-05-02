@@ -18,7 +18,8 @@
         border-radius:5px;
         color:white;
         margin-bottom:5%;
-        height: 25px;
+        height: 50px;
+        padding:15px 5px 5px 5px;
     }
     a{
         color:white;
@@ -38,50 +39,28 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}" id="hdd_IdUsuario">
 <input type="hidden" id="url_listado" value="{{ url('alumnos/listado') }}">
-<input type="hidden" id="url_datosget" value="{{ url('alumnos/datos') }}">
-<input type="hidden" id="url_guardar" value="{{ url('alumnos/guardar') }}">
-<input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
-<input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12">
             <div align="center" class="btnTitle" style="margin-top:3%">
-                <span>{{$cuatri}}</span>
+                <span>{{$cuatrimestre}}</span>
             </div>
 		</div>
 	</div>
     <div class="row">
         <div class="col-lg-12" style="margin-top:5%">
+            @foreach($materia as $mate)
             <div align="center" class="bots">
                 <div class="col-xs-1 col-md-1">
                     <i class="fa fa-pencil"></i>
                 </div>
                 <div class="col-xs-10 col-md-10">
                     <label>
-                        INTRODUCCIÓN AL DERECHO
+                        {{$mate->materia}}
                     </label>
                 </div>
             </div>
-            <div align="center" class="bots">
-                <div class="col-xs-1 col-md-1">
-                    <i class="fa fa-pencil"></i>
-                </div>
-                <div class="col-xs-10 col-md-10">
-                    <label>
-                        HISTORIA DEL DERECHO
-                    </label>
-                </div>    
-            </div>
-            <div align="center" class="bots">
-                <div class="col-xs-1 col-md-1">
-                    <i class="fa fa-pencil"></i>
-                </div>
-                <div class="col-xs-10 col-md-10">
-                    <label>
-                        INGLÉS I
-                    </label>
-                </div>
-            </div>
+            @endforeach
         </div>    
     </div>
 </div>

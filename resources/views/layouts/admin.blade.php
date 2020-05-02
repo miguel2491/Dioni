@@ -37,30 +37,8 @@
 <body class="skin-3">
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li>
-                            <span class="m-r-sm text-muted welcome-message">EDUCACIÓN MÓVIL MX</span>
-                        </li>
-                        <li style="margin-left:80%">
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                <img src="img/fondos/login/unimovil.png" style="width:50px" />
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
             @yield('main-content')
-            <div class="footer">
-                <div>
-                <img src="img/fondos/principal/regresar1.png" style="width:15px" />
-                </div>
-            </div>
+            
         </div>
     </div>
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>

@@ -6,6 +6,7 @@ use App;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Maestro\MateriasRequest;
 use App\Models\Catalogos\Materias;
+use App\Models\Catalogos\Cuatrimestres;
 use App\User;
 use Auth;
 use DB;
@@ -27,25 +28,47 @@ class MateriasController extends Controller {
     public function materia($id) {
     	$materia = "";
     	$icono = "";
-    	if($id == "1" || $id == 1){
-    		$materia = "DERECHO";
-    		$icono = "derecho1.png";
-    	}else{
-    		$materia = "ADMINISTRACIÓN";
-    		$icono = "administracion1.png";
-    	}
-		return view('Materias/index')->with('materia', $materia)->with('icono', $icono);
+        switch ($id) {
+            case 'DR00':
+                $materia = "DERECHO";
+                $icono = "derecho1.png";
+                break;
+            case 'ADE00':
+                $materia = "ADMINISTRACIÓN";
+                $icono = "administracion1.png";
+            default:
+                # code...
+                break;
+        }
+        $cuatri = Cuatrimestres::select(
+            'id_cuatri',
+            'cuatri')
+            ->get();
+		return view('Materias/index')->with('materia', $materia)->with('icono', $icono)->with('cuatri',$cuatri)->with('id_materia',$id);
     }
 
-    public function materia_clase($id)
+    public function materia_clase($id,$idc)
     {
+        $id_cuatri = $id;
+        $id_carrera = $idc;
     	$cuatri = "";
-    	if($id == "1" || $id == 1){
-    		$cuatri = "I CUATRIMESTRE";
-    	}else{
-    		$cuatri = "II CUATRIMESTRE";
-    	}
-    	return view('Materias/clase')->with('cuatri', $cuatri);
+    	//---------
+        $cuatri = Cuatrimestres::select('cuatri')
+        ->where('id_cuatri', $id_cuatri)
+        ->get();
+        $n_cuatri = $cuatri[0]->cuatri;
+        //---------
+        $materia = Materias::select(
+            'no',
+            'materia',
+            'cuatrimestres.cuatri'
+        )
+        ->leftjoin('cuatrimestres', 'cuatrimestres.id_cuatri', '=', 'materias.id_cuatrimestre')
+        ->where('materias.id_cuatrimestre',$id_cuatri)
+        ->where('materias.id_carr',$id_carrera)
+        ->get();
+
+        return view('Materias/clase')->with('materia', $materia)->with('cuatrimestre',$n_cuatri);
     }
     
     

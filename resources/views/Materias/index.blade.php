@@ -29,11 +29,28 @@
 @section('main-content')
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}" id="hdd_IdUsuario">
-<input type="hidden" id="url_listado" value="{{ url('alumnos/listado') }}">
-<input type="hidden" id="url_datosget" value="{{ url('alumnos/datos') }}">
-<input type="hidden" id="url_guardar" value="{{ url('alumnos/guardar') }}">
-<input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
-<input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
+<input type="hidden" id="url_listado" value="{{ url('materias/listado') }}">
+<input type="hidden" id="url_materias" value="{{ url('materia/clases') }}">
+<input type="hidden" id="id_carrera" value="{{$id_materia}}">
+<input type="hidden" id="view_clase" value="{{ url('materia/clases') }}">
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <span class="m-r-sm text-muted welcome-message">EDUCACIÓN MÓVIL MX</span>
+            </li>
+            <li style="margin-left:80%">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                    <img src="../img/fondos/login/unimovil.png" style="width:50px" />
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+            </li>
+        </ul>
+    </nav>
+</div>
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12">
@@ -46,25 +63,24 @@
 		</div>
 	</div>
     <div class="row">
-        <div class="col-lg-12" style="margin-top:5%">
-            <div align="center" class="botons">
-            <a href="{{ URL::to('materia/clase/1')}}">
-                <label>
-                	CUATRIMESTRE I
-                </label>
-            </a>    
-            </div>
-            <div align="center" class="botons">
-                <label>
-                    CUATRIMESTRE II
-                </label>    
-            </div>
-            <div align="center" class="botons">
-                <label> CUATRIMESTRE III</label>
-            </div>
+        <div class="col-lg-12" style="margin-top:5%;padding-bottom: 10%">
+            @foreach($cuatri as $cua)
+                <div align="center" class="botons">
+                    <a href="{{route('materia.clase',['id'=>$cua->id_cuatri,'name'=>$id_materia])}}">
+                        <label>
+                            {{$cua->cuatri}}
+                        </label>
+                    </a>    
+                </div>
+            @endforeach
         </div>    
     </div>
 </div>
+<div class="footer">
+        <div>
+            <img src="../img/fondos/principal/regresar1.png" style="width:15px" />
+        </div>
+    </div>
 @endsection
 @section('main-scripts')
 	<script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
@@ -74,5 +90,5 @@
 	<script src="{{ asset('js/plugins/autonumeric/autoNumeric.js') }}"></script>
 	<script src="{{ asset('js/plugins/touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
 	<script src="{{ asset('js/plugins/summernote/summernote.min.js') }}"></script>
-	<script src="{{ asset('js/maestro/maestro.js') }}"></script>
+	<script src="{{ asset('js/materias/materias.js') }}"></script>
 @endsection

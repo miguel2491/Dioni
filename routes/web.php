@@ -78,4 +78,5 @@ Route::get('evaluacion_alumno', 'Alumno\AlumnoController@evalua_alumno_vista');
 Route::get('cuestionario_alumno', 'Alumno\AlumnoController@cuestionario_alumno_vista');
 /*MATERIAS*/
 Route::get('materia/{id}', 'Materias\MateriasController@materia');
-Route::get('materia/clase/{id}', 'Materias\MateriasController@materia_clase');
+//Route::resource('maateria/{id}', 'Materias\MateriasController@materia');
+Route::get('materia/clases/{category}/post/{post}', 'Materias\MateriasController@materia_clase')->name('materia.clase');
