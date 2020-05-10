@@ -10,6 +10,34 @@ Inicio
             <li>
                 <span class="m-r-sm text-muted welcome-message">EDUCACIÓN MÓVIL MX</span>
             </li>
+            @php
+              use App\Models\RolesUser;
+              $id = Auth::user()->id;
+              $roles = RolesUser::where('user_id', $id)->first();
+            @endphp
+            @php
+                if($roles->rol_id==1){
+            @endphp
+            <li style="margin-left:80%">
+                <a href="{{ URL::to('menu_profe') }}">
+                    <img src="img/fondos/login/unimovil.png" style="width:50px" />
+                </a>
+            </li>
+            @php
+                }
+            @endphp
+            @php
+                if($roles->rol_id==3){
+            @endphp
+            <li style="margin-left:80%">
+                <a href="{{ URL::to('menu_alumno') }}">
+                    <img src="img/fondos/login/unimovil.png" style="width:50px" />
+                </a>
+            </li>
+            @php
+                }
+            @endphp
+            <!--
             <li style="margin-left:80%">
                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
@@ -19,6 +47,7 @@ Inicio
                     {{ csrf_field() }}
                 </form>
             </li>
+            -->
         </ul>
     </nav>
 </div>
@@ -62,7 +91,7 @@ Inicio
         <div class="col-xs-6 col-md-6">
             <a href="{{ URL::to('materia/CT00') }}">
                 <div align="center">
-                    <img src="img/fondos/principal/contaduria1.png" style="width:70px" />
+                    <img src="img/fondos/principal/contaduria1.png" style="width:70px" /><br>
                     <label class="titulos_menu">CONTADURÍA</label>  
                 </div>              
             </a>
@@ -78,7 +107,13 @@ Inicio
     </div>
     <div class="footer">
         <div>
-            <img src="img/fondos/principal/regresar1.png" style="width:15px" />
+             <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                    <img src="img/fondos/principal/regresar1.png" style="width:15px" />
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
         </div>
     </div>
 @endsection

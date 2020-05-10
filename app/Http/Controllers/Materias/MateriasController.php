@@ -41,8 +41,8 @@ class MateriasController extends Controller {
                 break;
         }
         $cuatri = Cuatrimestres::select(
-            'id_cuatri',
-            'cuatri')
+            'id',
+            'lapso')
             ->get();
 		return view('Materias/index')->with('materia', $materia)->with('icono', $icono)->with('cuatri',$cuatri)->with('id_materia',$id);
     }
@@ -53,8 +53,8 @@ class MateriasController extends Controller {
         $id_carrera = $idc;
     	$cuatri = "";
     	//---------
-        $cuatri = Cuatrimestres::select('cuatri')
-        ->where('id_cuatri', $id_cuatri)
+        $cuatri = Cuatrimestres::select('lapso')
+        ->where('id', $id_cuatri)
         ->get();
         $n_cuatri = $cuatri[0]->cuatri;
         //---------

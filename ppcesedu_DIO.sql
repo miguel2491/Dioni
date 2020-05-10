@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-12-2019 a las 05:51:55
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.1.26
+-- Tiempo de generación: 05-05-2020 a las 04:09:50
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_educacion`
+-- Base de datos: `ppcesedu_mx`
 --
 
 -- --------------------------------------------------------
@@ -50,14 +50,14 @@ CREATE TABLE `alumnos1` (
 INSERT INTO `alumnos1` (`id`, `id_alumn`, `nombre`, `appat`, `appmat`, `user_alum`, `pass_alumn`, `cuatrimestre`, `carrera`, `id_carrera`, `foto`, `info`) VALUES
 (1, '201701001', 'Andrea Guadalupe', 'Vigueras', 'Sánchez', 'vigueras.andrea', '7429647', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
 (2, '201701005', 'Violeta ', 'Romero', 'Bustamante', 'romero.violeta', '96', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
-(3, '201701007', 'Gerardo Abraham', 'Hernández', 'Chávez', 'hernandez.gerardo', '5497755', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
-(4, '201701011', 'María Martha', 'Rivera', 'Pérez', 'rivera.maria', '6121604', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
-(5, '201701013', 'José Armando', 'Santiago', 'Valente', 'santiago.jose', '4731325', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
-(6, '201701012', 'Beatriz ', 'Santiago', 'Miguel', 'santiago.beatriz', '2584771', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
+(3, '201701007', 'Gerardo Abraham', 'Hernández', 'Chávez', 'hernandez.gerardo', '', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
+(4, '201701011', 'María Martha', 'Rivera', 'Pérez', 'rivera.maria', '', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
+(5, '201701013', 'José Armando', 'Santiago', 'Valente', 'santiago.jose', '', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
+(6, '201701012', 'Beatriz ', 'Santiago', 'Miguel', 'santiago.beatriz', '', 'II     CUATRIMESTRE', 'Derecho', 'DR00', '', ''),
 (7, '201704001', 'Isai ', 'Méndez', 'Rodríguez', 'mendez.isai', '56', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
-(8, '201704002', 'Erika ', 'Hernández', 'Paz', 'hernandez.erika', '5691070', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
-(9, '201704003', 'Oliver Albino', 'Olarte', 'Rodríguez', 'olarte.oliver', '5650528', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
-(10, '201704004', 'Marlene', 'Galindo', 'Molina', 'galindo.marlene', '7852061', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
+(8, '201704002', 'Erika ', 'Hernández', 'Paz', 'hernandez.erika', '', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
+(9, '201704003', 'Oliver Albino', 'Olarte', 'Rodríguez', 'olarte.oliver', '', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
+(10, '201704004', 'Marlene', 'Galindo', 'Molina', 'galindo.marlene', '', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
 (11, '201704005', 'Lizbeth ', 'Álvarez', 'Rugerio', 'alvarez.lizbeth', '6303725', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
 (12, '201704009', 'Marisol ', 'GarcÍa', 'Aguirre', 'garcia.marisol', '1409634', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
 (13, '201704008', 'Clara ', 'Francisco', 'Martín', 'martín.clara', '4239754', 'II     CUATRIMESTRE', 'Administración de Empresa', 'ADE00', '', ''),
@@ -117,7 +117,6 @@ CREATE TABLE `carrera` (
 --
 
 INSERT INTO `carrera` (`id`, `id_carrera`, `Carrera`, `clave_sep`) VALUES
-('', '			', '', ''),
 ('1', 'ADE00', 'ADMINISTRACIÓN DE EMPRESAS', 'sep'),
 ('2', 'CT00', ' CONTADURÍA  ', 'sep'),
 ('3', 'DR00	', ' DERECHO ', 'sep'),
@@ -131,7 +130,7 @@ INSERT INTO `carrera` (`id`, `id_carrera`, `Carrera`, `clave_sep`) VALUES
 --
 
 CREATE TABLE `clase` (
-  `id_clase` int(2) NOT NULL DEFAULT '0',
+  `id_clase` int(2) NOT NULL DEFAULT 0,
   `fecha` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `id_unico_mat` varchar(10) COLLATE utf8_spanish_ci DEFAULT '',
   `id_carrera` varchar(5) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -186,7 +185,7 @@ INSERT INTO `clases_asig` (`id_clase_asignada`, `id_carrera`, `id_unico_mat`, `d
 --
 
 CREATE TABLE `cuatrimestres` (
-  `id_cuatri` int(1) NOT NULL DEFAULT '0',
+  `id_cuatri` int(1) NOT NULL DEFAULT 0,
   `cuatri` varchar(29) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -213,7 +212,7 @@ INSERT INTO `cuatrimestres` (`id_cuatri`, `cuatri`) VALUES
 --
 
 CREATE TABLE `materias` (
-  `no` int(3) NOT NULL DEFAULT '0',
+  `no` int(3) NOT NULL DEFAULT 0,
   `id_carr` varchar(5) COLLATE utf8_spanish_ci DEFAULT NULL,
   `carrera` varchar(55) COLLATE utf8_spanish_ci DEFAULT NULL,
   `id_mat` varchar(5) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -494,7 +493,7 @@ CREATE TABLE `migrations` (
 --
 
 CREATE TABLE `profe` (
-  `id_profre` int(2) NOT NULL DEFAULT '0',
+  `id_profre` int(2) NOT NULL DEFAULT 0,
   `Nombre` varchar(16) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Appat` varchar(12) COLLATE utf8_spanish_ci DEFAULT NULL,
   `apmat` varchar(39) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -512,8 +511,8 @@ CREATE TABLE `profe` (
 --
 
 INSERT INTO `profe` (`id_profre`, `Nombre`, `Appat`, `apmat`, `id_clave`, `user`, `pass`, `estudios`, `cedula`, `foto`, `info`) VALUES
-(1, 'Adolfo Emanuel', 'Hernández', 'Cruz', '', 'adolfo.emanuel.hernandez', '682976806', 'LICENCIATURA EN RELACIONES INTERNACIONALES', '', 'imagenes/logo-upp.png', ' Agregar información'),
-(2, 'Adriana Liliana', 'Cercado', 'Chantes', '', 'adriana.liliana.cercado', '85475984', 'LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS', '5277657', 'imagenes/aula.png', 'Agregar información'),
+(1, 'Adolfo Emanuel', 'Hernández', 'Cruz', '', 'adolfo.emanuel.hernandez', '', 'LICENCIATURA EN RELACIONES INTERNACIONALES', '', 'imagenes/logo-upp.png', ' Agregar información'),
+(2, 'Adriana Liliana', 'Cercado', 'Chantes', '', 'adriana.liliana.cercado', '', 'LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS', '5277657', 'imagenes/aula.png', 'Agregar información'),
 (3, 'Alberto', 'Flores', 'López', '', 'alberto.flores', '38', 'LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS', '3735785', 'imagenes/aula.png', 'Agregar información'),
 (4, 'Aldo', 'Benítez', 'Sánchez', '', 'aldo.benitez', '98941003', 'LICENCIATURA EN LENGUAS MODERNAS', '10394963', 'imagenes/aula.png', 'Agregar información'),
 (5, 'Carlos Alberto', 'López', 'Raichs', '', 'carlos.alberto.lopez', '88888888', 'LICENCIATURA COMERCIO INTERNACIONAL', 'PASANTE', 'imagenes/logo-upp.png', '  Agregar informaciï¿½n, actualiza 11:07 hrs'),
@@ -611,7 +610,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'miguelus', 'miguelin2491@gmail.com', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', '2mQ5fsCB0mlpclSRhG3e0XxGo0PwVzemLs6DXc32YgAnfoMqhhicoiRoXUeY', '2019-12-05 09:49:09', '2019-12-05 09:49:09');
+(1, 'miguelus', 'miguelin2491@gmail.com', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', 'GuvOq6NrKyZScFNoOmzaT03b30XBMPiMX64R2ttI4uRRQiPm2kJkrsYU6yYT', '2019-12-05 09:49:09', '2019-12-05 09:49:09');
 
 -- --------------------------------------------------------
 

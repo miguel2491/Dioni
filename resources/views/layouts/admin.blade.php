@@ -37,6 +37,13 @@
 <body class="skin-3">
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
+            @php
+              use App\Models\RolesUser;
+              $id_u = Auth::user()->id;
+              $rol = RolesUser::where('user_id', $id_u)->first();
+            @endphp
+            <input type="hidden" id="rol" value="{{ $rol->rol_id }}">
+            <input type="hidden" id="id_user" value="{{ $id_u }}">
             @yield('main-content')
             
         </div>

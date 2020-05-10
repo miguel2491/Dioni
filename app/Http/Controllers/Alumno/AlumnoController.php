@@ -24,6 +24,11 @@ class AlumnoController extends Controller {
 		return view('Alumno/index');
 	}
 
+	public function menu_alumno()
+    {
+    	return view('Alumno/menu');
+    }
+
 	public function clase_vista(){
 		return view('Alumno/clase');
 	}

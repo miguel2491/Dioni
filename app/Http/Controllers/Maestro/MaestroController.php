@@ -24,6 +24,11 @@ class MaestroController extends Controller {
 		return view('Maestro/index');
     }
     
+    public function menu_profe()
+    {
+    	return view('Maestro/menu');
+    }
+
     public function asignatura() {
 		return view('Maestro/asignatura');
     }
