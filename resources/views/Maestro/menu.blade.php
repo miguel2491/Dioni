@@ -50,7 +50,7 @@
     	<div class="col-xs-6 col-md-6">
             <a href="{{ URL::to('evaluacion_maestro') }}">
                 <div align="center">
-                    <img src="img/fondos/principal/derecho1.png" style="width:75px" /><br>
+                    <img src="img/fondos/principal/evaluacion.png" style="width:75px" /><br>
                     <label class="titulos_menu">Evaluación</label>
                 </div>
             </a>        
@@ -58,7 +58,7 @@
         <div class="col-xs-6 col-md-6">
             <a href="{{ URL::to('cuestionario_maestro') }}">
                 <div align="center">
-                    <img src="img/fondos/principal/administracion1.png" style="width:70px" />
+                    <img src="img/fondos/principal/cuestionarios.png" style="width:70px" />
                     <label class="titulos_menu">Cuestionario</label>
                 </div>  
             </a>          

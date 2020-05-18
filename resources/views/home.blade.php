@@ -37,17 +37,6 @@ Inicio
             @php
                 }
             @endphp
-            <!--
-            <li style="margin-left:80%">
-                <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                    <img src="img/fondos/login/unimovil.png" style="width:50px" />
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
-            </li>
-            -->
         </ul>
     </nav>
 </div>

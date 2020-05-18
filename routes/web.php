@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('auth/login');
@@ -82,3 +82,20 @@ Route::get('cuestionario_alumno', 'Alumno\AlumnoController@cuestionario_alumno_v
 Route::get('materia/{id}', 'Materias\MateriasController@materia');
 //Route::resource('maateria/{id}', 'Materias\MateriasController@materia');
 Route::get('materia/clases/{category}/post/{post}', 'Materias\MateriasController@materia_clase')->name('materia.clase');
+//*****************************/
+/********EVALUACIONES**********/
+/*****************************/
+Route::get('evaluacion/profesor/{id}', 'Catalogos\EvaluacionesController@con_eva_profe');
+
+Route::post('evaluacion/guardar', 'Catalogos\EvaluacionesController@store');
+Route::get('evaluacion/listar', 'Catalogos\EvaluacionesController@listado');
+Route::get('evaluacion/consulta/{id}', 'Catalogos\EvaluacionesController@evaluacion_');
+
+Route::post('pregunta/guardar', 'Catalogos\EvaluacionesController@store_pregunta');
+Route::get('evaluacion/con_pregunta/{id}', 'Catalogos\EvaluacionesController@evaluacion_preguntas');
+
+Route::post('respuesta/guardar', 'Catalogos\EvaluacionesController@store_respuesta');
+Route::get('evaluacion/con_respuesta/{id}', 'Catalogos\EvaluacionesController@evaluacion_respuestas');
+
+Route::post('cuestionario/guardar', 'Catalogos\EvaluacionesController@store_cuestionario');
+Route::get('cuestionario/consulta/{id}', 'Catalogos\EvaluacionesController@lista_cuestionario');

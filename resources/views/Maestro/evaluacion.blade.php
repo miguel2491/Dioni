@@ -48,6 +48,13 @@
 <input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
 <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row border-bottom">
+        <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+            <div style="margin-left: 80%">
+                <img src="img/fondos/login/unimovil.png" style="width:50px" />
+            </div>
+        </nav>
+    </div>
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">
             <p><b>EVLUACIÓN DEL CUESTIONARIO</b></p>
@@ -82,6 +89,13 @@
                         </tbody>
                         <tfoot></tfoot>
                     </table>
+        </div>
+    </div>
+    <div class="footer">
+        <div>
+             <a href="{{ URL::to('menu_profe') }}">
+                    <img src="img/fondos/principal/regresar1.png" style="width:15px" />
+                </a>
         </div>
     </div>
 </div>
