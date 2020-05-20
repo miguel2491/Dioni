@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App;
+use App\Http\Controllers\Controller;
+//use App\Http\Requests\Alumno\AlumnoRequest;
+use App\Models\RolesUser;
+use App\User;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +28,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $id    = Auth::user()->id;
+        $roles = RolesUser::where('user_id', $id)->first();
+        if ($roles->rol_id == 1) {
+            return view('home_admin');
+        } else {
+            return view('home');
+        }
     }
 }

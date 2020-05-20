@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.4
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 04-05-2020 a las 20:35:09
--- Versión del servidor: 10.1.44-MariaDB-cll-lve
--- Versión de PHP: 7.3.6
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 20-05-2020 a las 06:30:09
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -53,17 +53,18 @@ INSERT INTO `alumno` (`id`, `id_carrera`, `id_user`, `username`) VALUES
 
 CREATE TABLE `carrera` (
   `user_id` int(11) NOT NULL,
-  `carrera` varchar(255) DEFAULT NULL
+  `carrera` varchar(255) DEFAULT NULL,
+  `icono` varchar(100) DEFAULT 'administracion1.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `carrera`
 --
 
-INSERT INTO `carrera` (`user_id`, `carrera`) VALUES
-(1, 'ADMINISTRACION'),
-(2, 'DERECHO'),
-(3, 'Inglés');
+INSERT INTO `carrera` (`user_id`, `carrera`, `icono`) VALUES
+(1, 'ADMINISTRACION', 'administracion1.png'),
+(2, 'DERECHO', 'derecho1.png'),
+(3, 'Inglés', 'administracion1.png');
 
 -- --------------------------------------------------------
 
@@ -115,10 +116,10 @@ INSERT INTO `catera_materias_maestro` (`id`, `id_materia`, `id_maestro`, `id_cua
 --
 
 CREATE TABLE `clase` (
-  `id` int(100) NOT NULL DEFAULT '0',
+  `id` int(100) NOT NULL DEFAULT 0,
   `fecha` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `id_carrera` int(100) NOT NULL DEFAULT '0',
-  `id_cuatrimestre` int(100) NOT NULL DEFAULT '0'
+  `id_carrera` int(100) NOT NULL DEFAULT 0,
+  `id_cuatrimestre` int(100) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -146,6 +147,36 @@ CREATE TABLE `cuatrimestre` (
 
 INSERT INTO `cuatrimestre` (`id`, `lapso`, `fechainicio`) VALUES
 (1, 'enero mayo 2020', '2020-01-01');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuestionario`
+--
+
+CREATE TABLE `cuestionario` (
+  `id_cuestionario` int(11) NOT NULL,
+  `id_pregunta` int(11) NOT NULL,
+  `id_respuesta` int(11) NOT NULL,
+  `id_alumno` int(11) NOT NULL,
+  `id_evaluacion` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `evaluacion`
+--
+
+CREATE TABLE `evaluacion` (
+  `id_evaluacion` int(11) NOT NULL,
+  `id_profesor` int(11) NOT NULL,
+  `nombre_evaluacion` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -196,6 +227,32 @@ INSERT INTO `materias` (`id`, `nombre`, `id_cuatrimestre`, `id_carrera`) VALUES
 (6, 'MACRO II', 1, 1),
 (7, 'JURIDICO I', 1, 1),
 (8, 'RAZONAMIENTO I', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `preguntas`
+--
+
+CREATE TABLE `preguntas` (
+  `id_preguntas` int(11) NOT NULL,
+  `id_evaluacion` int(11) NOT NULL,
+  `nombre_pregunta` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `profe`
+--
+
+CREATE TABLE `profe` (
+  `id_profre` int(11) NOT NULL,
+  `Nombre` varchar(100) NOT NULL,
+  `Appat` varchar(100) NOT NULL,
+  `apmat` varchar(100) NOT NULL,
+  `estudios` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -331,6 +388,20 @@ INSERT INTO `role_user` (`idRolUser`, `rol_id`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `solucion`
+--
+
+CREATE TABLE `solucion` (
+  `id_solucion` int(11) NOT NULL,
+  `id_pregunta` int(11) NOT NULL,
+  `respuesta` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tarea`
 --
 
@@ -348,8 +419,8 @@ CREATE TABLE `tarea` (
   `nom_anexo1` varchar(45) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
   `nom_anexo2` varchar(45) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
   `fecha` varchar(45) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
-  `id_profesor` int(22) NOT NULL DEFAULT '0',
-  `id_clase` int(22) NOT NULL DEFAULT '0'
+  `id_profesor` int(22) NOT NULL DEFAULT 0,
+  `id_clase` int(22) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -373,7 +444,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'miguelus', 'miguelin2491@gmail.com', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', 'XG4KhD7TRFV1XYHzWTZXk23A5KroToiQcs4uH48tdszmfz0NN6DgndHzwOwY', '2019-12-05 09:49:09', '2019-12-05 09:49:09'),
+(1, 'miguelus', 'miguelin2491@gmail.com', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', 'Y3XsiYu8fqKDhLCvWcqQNqzBPsW6htkgBpWfFB0tX8pAF7KWfvxCp2pQKnay', '2019-12-05 09:49:09', '2019-12-05 09:49:09'),
 (2, 'romero.violeta', '', '$2b$10$l5e2y2AL0IY6rhDHbHY1De.uCcnQdsB16WygafO2mA2t4Z.r1ZTU.', NULL, NULL, NULL),
 (3, 'hernandez.gerardo', '', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', NULL, NULL, NULL),
 (4, 'rivera.maria', '', '6121604', NULL, NULL, NULL),
@@ -423,7 +494,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 (48, 'cancino.carmina', '', '7852067', NULL, NULL, NULL),
 (49, 'romero.maria', '', '7852068', NULL, NULL, NULL),
 (50, 'carmona.leopoldo', '', '7852070', NULL, NULL, NULL),
-(51, 'vigueras.andrea', '', '7429647', NULL, NULL, NULL),
+(51, 'vigueras.andrea', '', '7429647', 'PEUZSSWvxOuy36ppgCFCwXJksZ4AjeZB4DSulMXe9cRclmCuiOfPQCf7C5bH', NULL, NULL),
 (52, 'adriana.liliana.cercado', '', '85475984', NULL, NULL, NULL),
 (53, 'alberto.flores', '', '38', NULL, NULL, NULL),
 (54, 'aldo.benitez', '', '98941003', NULL, NULL, NULL),
@@ -459,7 +530,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 (84, 'rosario.rojas', '', '9448637', NULL, NULL, NULL),
 (85, 'salvador.nunez', '', '89448637', NULL, NULL, NULL),
 (86, 'daniel.calixto', '', '8297681', NULL, NULL, NULL),
-(87, 'adolfo.emanuel.hernandez', '', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', NULL, NULL, NULL),
+(87, 'adolfo.emanuel.hernandez', '', '$2y$12$65U/qSeGhbQbMno1Wmmyt.xO.zFIyen5Gv8WO34DmhNw01GCvsn3O', '120OvQxR2Dj46ZWuB8rvyiBjPRh9rEYAPeI6lQXWgzNuQtj8JYYyEoVLml6d', NULL, NULL),
 (88, 'francisco.alvarez', 'fcoal@gmail.com', '$2y$10$eI9jmAhKXzJk0tNaOkMTEeT.twmWf9HNQds2jUIlhsOJa4HqdCxxq', 'wGPOyS551gl6yRibfqhXOO8W29qbIabcycrQ9hjV7Jp3rVy6RnC8PamNRfl0', NULL, NULL),
 (89, 'Dionisio.espinoza', 'Dae@gmail.com', '$2y$10$xPMc7TOoNO6gYw0gBfez7Ob/79ZS.3D3GifwQ.IPBRYJPX0os/L4u', 'VGVPYGIJsJGPtSnzpwgyAN1dbhKMdqGSHxkBisSlo4q0VlrSv0F5SgEdnRXS', NULL, NULL),
 (90, 'ed Ophanim', 'erp.reno@hotmail.com', '$2y$10$L/VvUTPn9dxTWwDLlSbuyeg/GGPQK8iKt9V98ak7ZPHo1wBLW/NGa', NULL, NULL, NULL);
@@ -499,6 +570,18 @@ ALTER TABLE `cuatrimestre`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `cuestionario`
+--
+ALTER TABLE `cuestionario`
+  ADD PRIMARY KEY (`id_cuestionario`);
+
+--
+-- Indices de la tabla `evaluacion`
+--
+ALTER TABLE `evaluacion`
+  ADD PRIMARY KEY (`id_evaluacion`);
+
+--
 -- Indices de la tabla `maestro`
 --
 ALTER TABLE `maestro`
@@ -509,6 +592,18 @@ ALTER TABLE `maestro`
 --
 ALTER TABLE `materias`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `preguntas`
+--
+ALTER TABLE `preguntas`
+  ADD PRIMARY KEY (`id_preguntas`);
+
+--
+-- Indices de la tabla `profe`
+--
+ALTER TABLE `profe`
+  ADD PRIMARY KEY (`id_profre`);
 
 --
 -- Indices de la tabla `roles`
@@ -523,6 +618,12 @@ ALTER TABLE `role_user`
   ADD PRIMARY KEY (`idRolUser`),
   ADD KEY `fk_rol_idx` (`rol_id`),
   ADD KEY `fk_user_idx` (`user_id`);
+
+--
+-- Indices de la tabla `solucion`
+--
+ALTER TABLE `solucion`
+  ADD PRIMARY KEY (`id_solucion`);
 
 --
 -- Indices de la tabla `users`
@@ -565,6 +666,18 @@ ALTER TABLE `cuatrimestre`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `cuestionario`
+--
+ALTER TABLE `cuestionario`
+  MODIFY `id_cuestionario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `evaluacion`
+--
+ALTER TABLE `evaluacion`
+  MODIFY `id_evaluacion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `maestro`
 --
 ALTER TABLE `maestro`
@@ -577,6 +690,18 @@ ALTER TABLE `materias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT de la tabla `preguntas`
+--
+ALTER TABLE `preguntas`
+  MODIFY `id_preguntas` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `profe`
+--
+ALTER TABLE `profe`
+  MODIFY `id_profre` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -587,6 +712,12 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `role_user`
   MODIFY `idRolUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+
+--
+-- AUTO_INCREMENT de la tabla `solucion`
+--
+ALTER TABLE `solucion`
+  MODIFY `id_solucion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

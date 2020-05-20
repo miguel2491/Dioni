@@ -39,14 +39,7 @@ $(document).ready(function() {
             "bAutoWidth": false,
             //"bFilter": false,
             "aoColumns": [{
-                "mData": "id_clase"
-            }, {
-                "mData": "materia",
-                "bSortable": true,
-                "mRender": function(data, type, full) {
-                    var materia = full.materia;
-                    return materia;
-                }
+                "mData": "id"
             }, {
                 "mData": "carrera",
                 "bSortable": true,
@@ -55,7 +48,7 @@ $(document).ready(function() {
                     return carrera;
                 }
             },{
-                "mData": "cuatrimestre",
+                "mData": "id_cuatrimestre",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
                     var cuatrimestre = full.cuatri;

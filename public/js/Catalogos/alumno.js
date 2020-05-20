@@ -39,19 +39,19 @@ $(document).ready(function() {
             "bAutoWidth": false,
             //"bFilter": false,
             "aoColumns": [{
-                "mData": "id_alumn"
+                "mData": "id"
             }, {
-                "mData": "nombre",
+                "mData": "username",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var usuario = full.nombre+" "+full.appat+" "+full.appmat;
+                    var usuario = full.username;
                     return usuario;
                 }
             }, {
-                "mData": "cuatrimestre",
+                "mData": "id_carrera",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var grado = full.cuatrimestre;
+                    var grado = full.id_carrera;
                     return grado;
                 }
             }, {

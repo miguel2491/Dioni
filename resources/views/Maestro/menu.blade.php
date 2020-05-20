@@ -46,22 +46,40 @@
             </div>
         </nav>
     </div>
-	<div class="row" style="padding-bottom: 95%">
-    	<div class="col-xs-6 col-md-6">
+    <div class="row">
+        <div class="col-xs-6 col-md-6">
             <a href="{{ URL::to('evaluacion_maestro') }}">
                 <div align="center">
                     <img src="img/fondos/principal/evaluacion.png" style="width:75px" /><br>
                     <label class="titulos_menu">Evaluación</label>
                 </div>
-            </a>        
+            </a>
         </div>
         <div class="col-xs-6 col-md-6">
             <a href="{{ URL::to('cuestionario_maestro') }}">
                 <div align="center">
                     <img src="img/fondos/principal/cuestionarios.png" style="width:70px" />
                     <label class="titulos_menu">Cuestionario</label>
-                </div>  
-            </a>          
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom: 85%">
+        <div class="col-xs-6 col-md-6">
+            <a href="{{ URL::to('evaluacion_alumno') }}">
+                <div align="center">
+                    <img src="img/fondos/principal/evaluacion.png" style="width:75px" /><br>
+                    <label class="titulos_menu">Evaluación Alumno</label>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-6">
+            <a href="{{ URL::to('cuestionario_alumno') }}">
+                <div align="center">
+                    <img src="img/fondos/principal/cuestionarios.png" style="width:70px" />
+                    <label class="titulos_menu">Cuestionario Alumno</label>
+                </div>
+            </a>
         </div>
     </div>
     <div class="footer">
@@ -74,12 +92,12 @@
 </div>
 @endsection
 @section('main-scripts')
-	<script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
-	<script src="{{ asset('js/plugins/toastr/toastr.min.js')}}"></script>
-	<script src="{{ asset('js/plugins/iCheck/icheck.min.js') }}"></script>
-	<script src="{{ asset('js/plugins/select2/select2.full.min.js') }}"></script>
-	<script src="{{ asset('js/plugins/autonumeric/autoNumeric.js') }}"></script>
-	<script src="{{ asset('js/plugins/touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
-	<script src="{{ asset('js/plugins/summernote/summernote.min.js') }}"></script>
-	<script src="{{ asset('js/maestro/maestro.js') }}"></script>
+    <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/toastr/toastr.min.js')}}"></script>
+    <script src="{{ asset('js/plugins/iCheck/icheck.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/autonumeric/autoNumeric.js') }}"></script>
+    <script src="{{ asset('js/plugins/touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('js/maestro/maestro.js') }}"></script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin_admin')
 @section('main-title')
    ADMIN Cuentas
 @endsection
@@ -44,7 +44,6 @@
 								<tr>
 									<th class="text-center">Clave</th>
 									<th class="text-center">Carrera</th>
-									<th class="text-center">Clave SEP</th>
 									<th class="text-center">Acciones</th>
 								</tr>
 							</thead>

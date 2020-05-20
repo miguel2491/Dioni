@@ -16,7 +16,7 @@ Inicio
               $roles = RolesUser::where('user_id', $id)->first();
             @endphp
             @php
-                if($roles->rol_id==1){
+                if($roles->rol_id==2){
             @endphp
             <li style="margin-left:80%">
                 <a href="{{ URL::to('menu_profe') }}">
@@ -30,9 +30,7 @@ Inicio
                 if($roles->rol_id==3){
             @endphp
             <li style="margin-left:80%">
-                <a href="{{ URL::to('menu_alumno') }}">
-                    <img src="img/fondos/login/unimovil.png" style="width:50px" />
-                </a>
+                <img src="img/fondos/login/unimovil.png" style="width:50px" />
             </li>
             @php
                 }
@@ -40,59 +38,8 @@ Inicio
         </ul>
     </nav>
 </div>
-    <div class="row">
-        <div class="col-xs-6 col-md-6">
-            <a href="{{ URL::to('materia/DR00') }}">
-                <div align="center">
-                    <img src="img/fondos/principal/derecho1.png" style="width:75px" /><br>
-                    <label class="titulos_menu">DERECHO</label>
-                </div>
-            </a>        
-        </div>
-        <div class="col-xs-6 col-md-6">
-        <a href="{{ URL::to('materia/ADE00') }}">
-            <div align="center">
-                <img src="img/fondos/principal/administracion1.png" style="width:70px" />
-                <label class="titulos_menu">ADMINISTRACIÓN</label>
-            </div>  
-        </a>          
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6 col-md-6">
-            <a href="{{ URL::to('materia/ILD00') }}">
-            <div align="center">
-                <img src="img/fondos/principal/logistica1.png" style="width:70px" />
-                <label class="titulos_menu">INGENIERÍA EN LOGÍSTICA</label>
-            </div>                
-            </a>
-        </div>
-        <div class="col-xs-6 col-md-6">
-            <a href="{{ URL::to('materia/IP00') }}">
-            <div align="center">
-                <img src="img/fondos/principal/pericial1.png" style="width:70px" />
-                <label class="titulos_menu">INVESTIGACIÓN PERCIAL</label>
-            </div>        
-            </a>
-        </div>
-    </div>
-    <div class="row">    
-        <div class="col-xs-6 col-md-6">
-            <a href="{{ URL::to('materia/CT00') }}">
-                <div align="center">
-                    <img src="img/fondos/principal/contaduria1.png" style="width:70px" /><br>
-                    <label class="titulos_menu">CONTADURÍA</label>  
-                </div>              
-            </a>
-        </div>
-        <div class="col-xs-6 col-md-6">
-            <a href="{{ URL::to('materia/CT00') }}">
-            <div align="center">
-                <img src="img/fondos/principal/educacion.png" style="width:70px" />
-                <label class="titulos_menu">CIENCIAS DE LA EDUCACIÓN</label>
-            </div>        
-            </a>
-        </div>
+    <div class="row" id="div_carreras">
+
     </div>
     <div class="footer">
         <div>
@@ -105,4 +52,7 @@ Inicio
                 </form>
         </div>
     </div>
+@endsection
+@section('main-scripts')
+<script src="{{ asset('js/menu.js') }}"></script>
 @endsection

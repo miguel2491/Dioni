@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin_admin')
 @section('main-title')
    ADMIN Cuentas
 @endsection

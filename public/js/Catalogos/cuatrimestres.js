@@ -40,12 +40,12 @@ $(document).ready(function() {
             "bAutoWidth": false,
             //"bFilter": false,
             "aoColumns": [{
-                "mData": "id_cuatri"
+                "mData": "id"
             }, {
                 "mData": "cuatri",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var cuatri = full.cuatri;
+                    var cuatri = full.lapso;
                     return cuatri;
                 }
             }, {

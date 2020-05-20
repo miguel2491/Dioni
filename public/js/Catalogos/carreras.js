@@ -39,20 +39,13 @@ $(document).ready(function() {
             "bAutoWidth": false,
             //"bFilter": false,
             "aoColumns": [{
-                "mData": "id_carrera"
+                "mData": "user_id"
             }, {
-                "mData": "Carrera",
+                "mData": "carrera",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var carrera = full.Carrera;
+                    var carrera = full.carrera;
                     return carrera;
-                }
-            }, {
-                "mData": "clave",
-                "bSortable": true,
-                "mRender": function(data, type, full) {
-                    var clave = full.clave_sep;
-                    return clave;
                 }
             }, {
                 "mData": "Acciones",

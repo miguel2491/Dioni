@@ -39,19 +39,19 @@ $(document).ready(function() {
             "bAutoWidth": false,
             //"bFilter": false,
             "aoColumns": [{
-                "mData": "id_carr"
+                "mData": "id"
             }, {
                 "mData": "carrera",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var carrera = full.carrera;
+                    var carrera = full.nombre;
                     return carrera;
                 }
             }, {
                 "mData": "materia",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var materia = full.materia;
+                    var materia = full.id_cuatrimestre;
                     return materia;
                 }
             }, {

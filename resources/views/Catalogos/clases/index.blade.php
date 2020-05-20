@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin_admin')
 @section('main-title')
    ADMIN Cuentas
 @endsection
@@ -43,7 +43,6 @@
 							<thead>
 								<tr>
 									<th class="text-center">Clave</th>
-									<th class="text-center">Materia</th>
 									<th class="text-center">Carrera</th>
 									<th class="text-center">Cuatrimestre</th>
 									<th class="text-center">Fecha</th>
