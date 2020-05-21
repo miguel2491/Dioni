@@ -52,8 +52,8 @@ $(document).ready(function() {
                 "mData": "Acciones",
                 "bSortable": false,
                 "mRender": function(data, type, full) {
-                    var bttnDelete = '<button class="btn btn-danger btn-xs" id="bttn_modal_delete" data-id="' + full.id_cuatri + '" data-target="#modal_delete"  data-toggle="modal" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>';
-                    var bttnUpdate = '<button class="btn btn-warning btn-xs" id="bttn_modal_update"  data-id="' + full.id_cuatri + '"  data-target="#ModalSave" data-toggle="modal" title="Editar"><i class="glyphicon glyphicon-edit"></i></button> ';
+                    var bttnDelete = '<button class="btn btn-danger btn-xs" id="bttn_modal_delete" data-id="' + full.id + '" data-target="#modal_delete"  data-toggle="modal" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>';
+                    var bttnUpdate = '<button class="btn btn-warning btn-xs" id="bttn_modal_update"  data-id="' + full.id + '"  data-target="#ModalSave" data-toggle="modal" title="Editar"><i class="glyphicon glyphicon-edit"></i></button> ';
                     return bttnUpdate + bttnDelete;
                 }
             }, ],
@@ -105,38 +105,28 @@ $(document).ready(function() {
                 success: function(data) {
                     //var array = $.parseJSON(data);
                     var obj = data;
-                    $().val();
-                    $('#saldo_total').val(obj.saldo_total);
-                    $('#saldo_disponible').val(obj.saldo_disponible);
-                    $("#saldo_gasto").val(obj.saldo_gasto);
+                    $('#cuatrimestre').val(obj[0].lapso);
                 }
-
             });
         }
-
     });
     $("#modal_delete").on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         id = typeof button.data('id') != "undefined" ? button.data('id') : 0;
     });
     $('#ModalSave').on('show.bs.modal', function(e) {
-        $('#saldo_total').val(0);
-        $('#saldo_disponible').val(0);
-        $("#saldo_gasto").val(0);
+        $('#cuatrimestre').val("");
     });
     $('#saveform').click(function() {
         var msg = '';
 
         data_request = {
-            id: 1,
-            saldo_total: $('#saldo_total').val(),
-            saldo_disponible: $('#saldo_disponible').val(),
-            saldo_gasto: $('#saldo_gasto').val(),
+            id: id,
+            lapso: $('#cuatrimestre').val(),
+            fechainicio: $('#fechainicio').val(),
         }
-        console.log(data_request);
         var get_url = id == 0 ? $("#url_guardar").val() : $("#url_actualizar").val() + '/' + id;
         var type_method = id == 0 ? 'POST' : 'PUT';
-
         $.ajax({
             url: get_url,
             type: type_method,
@@ -152,9 +142,9 @@ $(document).ready(function() {
                     toastr.success(data.message);
                     dataTable_datos._fnAjaxUpdate();
                     $("#ModalSave").modal('hide');
-                    setTimeout(function() {
+                    /*setTimeout(function() {
                         location.reload();
-                    }, 2000);
+                    }, 2000);*/
                 }
             },
 
@@ -216,24 +206,3 @@ $(document).ready(function() {
         });
     });
 });
-
-function currency(value, decimals, separators) {
-    decimals = decimals >= 0 ? parseInt(decimals, 0) : 2;
-    separators = separators || ['.', "'", ','];
-    var number = (parseFloat(value) || 0).toFixed(decimals);
-    if (number.length <= (4 + decimals))
-        return number.replace('.', separators[separators.length - 1]);
-    var parts = number.split(/[-.]/);
-    value = parts[parts.length > 1 ? parts.length - 2 : 0];
-    var result = value.substr(value.length - 3, 3) + (parts.length > 1 ?
-        separators[separators.length - 1] + parts[parts.length - 1] : '');
-    var start = value.length - 6;
-    var idx = 0;
-    while (start > -3) {
-        result = (start > 0 ? value.substr(start, 3) : value.substr(0, 3 + start)) +
-            separators[idx] + result;
-        idx = (++idx) % 2;
-        start -= 3;
-    }
-    return (parts.length == 3 ? '-' : '') + result;
-}

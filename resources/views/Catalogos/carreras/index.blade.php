@@ -39,7 +39,7 @@
 				<div class="ibox-content">
 					<!-- Inicia Cuerpo  de la Vista -->
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered table-hover" id="table-datos">
+						<table class="table table-striped table-bordered table-hover" style="text-transform: uppercase;" id="table-datos">
 							<thead>
 								<tr>
 									<th class="text-center">Clave</th>
@@ -63,28 +63,21 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="ModalEditar">Cuenta</h4>
+				<h4 class="modal-title" id="ModalEditar">Carrera</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="descripcion-field">Saldo Total</label>
-							<input type="text" autofocus="true" id="saldo_total" name="saldo_total" class="form-control" >
+							<label for="descripcion-field">Carrera</label>
+							<input type="text" autofocus="true" id="carrera" name="carrera" class="form-control" >
+							<input type="hidden" id="id_carrera" value="0" >
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="descripcion-field">Saldo Gasto</label>
-							<input type="text" id="saldo_gasto" name="saldo_gasto" class="form-control">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Saldo Disponible</label>
-							<input type="text" id="saldo_disponible" name="saldo_disponible" class="form-control">
+							<label for="descripcion-field">Nombre de imagen</label>
+							<input type="text" autofocus="true" id="icono" name="icono" class="form-control" >
 						</div>
 					</div>
 				</div>

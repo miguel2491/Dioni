@@ -17,6 +17,16 @@
 <input type="hidden" id="url_guardar" value="{{ url('clases/guardar') }}">
 <input type="hidden" id="url_actualizar" value="{{ url('clases/update') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('clases/delete') }}">
+<input type="hidden" id="url_list_cuatrimestre" value="{{ url('cuatrimestres/lista') }}">
+<input type="hidden" id="url_list_carrera" value="{{ url('carreras/listar') }}">
+<style type="text/css">
+	.select2{
+        width: 100% !important;
+    }
+    span.select2-container {
+        z-index:10050;
+    }
+</style>
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12">
@@ -43,6 +53,7 @@
 							<thead>
 								<tr>
 									<th class="text-center">Clave</th>
+									<th class="text-center">Clase</th>
 									<th class="text-center">Carrera</th>
 									<th class="text-center">Cuatrimestre</th>
 									<th class="text-center">Fecha</th>
@@ -65,28 +76,34 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="ModalEditar">Cuenta</h4>
+				<h4 class="modal-title" id="ModalEditar">Clases</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="descripcion-field">Saldo Total</label>
-							<input type="text" autofocus="true" id="saldo_total" name="saldo_total" class="form-control" >
+							<label for="descripcion-field">Clases</label>
+							<input type="text" autofocus="true" id="clase" name="clase" class="form-control" >
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="descripcion-field">Saldo Gasto</label>
-							<input type="text" id="saldo_gasto" name="saldo_gasto" class="form-control">
+							<label for="descripcion-field">Carrera</label>
+							<select name="carrera" id="carrera" class="form-control"></select>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Saldo Disponible</label>
-							<input type="text" id="saldo_disponible" name="saldo_disponible" class="form-control">
+							<label>Cuatrimestre</label>
+							<select name="cuatrimestre" id="cuatrimestre" class="form-control"></select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Fecha</label>
+							<input type="text" id="fecha" name="fecha" class="form-control">
 						</div>
 					</div>
 				</div>

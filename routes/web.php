@@ -43,6 +43,7 @@ Route::delete('carreras/delete/{id}', 'Catalogos\CarrerasController@destroy');
 /****MATERIAS***/
 Route::resource('materias', 'Catalogos\MateriasController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('materias/listar', 'Catalogos\MateriasController@listar');
+Route::get('materias/listado', 'Catalogos\MateriasController@listado');
 Route::post('materias/guardar', 'Catalogos\MateriasController@store');
 Route::get('materias/datos/{id}', 'Catalogos\MateriasController@edit');
 Route::put('materias/update/{id}', 'Catalogos\MateriasController@update');
@@ -57,6 +58,7 @@ Route::delete('cuatrimestres/delete/{id}', 'Catalogos\CuatrimestresController@de
 /****CLASES***/
 Route::resource('clases', 'Catalogos\ClasesController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('clases/lista', 'Catalogos\ClasesController@lista');
+Route::get('clases/listado', 'Catalogos\ClasesController@listado');
 Route::post('clases/guardar', 'Catalogos\ClasesController@store');
 Route::get('clases/datos/{id}', 'Catalogos\ClasesController@edit');
 Route::put('clases/update/{id}', 'Catalogos\ClasesController@update');

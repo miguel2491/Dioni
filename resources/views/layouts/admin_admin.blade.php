@@ -42,7 +42,7 @@
                         <li>
                             <span class="m-r-sm text-muted welcome-message">EDUCACIÓN MÓVIL MX</span>
                         </li>
-                        <li>
+                        <li style="margin-left: 80%">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Cerrar Sesión

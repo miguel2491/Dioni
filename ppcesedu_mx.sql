@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2020 a las 06:30:09
+-- Tiempo de generación: 21-05-2020 a las 06:25:16
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.27
 
@@ -64,7 +64,7 @@ CREATE TABLE `carrera` (
 INSERT INTO `carrera` (`user_id`, `carrera`, `icono`) VALUES
 (1, 'ADMINISTRACION', 'administracion1.png'),
 (2, 'DERECHO', 'derecho1.png'),
-(3, 'Inglés', 'administracion1.png');
+(3, 'Preicial', 'pericial1.png');
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,8 @@ INSERT INTO `catera_materias_maestro` (`id`, `id_materia`, `id_maestro`, `id_cua
 --
 
 CREATE TABLE `clase` (
-  `id` int(100) NOT NULL DEFAULT 0,
+  `id` int(11) NOT NULL,
+  `clase` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `fecha` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `id_carrera` int(100) NOT NULL DEFAULT 0,
   `id_cuatrimestre` int(100) NOT NULL DEFAULT 0
@@ -126,8 +127,8 @@ CREATE TABLE `clase` (
 -- Volcado de datos para la tabla `clase`
 --
 
-INSERT INTO `clase` (`id`, `fecha`, `id_carrera`, `id_cuatrimestre`) VALUES
-(0, '2020-01-07', 1, 1);
+INSERT INTO `clase` (`id`, `clase`, `fecha`, `id_carrera`, `id_cuatrimestre`) VALUES
+(1, 'D1ahfdjasfh', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -444,7 +445,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'miguelus', 'miguelin2491@gmail.com', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', 'Y3XsiYu8fqKDhLCvWcqQNqzBPsW6htkgBpWfFB0tX8pAF7KWfvxCp2pQKnay', '2019-12-05 09:49:09', '2019-12-05 09:49:09'),
+(1, 'miguelus', 'miguelin2491@gmail.com', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', 'uVv7ZknijssKQb97GVhRZ2f96Qf0r2EAe0ArqNJS8xvcB0RvTJ4FLoF4avn9', '2019-12-05 09:49:09', '2019-12-05 09:49:09'),
 (2, 'romero.violeta', '', '$2b$10$l5e2y2AL0IY6rhDHbHY1De.uCcnQdsB16WygafO2mA2t4Z.r1ZTU.', NULL, NULL, NULL),
 (3, 'hernandez.gerardo', '', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', NULL, NULL, NULL),
 (4, 'rivera.maria', '', '6121604', NULL, NULL, NULL),
@@ -564,6 +565,12 @@ ALTER TABLE `catera_materias_maestro`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `clase`
+--
+ALTER TABLE `clase`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `cuatrimestre`
 --
 ALTER TABLE `cuatrimestre`
@@ -645,7 +652,7 @@ ALTER TABLE `alumno`
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `catera_materias_alumno`
@@ -660,10 +667,16 @@ ALTER TABLE `catera_materias_maestro`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `clase`
+--
+ALTER TABLE `clase`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `cuatrimestre`
 --
 ALTER TABLE `cuatrimestre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `cuestionario`
@@ -687,7 +700,7 @@ ALTER TABLE `maestro`
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`

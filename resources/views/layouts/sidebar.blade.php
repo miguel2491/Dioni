@@ -13,7 +13,7 @@
                          </span> <span class="text-muted text-xs block"><b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="profile.html">Perfil</a></li>
-                        <li>
+                        <li style="margin-left: 80%">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Cerrar Sesión

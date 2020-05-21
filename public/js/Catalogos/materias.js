@@ -15,6 +15,79 @@ $(document).ready(function() {
         radioClass: 'iradio_square-green',
     });
 
+    $.ajax({
+        url: $("#url_list_cuatrimestre").val(),
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {
+            var cuatrimestre = resp.data;
+            var itemcuatrimestre = [];
+
+            cuatrimestre.forEach(function(element) {
+                itemcuatrimestre.push({
+                    id: element.id,
+                    text: element.lapso
+                });
+            });
+
+            $('#cuatrimestre').select2({
+                placeholder: {
+                    id: 0,
+                    text: 'Seleccione un cuatrimestre'
+                },
+                width: '100%',
+                allowClear: true,
+                data: itemcuatrimestre,
+                //dropdownParent: $('#ModalSave')
+            });
+
+            $("#cuatrimestre").val(0).change();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                location.reload();
+            }
+        }
+    });
+
+    $.ajax({
+        url: $("#url_list_carrera").val(),
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {
+            var carrera = resp.data;
+            var itemcarrera = [];
+
+            carrera.forEach(function(element) {
+                itemcarrera.push({
+                    id: element.user_id,
+                    text: element.carrera
+                });
+            });
+
+            $('#carrera').select2({
+                placeholder: {
+                    id: 0,
+                    text: 'Seleccione una carrera'
+                },
+                width: '100%',
+                allowClear: true,
+                data: itemcarrera,
+                //dropdownParent: $('#ModalSave')
+            });
+
+            $("#carrera").val(0).change();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                location.reload();
+            }
+
+        }
+    });
+
     dataTable_datos =
         $("#table-datos").dataTable({
             "bDeferRender": true,
@@ -29,6 +102,7 @@ $(document).ready(function() {
                     "success": fnCallback,
                     "error": function(jqXHR, textStatus, errorThrown) {
                         var data = jqXHR.responseJSON;
+                        console.log(data);
                         /*
                         if (jqXHR.status == 401 || jqXHR.status == 500) {
                             location.reload();
@@ -41,18 +115,25 @@ $(document).ready(function() {
             "aoColumns": [{
                 "mData": "id"
             }, {
-                "mData": "carrera",
-                "bSortable": true,
-                "mRender": function(data, type, full) {
-                    var carrera = full.nombre;
-                    return carrera;
-                }
-            }, {
                 "mData": "materia",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var materia = full.id_cuatrimestre;
+                    var materia = full.nombre;
                     return materia;
+                }
+            }, {
+                "mData": "cuatrimestre",
+                "bSortable": true,
+                "mRender": function(data, type, full) {
+                    var cuatri = full.lapso;
+                    return cuatri;
+                }
+            },{
+                "mData": "carrera",
+                "bSortable": true,
+                "mRender": function(data, type, full) {
+                    var carrera = full.carrera;
+                    return carrera;
                 }
             }, {
                 "mData": "Acciones",
@@ -111,10 +192,10 @@ $(document).ready(function() {
                 success: function(data) {
                     //var array = $.parseJSON(data);
                     var obj = data;
-                    $().val();
-                    $('#saldo_total').val(obj.saldo_total);
-                    $('#saldo_disponible').val(obj.saldo_disponible);
-                    $("#saldo_gasto").val(obj.saldo_gasto);
+                    console.log(data);
+                    $('#materia').val(obj[0].nombre);
+                    $('#cuatrimestre').val(obj[0].id_cuatrimestre).change();;
+                    $("#carrera").val(obj[0].id_carrera).change();;
                 }
 
             });
@@ -126,18 +207,18 @@ $(document).ready(function() {
         id = typeof button.data('id') != "undefined" ? button.data('id') : 0;
     });
     $('#ModalSave').on('show.bs.modal', function(e) {
-        $('#saldo_total').val(0);
-        $('#saldo_disponible').val(0);
-        $("#saldo_gasto").val(0);
+        $('#materia').val("");
+        $('#cuatrimestre').select2({dropdownParent: $(this).parent()}).select2('val', 0);
+        $("#carrera").select2({dropdownParent: $(this).parent()}).select2('val', 0);
     });
     $('#saveform').click(function() {
         var msg = '';
 
         data_request = {
-            id: 1,
-            saldo_total: $('#saldo_total').val(),
-            saldo_disponible: $('#saldo_disponible').val(),
-            saldo_gasto: $('#saldo_gasto').val(),
+            id: id,
+            materia: $('#materia').val(),
+            cuatrimestre: $('#cuatrimestre option:selected').val()==undefined?'0':$('#cuatrimestre option:selected').val(),
+            carrera: $('#carrera option:selected').val()==undefined?'0':$('#carrera option:selected').val(),
         }
         console.log(data_request);
         var get_url = id == 0 ? $("#url_guardar").val() : $("#url_actualizar").val() + '/' + id;
@@ -152,6 +233,7 @@ $(document).ready(function() {
             },
             data: data_request,
             success: function(data) {
+                console.log(data);
                 if (data.status == 'fail') {
                     toastr.error(data.message);
                 } else {
@@ -222,24 +304,3 @@ $(document).ready(function() {
         });
     });
 });
-
-function currency(value, decimals, separators) {
-    decimals = decimals >= 0 ? parseInt(decimals, 0) : 2;
-    separators = separators || ['.', "'", ','];
-    var number = (parseFloat(value) || 0).toFixed(decimals);
-    if (number.length <= (4 + decimals))
-        return number.replace('.', separators[separators.length - 1]);
-    var parts = number.split(/[-.]/);
-    value = parts[parts.length > 1 ? parts.length - 2 : 0];
-    var result = value.substr(value.length - 3, 3) + (parts.length > 1 ?
-        separators[separators.length - 1] + parts[parts.length - 1] : '');
-    var start = value.length - 6;
-    var idx = 0;
-    while (start > -3) {
-        result = (start > 0 ? value.substr(start, 3) : value.substr(0, 3 + start)) +
-            separators[idx] + result;
-        idx = (++idx) % 2;
-        start -= 3;
-    }
-    return (parts.length == 3 ? '-' : '') + result;
-}
