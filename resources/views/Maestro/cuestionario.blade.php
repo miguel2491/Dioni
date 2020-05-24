@@ -52,7 +52,7 @@
 @section('main-content')
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}" id="hdd_IdUsuario">
-<input type="hidden" name="id_profesor" value="{{ Auth::user()->id_clave }}" id="hdd_IdProfesor">
+<input type="hidden" name="id_profesor" value="{{ Auth::user()->id }}" id="hdd_IdProfesor">
 <input type="hidden" id="url_listado" value="{{ url('alumnos/listado') }}">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row border-bottom">

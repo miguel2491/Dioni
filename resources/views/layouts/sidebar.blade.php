@@ -73,16 +73,6 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="{{ URL::to('alumno') }}">
-                    <i class="fa fa-users" aria-hidden="true"></i> Alumno
-                </a>
-            </li>
-            <li>
-                <a href="{{ URL::to('profesor') }}">
-                    <i class="fa fa-users" aria-hidden="true"></i> Profesor
-                </a>
-            </li>
         </ul>
     </div>
 </nav>

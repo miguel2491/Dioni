@@ -15,6 +15,43 @@ $(document).ready(function() {
         radioClass: 'iradio_square-green',
     });
 
+    $.ajax({
+        url: $("#url_list_carrera").val(),
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {console.log(resp);
+            var carrera = resp.data;
+            var itemcarrera = [];
+
+            carrera.forEach(function(element) {
+                itemcarrera.push({
+                    id: element.user_id,
+                    text: element.carrera
+                });
+            });
+
+            $('#carrera').select2({
+                placeholder: {
+                    id: 0,
+                    text: 'Seleccione una carrera'
+                },
+                width: '100%',
+                allowClear: true,
+                data: itemcarrera,
+                //dropdownParent: $('#ModalSave')
+            });
+
+            $("#carrera").val(0).change();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                location.reload();
+            }
+
+        }
+    });
+
     dataTable_datos =
         $("#table-datos").dataTable({
             "bDeferRender": true,
@@ -39,27 +76,27 @@ $(document).ready(function() {
             "bAutoWidth": false,
             //"bFilter": false,
             "aoColumns": [{
-                "mData": "id_profre"
+                "mData": "id"
             }, {
                 "mData": "usuario",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var nombre = full.Nombre+" "+full.Appat+" "+full.apmat;
+                    var nombre = full.nombre;
                     return nombre;
                 }
             }, {
                 "mData": "estudios",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var estudios = full.estudios;
+                    var estudios = full.email;
                     return estudios;
                 }
             }, {
                 "mData": "Acciones",
                 "bSortable": false,
                 "mRender": function(data, type, full) {
-                    var bttnDelete = '<button class="btn btn-danger btn-xs" id="bttn_modal_delete" data-id="' + full.id_profe + '" data-target="#modal_delete"  data-toggle="modal" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>';
-                    var bttnUpdate = '<button class="btn btn-warning btn-xs" id="bttn_modal_update"  data-id="' + full.id_profe + '"  data-target="#ModalSave" data-toggle="modal" title="Editar"><i class="glyphicon glyphicon-edit"></i></button> ';
+                    var bttnDelete = '<button class="btn btn-danger btn-xs" id="bttn_modal_delete" data-id="' + full.id + '" data-target="#modal_delete"  data-toggle="modal" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>';
+                    var bttnUpdate = '<button class="btn btn-warning btn-xs" id="bttn_modal_update"  data-id="' + full.id + '"  data-target="#ModalSave" data-toggle="modal" title="Editar"><i class="glyphicon glyphicon-edit"></i></button> ';
                     return bttnUpdate + bttnDelete;
                 }
             }, ],
@@ -110,10 +147,9 @@ $(document).ready(function() {
                 success: function(data) {
                     //var array = $.parseJSON(data);
                     var obj = data;
-                    $().val();
-                    $('#saldo_total').val(obj.saldo_total);
-                    $('#saldo_disponible').val(obj.saldo_disponible);
-                    $("#saldo_gasto").val(obj.saldo_gasto);
+                    $('#nombre').val(obj[0].nombre);
+                    $('#email').val(obj[0].email);
+                    $('#password').val("");
                 }
 
             });
@@ -125,20 +161,31 @@ $(document).ready(function() {
         id = typeof button.data('id') != "undefined" ? button.data('id') : 0;
     });
     $('#ModalSave').on('show.bs.modal', function(e) {
-        $('#saldo_total').val(0);
-        $('#saldo_disponible').val(0);
-        $("#saldo_gasto").val(0);
+        $('#nombre').val("");
+        $("#carrera").val(0).change();
+        $("#email").val("");
+        $("#password").val("");
+        $("#password_c").val("");
+
     });
     $('#saveform').click(function() {
         var msg = '';
-
-        data_request = {
-            id: 1,
-            saldo_total: $('#saldo_total').val(),
-            saldo_disponible: $('#saldo_disponible').val(),
-            saldo_gasto: $('#saldo_gasto').val(),
+        var p1 = $("#password").val();
+        var p2 = $("#password_c").val();
+        if(p1 != p2){
+            toastr.error("Las Contraseñas no Coinciden");
+            $("#password").val("");
+            $("#password_c").val("");
+            $("#password").focus();
+            return false;
         }
-        console.log(data_request);
+        data_request = {
+            id: id,
+            nombre: $('#nombre').val(),
+            carrera:$('#carrera option:selected').val()==undefined?'0':$('#carrera option:selected').val(),
+            email:$("#email").val(),
+            password:$("#password").val(),    
+        }
         var get_url = id == 0 ? $("#url_guardar").val() : $("#url_actualizar").val() + '/' + id;
         var type_method = id == 0 ? 'POST' : 'PUT';
 
@@ -221,24 +268,3 @@ $(document).ready(function() {
         });
     });
 });
-
-function currency(value, decimals, separators) {
-    decimals = decimals >= 0 ? parseInt(decimals, 0) : 2;
-    separators = separators || ['.', "'", ','];
-    var number = (parseFloat(value) || 0).toFixed(decimals);
-    if (number.length <= (4 + decimals))
-        return number.replace('.', separators[separators.length - 1]);
-    var parts = number.split(/[-.]/);
-    value = parts[parts.length > 1 ? parts.length - 2 : 0];
-    var result = value.substr(value.length - 3, 3) + (parts.length > 1 ?
-        separators[separators.length - 1] + parts[parts.length - 1] : '');
-    var start = value.length - 6;
-    var idx = 0;
-    while (start > -3) {
-        result = (start > 0 ? value.substr(start, 3) : value.substr(0, 3 + start)) +
-            separators[idx] + result;
-        idx = (++idx) % 2;
-        start -= 3;
-    }
-    return (parts.length == 3 ? '-' : '') + result;
-}

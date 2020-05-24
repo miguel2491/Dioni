@@ -17,6 +17,19 @@
 <input type="hidden" id="url_guardar" value="{{ url('alumnos/guardar') }}">
 <input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
+<input type="hidden" id="url_list_carrera" value="{{ url('carreras/listar') }}">
+<input type="hidden" id="url_list_user" value="{{ url('usuarios/listar') }}">
+<input type="hidden" id="url_list_carrera" value="{{ url('carreras/listar') }}">
+
+<style type="text/css">
+	.select2{
+        width: 100% !important;
+    }
+    span.select2-container {
+        z-index:10050;
+    }
+
+</style>
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12">
@@ -36,7 +49,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="ibox-content">
+				<div class="ibox-content" style="text-transform: uppercase;">
 					<!-- Inicia Cuerpo  de la Vista -->
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover" id="table-datos">
@@ -44,7 +57,8 @@
 								<tr>
 									<th class="text-center">Clave</th>
 									<th class="text-center">Nombre</th>
-									<th class="text-center">Cuatrimestre</th>
+									<th class="text-center">Carrera</th>
+									<th class="text-center">Usuario</th>
 									<th class="text-center">Acciones</th>
 								</tr>
 							</thead>
@@ -64,28 +78,48 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="ModalEditar">Cuenta</h4>
+				<h4 class="modal-title" id="ModalEditar">Alumno</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="descripcion-field">Saldo Total</label>
-							<input type="text" autofocus="true" id="saldo_total" name="saldo_total" class="form-control" >
+							<label for="descripcion-field">Nombre</label>
+							<input type="text" autofocus="true" id="nombre" name="nombre" class="form-control" >
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="descripcion-field">Saldo Gasto</label>
-							<input type="text" id="saldo_gasto" name="saldo_gasto" class="form-control">
+							<label for="descripcion-field">Carrera</label>
+							<select name="carrera" id="carrera" class="form-control"></select>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Saldo Disponible</label>
-							<input type="text" id="saldo_disponible" name="saldo_disponible" class="form-control">
+							<label>Email</label>
+							<input type="text" id="email" name="email" class="form-control" >
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Usuario</label>
+							<input type="text" id="usuario" name="usuario" class="form-control" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" id="password" name="password" class="form-control" >
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Confirmar password</label>
+							<input type="password" id="password_c" name="password_c" class="form-control" >
 						</div>
 					</div>
 				</div>

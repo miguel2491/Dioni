@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2020 a las 06:25:16
+-- Tiempo de generación: 24-05-2020 a las 06:40:03
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.27
 
@@ -40,10 +40,7 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`id`, `id_carrera`, `id_user`, `username`) VALUES
-(1, 1, 1, 'Juan Alvarez'),
-(7, NULL, NULL, NULL),
-(8, 1, 1, 'Pablo Rosas'),
-(9, 2, 1, 'ENRIQUE RUIZ');
+(4, 5, 8, 'miguel angel dominguez');
 
 -- --------------------------------------------------------
 
@@ -64,7 +61,8 @@ CREATE TABLE `carrera` (
 INSERT INTO `carrera` (`user_id`, `carrera`, `icono`) VALUES
 (1, 'ADMINISTRACION', 'administracion1.png'),
 (2, 'DERECHO', 'derecho1.png'),
-(3, 'Preicial', 'pericial1.png');
+(3, 'Preicial', 'pericial1.png'),
+(5, 'informatica', 'educacion.png');
 
 -- --------------------------------------------------------
 
@@ -193,15 +191,6 @@ CREATE TABLE `maestro` (
   `email` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `maestro`
---
-
-INSERT INTO `maestro` (`id`, `id_user`, `username`, `nombre`, `email`) VALUES
-(1, NULL, 'JF', 'JUAN RULFO', 'JF@GMAIL.COM'),
-(2, NULL, 'SF', 'SOFIA FITCH', 'SF@SF.COM'),
-(3, NULL, 'HR', 'Hugo Ruiz', 'hr@gmail.com');
-
 -- --------------------------------------------------------
 
 --
@@ -239,20 +228,6 @@ CREATE TABLE `preguntas` (
   `id_preguntas` int(11) NOT NULL,
   `id_evaluacion` int(11) NOT NULL,
   `nombre_pregunta` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `profe`
---
-
-CREATE TABLE `profe` (
-  `id_profre` int(11) NOT NULL,
-  `Nombre` varchar(100) NOT NULL,
-  `Appat` varchar(100) NOT NULL,
-  `apmat` varchar(100) NOT NULL,
-  `estudios` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -296,95 +271,11 @@ CREATE TABLE `role_user` (
 
 INSERT INTO `role_user` (`idRolUser`, `rol_id`, `user_id`) VALUES
 (1, 1, 1),
-(2, 3, 2),
-(3, 3, 3),
-(4, 3, 4),
-(5, 3, 5),
-(6, 3, 6),
-(7, 3, 7),
-(8, 3, 8),
-(9, 3, 9),
-(10, 3, 10),
-(11, 3, 11),
-(12, 3, 12),
-(13, 3, 13),
-(14, 3, 14),
-(15, 3, 15),
-(16, 3, 16),
-(17, 3, 17),
-(18, 3, 18),
-(19, 3, 19),
-(20, 3, 20),
-(21, 3, 21),
-(22, 3, 22),
-(23, 3, 23),
-(24, 3, 24),
-(25, 3, 25),
-(26, 3, 26),
-(27, 3, 27),
-(28, 3, 28),
-(29, 3, 29),
-(30, 3, 30),
-(31, 3, 31),
-(32, 3, 32),
-(33, 3, 33),
-(34, 3, 34),
-(35, 3, 35),
-(36, 3, 36),
-(37, 3, 37),
-(38, 3, 38),
-(39, 3, 39),
-(40, 3, 40),
-(41, 3, 41),
-(42, 3, 42),
-(43, 3, 43),
-(44, 3, 44),
-(45, 3, 45),
-(46, 3, 46),
-(47, 3, 47),
-(48, 3, 48),
-(49, 3, 49),
-(50, 3, 50),
-(51, 2, 51),
-(52, 2, 52),
-(53, 2, 53),
-(54, 2, 54),
-(55, 2, 55),
-(56, 2, 56),
-(57, 2, 57),
-(58, 2, 58),
-(59, 2, 59),
-(60, 2, 60),
-(61, 2, 61),
-(62, 2, 62),
-(63, 2, 63),
-(64, 2, 64),
-(65, 2, 65),
-(66, 2, 66),
-(67, 2, 67),
-(68, 2, 68),
-(69, 2, 69),
-(70, 2, 70),
-(71, 2, 71),
-(72, 2, 72),
-(73, 2, 73),
-(74, 2, 74),
-(75, 2, 75),
-(76, 2, 76),
-(77, 2, 77),
-(78, 2, 78),
-(79, 2, 79),
-(80, 2, 80),
-(81, 2, 81),
-(82, 2, 82),
-(83, 2, 83),
-(84, 2, 84),
-(85, 2, 85),
-(86, 2, 86),
-(87, 2, 87),
-(88, 2, 88),
-(89, 3, 89),
-(90, 3, 90);
+(2, 2, 2),
+(4, 3, 5),
+(5, 3, 6),
+(6, 3, 7),
+(7, 3, 8);
 
 -- --------------------------------------------------------
 
@@ -445,96 +336,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'miguelus', 'miguelin2491@gmail.com', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', 'uVv7ZknijssKQb97GVhRZ2f96Qf0r2EAe0ArqNJS8xvcB0RvTJ4FLoF4avn9', '2019-12-05 09:49:09', '2019-12-05 09:49:09'),
-(2, 'romero.violeta', '', '$2b$10$l5e2y2AL0IY6rhDHbHY1De.uCcnQdsB16WygafO2mA2t4Z.r1ZTU.', NULL, NULL, NULL),
-(3, 'hernandez.gerardo', '', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', NULL, NULL, NULL),
-(4, 'rivera.maria', '', '6121604', NULL, NULL, NULL),
-(5, 'santiago.jose', '', '4731325', NULL, NULL, NULL),
-(6, 'santiago.beatriz', '', '2584771', NULL, NULL, NULL),
-(7, 'mendez.isai', '', '56', NULL, NULL, NULL),
-(8, 'hernandez.erika', '', '5691070', NULL, NULL, NULL),
-(9, 'olarte.oliver', '', '5650528', NULL, NULL, NULL),
-(10, 'galindo.marlene', '', '7852061', NULL, NULL, NULL),
-(11, 'alvarez.lizbeth', '', '6303725', NULL, NULL, NULL),
-(12, 'garcia.marisol', '', '1409634', NULL, NULL, NULL),
-(13, 'martín.clara', '', '4239754', NULL, NULL, NULL),
-(14, 'garcia.morales.dario', '', '4088078', NULL, NULL, NULL),
-(15, 'robles.luis', '', '3644623', NULL, NULL, NULL),
-(16, 'bautista.sandra', '', '2584771', NULL, NULL, NULL),
-(17, 'carrillo.omar', '', '2422692', NULL, NULL, NULL),
-(18, 'islas.camilo', '', '5666772', NULL, NULL, NULL),
-(19, 'zamora.irbin', '', '5691070', NULL, NULL, NULL),
-(20, 'zamora.sujey', '', '5650528', NULL, NULL, NULL),
-(21, 'manzano.alejandro', '', '7852061', NULL, NULL, NULL),
-(22, 'mora.elizabeth', '', '1409634', NULL, NULL, NULL),
-(23, 'meneses.aaron', '', '4239754', NULL, NULL, NULL),
-(24, 'montes.mariana', '', '4239756', NULL, NULL, NULL),
-(25, 'benitez.andrea', '', '4239757', NULL, NULL, NULL),
-(26, 'guerra.erika', '', '4239758', NULL, NULL, NULL),
-(27, 'roldan.hugo', '', '4239759', NULL, NULL, NULL),
-(28, 'amador.jose', '', '4239760', NULL, NULL, NULL),
-(29, 'tapia.ariel', '', '4239761', NULL, NULL, NULL),
-(30, 'aponte.melissa', '', '4239762', NULL, NULL, NULL),
-(31, 'chantes.gustavo', '', '4239763', NULL, NULL, NULL),
-(32, 'marin.oscar', '', '2584771', NULL, NULL, NULL),
-(33, 'fragoso.sergio', '', '2422692', NULL, NULL, NULL),
-(34, 'romero.rey', '', '5691070', NULL, NULL, NULL),
-(35, 'ortiz.carlos', '', '5650528', NULL, NULL, NULL),
-(36, 'luna.noemi', '', '7852061', NULL, NULL, NULL),
-(37, 'baez.jose', '', '1409634', NULL, NULL, NULL),
-(38, 'morales.jose', '', '1409635', NULL, NULL, NULL),
-(39, 'perez.lizethbet', '', '1409636', NULL, NULL, NULL),
-(40, 'olivares.genesis', '', '1409637', NULL, NULL, NULL),
-(41, 'cruz.landy', '', '1409639', NULL, NULL, NULL),
-(42, 'sanchez.angelica', '', '1409640', NULL, NULL, NULL),
-(43, 'carmona.angelica', '', '7852061', NULL, NULL, NULL),
-(44, 'flores.alma', '', '7852062', NULL, NULL, NULL),
-(45, 'gomez.israel', '', '7852064', NULL, NULL, NULL),
-(46, 'ibanez.daniel', '', '7852065', NULL, NULL, NULL),
-(47, 'rojas.leticia', '', '7852066', NULL, NULL, NULL),
-(48, 'cancino.carmina', '', '7852067', NULL, NULL, NULL),
-(49, 'romero.maria', '', '7852068', NULL, NULL, NULL),
-(50, 'carmona.leopoldo', '', '7852070', NULL, NULL, NULL),
-(51, 'vigueras.andrea', '', '7429647', 'PEUZSSWvxOuy36ppgCFCwXJksZ4AjeZB4DSulMXe9cRclmCuiOfPQCf7C5bH', NULL, NULL),
-(52, 'adriana.liliana.cercado', '', '85475984', NULL, NULL, NULL),
-(53, 'alberto.flores', '', '38', NULL, NULL, NULL),
-(54, 'aldo.benitez', '', '98941003', NULL, NULL, NULL),
-(55, 'carlos.alberto.lopez', '', '88888888', NULL, NULL, NULL),
-(56, 'christian.israel.rodriguez', '', '98941005', NULL, NULL, NULL),
-(57, 'fiorela.benitez', '', '98941006', NULL, NULL, NULL),
-(58, 'francisco.maldonado', '', '98941007', NULL, NULL, NULL),
-(59, 'gregorio.cruz', '', '98941008', NULL, NULL, NULL),
-(60, 'guillermo.contreras', '', '98941009', NULL, NULL, NULL),
-(61, 'hortensia.coyotl', '', '98941010', NULL, NULL, NULL),
-(62, 'isabel.machorro', '', '389448632', NULL, NULL, NULL),
-(63, 'jose.antonio.aguas', '', '389448633', NULL, NULL, NULL),
-(64, 'jose.manuel.manuel', '', '389448634', NULL, NULL, NULL),
-(65, 'juan jesus.limon', '', '389448635', NULL, NULL, NULL),
-(66, 'julio.fernando.alvarado', '', '389448636', NULL, NULL, NULL),
-(67, 'laura.carvajal', '', '389448637', NULL, NULL, NULL),
-(68, 'lizandro.rios', '', '389448638', NULL, NULL, NULL),
-(69, 'maria elena.sanchez', '', '388944562', NULL, NULL, NULL),
-(70, 'nan.josedelacueva', '', '12345678', NULL, NULL, NULL),
-(71, 'porfirio.rosete', '', '682976807', NULL, NULL, NULL),
-(72, 'raymundo.maldonado', '', '682976808', NULL, NULL, NULL),
-(73, 'roberto.brambila', '', '682976809', NULL, NULL, NULL),
-(74, 'tomas.israel.vazquez', '', '682976810', NULL, NULL, NULL),
-(75, 'viridiana.lozada', '', '682976811', NULL, NULL, NULL),
-(76, 'waldo.guerrero', '', '682976812', NULL, NULL, NULL),
-(77, 'yara.lesly.hernandez', '', '682976813', NULL, NULL, NULL),
-(78, 'alejandro.garcia', '', '68297681', NULL, NULL, NULL),
-(79, 'ariadna.ayala', '', '68297680', NULL, NULL, NULL),
-(80, 'gerardo.torres', '', '3894486', NULL, NULL, NULL),
-(81, 'javier.chacon', '', '8976806', NULL, NULL, NULL),
-(82, 'francisco.garcia', '', '8297680', NULL, NULL, NULL),
-(83, 'juan.rodriguez', '', '3848637', NULL, NULL, NULL),
-(84, 'rosario.rojas', '', '9448637', NULL, NULL, NULL),
-(85, 'salvador.nunez', '', '89448637', NULL, NULL, NULL),
-(86, 'daniel.calixto', '', '8297681', NULL, NULL, NULL),
-(87, 'adolfo.emanuel.hernandez', '', '$2y$12$65U/qSeGhbQbMno1Wmmyt.xO.zFIyen5Gv8WO34DmhNw01GCvsn3O', '120OvQxR2Dj46ZWuB8rvyiBjPRh9rEYAPeI6lQXWgzNuQtj8JYYyEoVLml6d', NULL, NULL),
-(88, 'francisco.alvarez', 'fcoal@gmail.com', '$2y$10$eI9jmAhKXzJk0tNaOkMTEeT.twmWf9HNQds2jUIlhsOJa4HqdCxxq', 'wGPOyS551gl6yRibfqhXOO8W29qbIabcycrQ9hjV7Jp3rVy6RnC8PamNRfl0', NULL, NULL),
-(89, 'Dionisio.espinoza', 'Dae@gmail.com', '$2y$10$xPMc7TOoNO6gYw0gBfez7Ob/79ZS.3D3GifwQ.IPBRYJPX0os/L4u', 'VGVPYGIJsJGPtSnzpwgyAN1dbhKMdqGSHxkBisSlo4q0VlrSv0F5SgEdnRXS', NULL, NULL),
-(90, 'ed Ophanim', 'erp.reno@hotmail.com', '$2y$10$L/VvUTPn9dxTWwDLlSbuyeg/GGPQK8iKt9V98ak7ZPHo1wBLW/NGa', NULL, NULL, NULL);
+(1, 'miguelus', 'miguelin2491@gmail.com', '$2y$10$uq/tUDWZI.U3QcY9yYZ.rOQLWRdSFFLDHs73l5F.aquxsdOg.T.A.', 'I7YlPBWGciSjah5p7EFr8Tjf53ikQUa2EMfXf1n5bRDuGapuAwXwir9RZtOs', '2019-12-05 09:49:09', '2019-12-05 09:49:09'),
+(2, 'Marifer', 'mari@mail.com', '$2y$10$QAnsWnizPFgOQnWvVIo3R.uFQiDJh4MBf836FGn1gF9sZhrhx2wzy', NULL, NULL, NULL),
+(8, 'miguelin', 'miguelb@mailer.com', '$2y$10$QnNDJskqJrP2/VYGbYaW5OfyqAl3qobfzpDPG9J2azs85mpQzFMpa', 'aNd32FxAqTnFahz6SQfE2f56QoIkcnk8MMbHZ0Au7xFQBNz4DP9PAs3pmM4E', NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -607,12 +411,6 @@ ALTER TABLE `preguntas`
   ADD PRIMARY KEY (`id_preguntas`);
 
 --
--- Indices de la tabla `profe`
---
-ALTER TABLE `profe`
-  ADD PRIMARY KEY (`id_profre`);
-
---
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -646,13 +444,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `catera_materias_alumno`
@@ -694,25 +492,19 @@ ALTER TABLE `evaluacion`
 -- AUTO_INCREMENT de la tabla `maestro`
 --
 ALTER TABLE `maestro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
   MODIFY `id_preguntas` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `profe`
---
-ALTER TABLE `profe`
-  MODIFY `id_profre` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -724,7 +516,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `idRolUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `idRolUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `solucion`
@@ -736,7 +528,7 @@ ALTER TABLE `solucion`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

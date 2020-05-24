@@ -15,6 +15,38 @@ $(document).ready(function() {
         radioClass: 'iradio_square-green',
     });
 
+    $.ajax({
+        url: $("#url_list_carrera").val(),
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {
+            var carrera = resp.data;
+            var itemcarrera = [];
+            carrera.forEach(function(element) {
+                itemcarrera.push({
+                    id: element.user_id,
+                    text: element.carrera
+                });
+            });
+            $('#carrera').select2({
+                placeholder: {
+                    id: 0,
+                    text: 'Seleccione una carrera'
+                },
+                width: '100%',
+                allowClear: true,
+                data: itemcarrera,
+                //dropdownParent: $('#ModalSave')
+            });
+            $("#carrera").val(0).change();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                location.reload();
+            }
+        }
+    });
     dataTable_datos =
         $("#table-datos").dataTable({
             "bDeferRender": true,
@@ -44,15 +76,22 @@ $(document).ready(function() {
                 "mData": "username",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var usuario = full.username;
+                    var usuario = full.nombre;
                     return usuario;
                 }
             }, {
                 "mData": "id_carrera",
                 "bSortable": true,
                 "mRender": function(data, type, full) {
-                    var grado = full.id_carrera;
+                    var grado = full.carrera;
                     return grado;
+                }
+            },{
+                "mData": "usuario",
+                "bSortable": true,
+                "mRender": function(data, type, full) {
+                    var name = full.name;
+                    return name;
                 }
             }, {
                 "mData": "Acciones",
@@ -118,13 +157,15 @@ $(document).ready(function() {
                 url: $('#url_datosget').val() + '/' + id,
                 type: 'GET',
                 data: '',
-                success: function(data) {
+                success: function(data) {console.log(data);
                     //var array = $.parseJSON(data);
                     var obj = data;
-                    $().val();
-                    $('#saldo_total').val(obj.saldo_total);
-                    $('#saldo_disponible').val(obj.saldo_disponible);
-                    $("#saldo_gasto").val(obj.saldo_gasto);
+                    $('#nombre').val(obj[0].nombre);
+                    $('#carrera').val(obj[0].id_carrera).change();
+                    $('#email').val(obj[0].email);
+                    $('#usuario').val(obj[0].name);
+                    $('#password').val("");
+                    $('#password_c').val("");
                 }
 
             });
@@ -136,23 +177,34 @@ $(document).ready(function() {
         id = typeof button.data('id') != "undefined" ? button.data('id') : 0;
     });
     $('#ModalSave').on('show.bs.modal', function(e) {
-        $('#saldo_total').val(0);
-        $('#saldo_disponible').val(0);
-        $("#saldo_gasto").val(0);
+        $('#nombre').val("");
+        $('#carrera').val(0).change();
+        $("#usuario").val("");
+        $("#email").val("");
+        $("#password").val("");
+        $("#password_c").val("");
     });
     $('#saveform').click(function() {
         var msg = '';
-
-        data_request = {
-            id: 1,
-            saldo_total: $('#saldo_total').val(),
-            saldo_disponible: $('#saldo_disponible').val(),
-            saldo_gasto: $('#saldo_gasto').val(),
+        var p1 = $("#password").val();
+        var p2 = $("#password_c").val();
+        if(p1 != p2){
+            toastr.error("Las Contraseñas no Coinciden");
+            $("#password").val("");
+            $("#password_c").val("");
+            $("#password").focus();
+            return false;
         }
-        console.log(data_request);
+        data_request = {
+            id: id,
+            nombre: $('#nombre').val(),
+            usuario: $('#usuario').val(),
+            carrera: $('#carrera option:selected').val()==undefined?'0':$('#carrera option:selected').val(),
+            email: $("#email").val(),
+            password: $("#password").val(),
+        };
         var get_url = id == 0 ? $("#url_guardar").val() : $("#url_actualizar").val() + '/' + id;
         var type_method = id == 0 ? 'POST' : 'PUT';
-
         $.ajax({
             url: get_url,
             type: type_method,
@@ -168,9 +220,6 @@ $(document).ready(function() {
                     toastr.success(data.message);
                     dataTable_datos._fnAjaxUpdate();
                     $("#ModalSave").modal('hide');
-                    setTimeout(function() {
-                        location.reload();
-                    }, 2000);
                 }
             },
 
@@ -232,24 +281,3 @@ $(document).ready(function() {
         });
     });
 });
-
-function currency(value, decimals, separators) {
-    decimals = decimals >= 0 ? parseInt(decimals, 0) : 2;
-    separators = separators || ['.', "'", ','];
-    var number = (parseFloat(value) || 0).toFixed(decimals);
-    if (number.length <= (4 + decimals))
-        return number.replace('.', separators[separators.length - 1]);
-    var parts = number.split(/[-.]/);
-    value = parts[parts.length > 1 ? parts.length - 2 : 0];
-    var result = value.substr(value.length - 3, 3) + (parts.length > 1 ?
-        separators[separators.length - 1] + parts[parts.length - 1] : '');
-    var start = value.length - 6;
-    var idx = 0;
-    while (start > -3) {
-        result = (start > 0 ? value.substr(start, 3) : value.substr(0, 3 + start)) +
-            separators[idx] + result;
-        idx = (++idx) % 2;
-        start -= 3;
-    }
-    return (parts.length == 3 ? '-' : '') + result;
-}

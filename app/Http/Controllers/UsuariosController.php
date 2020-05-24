@@ -1,17 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Catalogos;
+namespace App\Http\Controllers;
 
 use App;
 use App\Http\Controllers\Controller;
-use App\Models\Catalogos\Alumno;
-use App\Models\RolesUser;
-use App\Models\Usuario;
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
-class AlumnosController extends Controller
+class UsuariosController extends Controller
 {
     public function __construct()
     {
@@ -24,7 +20,7 @@ class AlumnosController extends Controller
      */
     public function index()
     {
-        return view('Catalogos/alumno.index');
+        return view('Catalogos/usuarios.index');
     }
 
     public function lista()
@@ -39,31 +35,15 @@ class AlumnosController extends Controller
     public function store(Request $request)
     {
 
-        $email                 = request("email");
-        $password              = request("password");
-        $nombre                = request("nombre");
-        $usuario               = request("usuario");
-        $carrera               = request("carrera");
-        $cat_usuario           = new Usuario();
-        $cat_usuario->name     = $usuario;
-        $cat_usuario->email    = $email;
-        $cat_usuario->password = Hash::make($password);
+        $cat_materias                  = new Materias();
+        $cat_materias->nombre          = request("materia");
+        $cat_materias->id_cuatrimestre = request("cuatrimestre");
+        $cat_materias->id_carrera      = request("carrera");
         DB::beginTransaction();
         try {
-            if ($cat_usuario->save()) {
-                $id                      = $cat_usuario->id;
-                $cat_roles_user          = new RolesUser();
-                $cat_roles_user->rol_id  = 3;
-                $cat_roles_user->user_id = $id;
-                if ($cat_roles_user->save()) {
-                    $cat_alumno             = new Alumno();
-                    $cat_alumno->id_user    = $id;
-                    $cat_alumno->id_carrera = $carrera;
-                    $cat_alumno->username   = $nombre;
-                    if ($cat_alumno->save()) {
-                        $msg = ['status' => 'ok', 'message' => 'Se ha guardado correctamente'];
-                    }
-                }
+            if ($cat_materias->save()) {
+                $id  = $cat_materias->id_carrera;
+                $msg = ['status' => 'ok', 'message' => 'Se ha guardado correctamente', 'id' => $id];
             }
         } catch (\Illuminate\Database\QueryException $ex) {
             DB::rollback();
@@ -81,9 +61,7 @@ class AlumnosController extends Controller
     public function edit($id)
     {
         $results = DB::table('alumno as a')
-            ->select('a.id', 'a.username as nombre', 'a.id_carrera', 'u.email', 'u.name')
-            ->leftjoin('carrera as c', 'c.user_id', '=', 'a.id_carrera')
-            ->leftjoin('users as u', 'u.id', '=', 'a.id_user')
+            ->select('a.id', 'a.id_carrera', 'a.id_user', 'a.username')
             ->where('a.id', $id)->get();
         return response()->json($results);
     }
@@ -91,26 +69,14 @@ class AlumnosController extends Controller
     public function update(Request $request, $id)
     {
 
-        $pass                   = request("password");
-        $nombre                 = request("nombre");
-        $carrera                = request("carrera");
-        $cat_alumno             = Alumno::findOrFail($id);
-        $cat_alumno->username   = request("nombre");
-        $cat_alumno->id_carrera = request("carrera");
-
+        $cat_materias                  = Materias::findOrFail($id);
+        $cat_materias->nombre          = request("materia");
+        $cat_materias->id_cuatrimestre = request("cuatrimestre");
+        $cat_materias->id_carrera      = request("carrera");
         DB::beginTransaction();
         try {
-            if ($cat_alumno->save()) {
-                $idu                = $cat_alumno->id_user;
-                $cat_usuario        = Usuario::findOrFail($idu);
-                $cat_usuario->name  = request("usuario");
-                $cat_usuario->email = request("email");
-                if ($pass != "") {
-                    $cat_usuario->password = Hash::make($pass);
-                }
-                if ($cat_usuario->save()) {
-                    $msg = ['status' => 'ok', 'message' => 'Se Actualizo correctamente', 'idu' => $idu];
-                }
+            if ($cat_materias->save()) {
+                $msg = ['status' => 'ok', 'message' => 'Se Actualizo correctamente'];
             }
         } catch (\Illuminate\Database\QueryException $ex) {
             DB::rollback();
@@ -127,17 +93,12 @@ class AlumnosController extends Controller
     }
     public function destroy($id)
     {
-        $msg        = [];
-        $cat_alumno = Alumno::find($id);
-        $id         = $cat_alumno->id_user;
+        $msg          = [];
+        $cat_materias = Materias::find($id);
         DB::beginTransaction();
         try {
-            if ($cat_alumno->delete()) {
-                $cat_usuario = Usuario::find($id);
-                if ($cat_usuario->delete()) {
-                    $msg = ['status' => 'ok', 'message' => 'Se elimino correctamente!'];
-                }
-
+            if ($cat_materias->delete()) {
+                $msg = ['status' => 'ok', 'message' => 'Se elimino correctamente!'];
             }
         } catch (\Illuminate\Database\QueryException $ex) {
             DB::rollback();
@@ -155,10 +116,8 @@ class AlumnosController extends Controller
     //LISTAR
     public function listado()
     {
-        $results = DB::table('materias as m')
-            ->select('m.id', 'm.nombre', 'm.id_cuatrimestre', 'm.id_carrera', 'c.lapso', 'ca.carrera')
-            ->leftjoin('cuatrimestre as c', 'c.id', '=', 'm.id_cuatrimestre')
-            ->leftjoin('carrera as ca', 'ca.user_id', '=', 'm.id_carrera')
+        $results = DB::table('users as u')
+            ->select('u.id', 'u.name', 'u.email')
             ->get();
         return response()->json($results);
     }

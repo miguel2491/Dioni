@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    //materias();
+    materias();
 });
    
 function materias(){
