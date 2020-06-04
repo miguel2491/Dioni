@@ -101,6 +101,8 @@ $(document).ready(function() {
                     id: element.id,
                     text: element.nombre
                 });
+
+                console.log(element);
             });
 
             $('#maestro').select2({
@@ -253,7 +255,7 @@ $(document).ready(function() {
         var msg = '';
 
         data_request = {
-            id: id,
+            
             materia: $('#materia').val(),
             cuatrimestre: $('#cuatrimestre option:selected').val()==undefined?'0':$('#cuatrimestre option:selected').val(),
             carrera: $('#carrera option:selected').val()==undefined?'0':$('#carrera option:selected').val(),
