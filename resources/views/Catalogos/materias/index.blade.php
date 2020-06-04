@@ -19,6 +19,7 @@
 <input type="hidden" id="url_eliminar" value="{{ url('materias/delete') }}">
 <input type="hidden" id="url_list_cuatrimestre" value="{{ url('cuatrimestres/lista') }}">
 <input type="hidden" id="url_list_carrera" value="{{ url('carreras/listar') }}">
+<input type="hidden" id="url_list_maestro" value="{{ url('profesor/lista') }}">
 
 <style type="text/css">
 	.select2{
@@ -98,6 +99,12 @@
 						<div class="form-group">
 							<label>Carrera</label>
                 			<select name="carrera" id="carrera" class="form-control"></select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Maestro</label>
+                			<select name="maestro" id="maestro" class="form-control"></select>
 						</div>
 					</div>
 				</div>

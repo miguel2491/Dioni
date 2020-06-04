@@ -88,6 +88,43 @@ $(document).ready(function() {
         }
     });
 
+    $.ajax({
+        url: $("#url_list_maestro").val(),
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) { console.log(resp);
+            var maestro = resp.data;
+            var itemmaestro = [];
+
+            maestro.forEach(function(element) {
+                itemmaestro.push({
+                    id: element.id,
+                    text: element.nombre
+                });
+            });
+
+            $('#maestro').select2({
+                placeholder: {
+                    id: 0,
+                    text: 'Seleccione un Maestro'
+                },
+                width: '100%',
+                allowClear: true,
+                data: itemmaestro,
+                //dropdownParent: $('#ModalSave')
+            });
+
+            $("#maestro").val(0).change();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                location.reload();
+            }
+
+        }
+    });
+
     dataTable_datos =
         $("#table-datos").dataTable({
             "bDeferRender": true,
@@ -102,7 +139,6 @@ $(document).ready(function() {
                     "success": fnCallback,
                     "error": function(jqXHR, textStatus, errorThrown) {
                         var data = jqXHR.responseJSON;
-                        console.log(data);
                         /*
                         if (jqXHR.status == 401 || jqXHR.status == 500) {
                             location.reload();
@@ -195,7 +231,8 @@ $(document).ready(function() {
                     console.log(data);
                     $('#materia').val(obj[0].nombre);
                     $('#cuatrimestre').val(obj[0].id_cuatrimestre).change();;
-                    $("#carrera").val(obj[0].id_carrera).change();;
+                    $("#carrera").val(obj[0].id_carrera).change();
+                    $("#maestro").val(obj[0].id_maestro).change();
                 }
 
             });
@@ -210,6 +247,7 @@ $(document).ready(function() {
         $('#materia').val("");
         $('#cuatrimestre').select2({dropdownParent: $(this).parent()}).select2('val', 0);
         $("#carrera").select2({dropdownParent: $(this).parent()}).select2('val', 0);
+        $("#maestro").select2({dropdownParent: $(this).parent()}).select2('val', 0);
     });
     $('#saveform').click(function() {
         var msg = '';
@@ -219,8 +257,8 @@ $(document).ready(function() {
             materia: $('#materia').val(),
             cuatrimestre: $('#cuatrimestre option:selected').val()==undefined?'0':$('#cuatrimestre option:selected').val(),
             carrera: $('#carrera option:selected').val()==undefined?'0':$('#carrera option:selected').val(),
+            maestro: $('#maestro option:selected').val()==undefined?'0':$('#maestro option:selected').val(),
         }
-        console.log(data_request);
         var get_url = id == 0 ? $("#url_guardar").val() : $("#url_actualizar").val() + '/' + id;
         var type_method = id == 0 ? 'POST' : 'PUT';
 
@@ -233,7 +271,6 @@ $(document).ready(function() {
             },
             data: data_request,
             success: function(data) {
-                console.log(data);
                 if (data.status == 'fail') {
                     toastr.error(data.message);
                 } else {

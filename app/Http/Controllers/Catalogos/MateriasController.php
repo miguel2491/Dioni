@@ -42,6 +42,7 @@ class MateriasController extends Controller
         $cat_materias->nombre          = request("materia");
         $cat_materias->id_cuatrimestre = request("cuatrimestre");
         $cat_materias->id_carrera      = request("carrera");
+        $cat_materias->id_maestro      = request("maestro");
         DB::beginTransaction();
         try {
             if ($cat_materias->save()) {
@@ -64,7 +65,7 @@ class MateriasController extends Controller
     public function edit($id)
     {
         $results = DB::table('materias as m')
-            ->select('m.id', 'm.nombre', 'm.id_cuatrimestre', 'm.id_carrera')
+            ->select('m.id', 'm.nombre', 'm.id_cuatrimestre', 'm.id_carrera', 'm.id_maestro')
             ->where('m.id', $id)->get();
         return response()->json($results);
     }
@@ -76,6 +77,7 @@ class MateriasController extends Controller
         $cat_materias->nombre          = request("materia");
         $cat_materias->id_cuatrimestre = request("cuatrimestre");
         $cat_materias->id_carrera      = request("carrera");
+        $cat_materias->id_maestro      = request("maestro");
         DB::beginTransaction();
         try {
             if ($cat_materias->save()) {
@@ -120,7 +122,7 @@ class MateriasController extends Controller
     public function listado()
     {
         $results = DB::table('materias as m')
-            ->select('m.id', 'm.nombre', 'm.id_cuatrimestre', 'm.id_carrera', 'c.lapso', 'ca.carrera')
+            ->select('m.id', 'm.nombre', 'm.id_cuatrimestre', 'm.id_carrera', 'm.id_maestro', 'c.lapso', 'ca.carrera')
             ->leftjoin('cuatrimestre as c', 'c.id', '=', 'm.id_cuatrimestre')
             ->leftjoin('carrera as ca', 'ca.user_id', '=', 'm.id_carrera')
             ->get();
