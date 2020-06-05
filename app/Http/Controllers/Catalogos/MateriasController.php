@@ -128,4 +128,13 @@ class MateriasController extends Controller
             ->get();
         return response()->json($results);
     }
+    //Catera Materia Alumno
+    public function lista_materia_alumno($id)
+    {
+        $results = DB::table('catera_materias_alumno as cma')
+            ->select('cma.id', 'cma.id_alumno', 'cma.id_materia', 'm.id_cuatrimestre', 'cma.calificacionfinal')
+            ->where('cma.id', $id)
+            ->get();
+        return response()->json($results);
+    }
 }

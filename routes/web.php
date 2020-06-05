@@ -102,3 +102,12 @@ Route::get('evaluacion/con_respuesta/{id}', 'Catalogos\EvaluacionesController@ev
 
 Route::post('cuestionario/guardar', 'Catalogos\EvaluacionesController@store_cuestionario');
 Route::get('cuestionario/consulta/{id}', 'Catalogos\EvaluacionesController@lista_cuestionario');
+//CHEMAS
+Route::get('catera_materia_alumno/{id}', 'Catalogos\MateriasController@lista_materia_alumno');
+Route::post('asignar_materia/guardar', 'Catalogos\AlumnosController@asigna_materia_alumno');
+Route::post('asignar_clases_maestro/guardar', 'Catalogos\ClasesController@store_clases_maestro');
+Route::post('select_materia_alumno/materias', 'Catalogos\ClasesController@lista_clase_maestro');
+Route::post('select_materia_alumno/delete', 'Catalogos\ClasesController@destroyMatCua');
+Route::get('anexo/lista/{id}', 'Catalogos\AnexoController@lista_anexo');
+Route::post('anexo/guardar', 'Catalogos\AnexoController@store');
+Route::post('anexo/delete', 'Catalogos\AnexoController@destroy');

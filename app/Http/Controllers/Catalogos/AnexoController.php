@@ -4,15 +4,13 @@ namespace App\Http\Controllers\Catalogos;
 
 use App;
 use App\Http\Controllers\Controller;
-use App\Models\Catalogos\Alumno;
-use App\Models\Catalogos\CatMatAlu;
-use App\Models\RolesUser;
+use App\Models\Catalogos\Anexos;
 use App\Models\Usuario;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class AlumnosController extends Controller
+class AnexoController extends Controller
 {
     public function __construct()
     {
@@ -28,43 +26,28 @@ class AlumnosController extends Controller
         return view('Catalogos/alumno.index');
     }
 
-    public function lista()
+    public function lista_anexo()
     {
-        $results = DB::table('alumno as a')
-            ->select('a.id', 'a.username as nombre', 'c.carrera', 'u.name')
-            ->leftjoin('carrera as c', 'c.user_id', '=', 'a.id_carrera')
-            ->leftjoin('users as u', 'u.id', '=', 'a.id_user')
+        $results = DB::table('anexos as a')
+            ->select('a.id', 'a.id_clase', 'a.tipo', 'a.link', 'c.clase')
+            ->leftjoin('clase as c', 'c.id', '=', 'a.id_clase')
             ->get();
         return response()->json(['data' => $results]);
     }
     public function store(Request $request)
     {
-
-        $email                 = request("email");
-        $password              = request("password");
-        $nombre                = request("nombre");
-        $usuario               = request("usuario");
-        $carrera               = request("carrera");
-        $cat_usuario           = new Usuario();
-        $cat_usuario->name     = $usuario;
-        $cat_usuario->email    = $email;
-        $cat_usuario->password = Hash::make($password);
+        $id_clase             = request("id_clase");
+        $tipo                 = request("tipo");
+        $link                 = request("link");
+        $cat_anexos           = new Anexos();
+        $cat_anexos->id_clase = $id_clase;
+        $cat_anexos->tipo     = $tipo;
+        $cat_anexos->link     = $link;
         DB::beginTransaction();
         try {
-            if ($cat_usuario->save()) {
-                $id                      = $cat_usuario->id;
-                $cat_roles_user          = new RolesUser();
-                $cat_roles_user->rol_id  = 3;
-                $cat_roles_user->user_id = $id;
-                if ($cat_roles_user->save()) {
-                    $cat_alumno             = new Alumno();
-                    $cat_alumno->id_user    = $id;
-                    $cat_alumno->id_carrera = $carrera;
-                    $cat_alumno->username   = $nombre;
-                    if ($cat_alumno->save()) {
-                        $msg = ['status' => 'ok', 'message' => 'Se ha guardado correctamente'];
-                    }
-                }
+            if ($cat_anexos->save()) {
+                $id  = $cat_anexos->id;
+                $msg = ['status' => 'ok', 'message' => 'Se ha guardado correctamente'];
             }
         } catch (\Illuminate\Database\QueryException $ex) {
             DB::rollback();
@@ -95,7 +78,7 @@ class AlumnosController extends Controller
         $pass                   = request("password");
         $nombre                 = request("nombre");
         $carrera                = request("carrera");
-        $cat_alumno             = Alumno::findOrFail($id);
+        $cat_alumno             = Anexos::findOrFail($id);
         $cat_alumno->username   = request("nombre");
         $cat_alumno->id_carrera = request("carrera");
 
@@ -129,8 +112,8 @@ class AlumnosController extends Controller
     public function destroy($id)
     {
         $msg        = [];
-        $cat_alumno = Alumno::find($id);
-        $id         = $cat_alumno->id_user;
+        $cat_alumno = Anexo::find($id);
+        $id         = $cat_alumno->id_clase;
         DB::beginTransaction();
         try {
             if ($cat_alumno->delete()) {
