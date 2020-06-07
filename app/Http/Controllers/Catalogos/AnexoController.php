@@ -14,7 +14,7 @@ class AnexoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
     /**
      * Mostrar un listado de los recursos.
@@ -111,17 +111,12 @@ class AnexoController extends Controller
     }
     public function destroy($id)
     {
-        $msg        = [];
-        $cat_alumno = Anexo::find($id);
-        $id         = $cat_alumno->id_clase;
+        $msg       = [];
+        $cat_anexo = Anexos::find($id);
         DB::beginTransaction();
         try {
-            if ($cat_alumno->delete()) {
-                $cat_usuario = Usuario::find($id);
-                if ($cat_usuario->delete()) {
-                    $msg = ['status' => 'ok', 'message' => 'Se elimino correctamente!'];
-                }
-
+            if ($cat_anexo->delete()) {
+                $msg = ['status' => 'ok', 'message' => 'Se elimino correctamente!'];
             }
         } catch (\Illuminate\Database\QueryException $ex) {
             DB::rollback();

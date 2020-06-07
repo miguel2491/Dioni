@@ -65,20 +65,6 @@ class UsuariosController extends Controller
             ->where('a.id', $id)->get();
         return response()->json($results);
     }
-
-    public function getAlumno($id)
-    {
-        $results = DB::table('alumno as a')
-            ->select('a.id', 'a.id_carrera', 'a.id_user', 'a.username')
-            ->where('a.id_user', $id)->get();
-            return response()->json(['data' => $results]);    }
-
-    public function getMaestro($id)
-    {
-        $results = DB::table('maestro as a')
-            ->select('a.nombre', 'a.email', 'a.id_user', 'a.username')
-            ->where('a.id_user', $id)->get();
-            return response()->json(['data' => $results]);    }
     //Update
     public function update(Request $request, $id)
     {

@@ -181,10 +181,7 @@ class AlumnosController extends Controller
         DB::beginTransaction();
         try {
             if ($cat_materia_alumno->save()) {
-                $id = $cat_materia_alumno->id;
-                if ($cat_roles_user->save()) {
-                    $msg = ['status' => 'ok', 'message' => 'Se ha guardado correctamente'];
-                }
+                $msg = ['status' => 'ok', 'message' => 'Se ha guardado correctamente'];
             }
         } catch (\Illuminate\Database\QueryException $ex) {
             DB::rollback();

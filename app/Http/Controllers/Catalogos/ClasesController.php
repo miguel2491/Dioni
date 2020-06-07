@@ -182,9 +182,10 @@ class ClasesController extends Controller
         $id_maestro      = request("id_maestro");
 
         $results = DB::table('clase as c')
-            ->select('c.id', 'c.clase', 'c.fecha', 'c.id_materia', 'c.id_cuatrimestre', 'c.enlace', 'c.actividad', 'id_maestro', 'm.materia', 'cu.cuatrimestre')
+            ->select('c.id', 'c.clase', 'c.fecha', 'c.id_materia', 'c.id_cuatrimestre', 'c.enlace', 'c.actividad', 'c.id_maestro', 'm.nombre', 'cu.lapso', 'ma.nombre')
             ->leftjoin('cuatrimestre as cu', 'cu.id', '=', 'c.id_cuatrimestre')
-            ->leftjoin('materia as m', 'm.id', '=', 'c.id_materia')
+            ->leftjoin('materias as m', 'm.id', '=', 'c.id_materia')
+            ->leftjoin('maestro as ma', 'ma.id', '=', 'c.id_maestro')
             ->where('c.id_materia', $id_materia)
             ->where('c.id_cuatrimestre', $id_cuatrimestre)
             ->where('c.id_maestro', $id_maestro)
@@ -192,10 +193,13 @@ class ClasesController extends Controller
         return response()->json($results);
     }
 
-    public function destroyMatCua($idm, $idc)
+    public function eliminaClase(Request $request)
     {
+        $idm       = request('id_materia');
+        $idc       = request('id_cuatrimestre');
         $msg       = [];
-        $cat_clase = Clases::find($idm);
+        $cat_clase = Clases::where('id_materia', $idm)->where('id_cuatrimestre', $idc);
+
         DB::beginTransaction();
         try {
             if ($cat_clase->delete()) {
