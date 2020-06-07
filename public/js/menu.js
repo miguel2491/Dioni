@@ -1,9 +1,18 @@
 $(document).ready(function() {
-    materias();
+    console.log("Menu");
+
+    userx = $('#rol').val();
+    if(userx == 3){
+       materias();
+    }else if(userx == 2){
+     
+        $("#div_carreras").append('<div class="container"><div class="col-lg-12"><p>Bienvenido maestro de click en el logo para ver sus opciones</p></div></div>');
+        }else{
+            $("#div_carreras").append('<div class="container"><div class="col-lg-12"><p>Usted no tiene permisos</p></div></div>');
+        }
 });
    
 function materias(){
-    console.log("HOLA");
     $.ajax({
         url: 'carreras/listar',
         type: 'GET',

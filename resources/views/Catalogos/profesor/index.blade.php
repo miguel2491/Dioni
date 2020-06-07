@@ -140,6 +140,9 @@
 		</div>
 	</div>
 </div>
+
+
+
 @endsection
 @section('main-scripts')
 	<script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>

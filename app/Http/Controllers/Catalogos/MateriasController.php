@@ -126,15 +126,16 @@ class MateriasController extends Controller
             ->leftjoin('cuatrimestre as c', 'c.id', '=', 'm.id_cuatrimestre')
             ->leftjoin('carrera as ca', 'ca.user_id', '=', 'm.id_carrera')
             ->get();
-        return response()->json($results);
+            return response()->json(['data' => $results]);
+
     }
     //Catera Materia Alumno
     public function lista_materia_alumno($id)
     {
         $results = DB::table('catera_materias_alumno as cma')
-            ->select('cma.id', 'cma.id_alumno', 'cma.id_materia', 'm.id_cuatrimestre', 'cma.calificacionfinal')
-            ->where('cma.id', $id)
+            ->select('cma.id', 'cma.id_alumno', 'cma.id_materia', 'cma.id_cuatrimestre', 'cma.calificacionfinal')
+            ->where('cma.id_alumno', $id)
             ->get();
-        return response()->json($results);
+            return response()->json(['data' => $results]);
     }
 }

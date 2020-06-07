@@ -16,117 +16,177 @@ $(document).ready(function() {
     });
 
     dataTable_datos =
-        $("#table-datos").dataTable({
-            "bDeferRender": true,
-            "iDisplayLength": 10,
-            "bProcessing": true,
-            "sAjaxSource": $('#url_listado').val(),
-            "fnServerData": function(sSource, aoData, fnCallback, oSettings) {
-                oSettings.jqXHR = $.ajax({
-                    "dataType": 'json',
-                    "type": "GET",
-                    "url": sSource,
-                    "success": fnCallback,
-                    "error": function(jqXHR, textStatus, errorThrown) {
-                        var data = jqXHR.responseJSON;
-                        /*
-                        if (jqXHR.status == 401 || jqXHR.status == 500) {
-                            location.reload();
-                        }*/
-                    }
-                });
-            },
-            "bAutoWidth": false,
-            //"bFilter": false,
-            "aoColumns": [{
-                "mData": "id_clase_asignada"
-            }, {
-                "mData": "materia",
-                "bSortable": true,
-                "mRender": function(data, type, full) {
-                    var materia = full.id_carrera;
-                    return materia;
+    $("#table-datos").dataTable({
+        "bDeferRender": true,
+        "iDisplayLength": 10,
+        "bProcessing": true,
+        "sAjaxSource": $('#url_listado_alumnos').val(),
+        "fnServerData": function(sSource, aoData, fnCallback, oSettings) {
+            oSettings.jqXHR = $.ajax({
+                "dataType": 'json',
+                "type": "GET",
+                "url": sSource,
+                "success": fnCallback,
+                "error": function(jqXHR, textStatus, errorThrown) {
+                    var data = jqXHR.responseJSON;
+                    /*
+                    if (jqXHR.status == 401 || jqXHR.status == 500) {
+                        location.reload();
+                    }*/
                 }
-            }, {
-                "mData": "materia",
-                "bSortable": true,
-                "mRender": function(data, type, full) {
-                    var materia = full.id_unico_mat;
-                    return materia;
-                }
-            },{
-                "mData": "descripcion_tarea",
-                "bSortable": true,
-                "mRender": function(data, type, full) {
-                    var descripcion_tarea = full.descripcion_tarea;
-                    return descripcion_tarea;
-                }
-            },{
-                "mData": "name_alumn",
-                "bSortable": true,
-                "mRender": function(data, type, full) {
-                    var name_alumn = full.name_alumn;
-                    return name_alumn;
-                }
-            },{
-                "mData": "fecha",
-                "bSortable": true,
-                "mRender": function(data, type, full) {
-                    var fecha = full.fecha;
-                    return fecha;
-                }
-            },{
-                "mData": "Acciones",
-                "bSortable": false,
-                "mRender": function(data, type, full) {
-                    var bttnDelete = '<button class="btn btn-danger btn-xs" id="bttn_modal_delete" data-id="' + full.id_clase_asignada + '" data-target="#modal_delete"  data-toggle="modal" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>';
-                    var bttnUpdate = '<button class="btn btn-warning btn-xs" id="bttn_modal_update"  data-id="' + full.id_clase_asignada + '"  data-target="#ModalSave" data-toggle="modal" title="Editar"><i class="glyphicon glyphicon-edit"></i></button> ';
-                    return bttnUpdate + bttnDelete;
-                }
-            }, ],
-            "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                $("td:eq(0), td:eq(2)", nRow).attr('align', 'center');
-
-                //$("#btn_modal_eliminar", nRow).attr('disabled', aData.Activo == 1 ? false : true);
-
-                /*if (!aData.Editar) {
-                    $("#bttn_modal_update", nRow).remove();
-                }
-
-                if (!aData.Eliminar) {
-                    $("#bttn_modal_delete", nRow).remove();
-                }*/
-
-            },
-            "aLengthMenu": [
-                [5, 10, -1],
-                [5, 10, "Todo"]
-            ],
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Registros del _START_ al _END_  total: _TOTAL_ ",
-                "sInfoEmpty": "Sin registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "oAria": {
-                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                }
+            });
+        },
+        "bAutoWidth": false,
+        //"bFilter": false,
+        "aoColumns": [{
+            "mData": "id"
+        }, {
+            "mData": "username",
+            "bSortable": true,
+            "mRender": function(data, type, full) {
+                var usuario = full.nombre;
+                return usuario;
             }
-        });
+        }, {
+            "mData": "id_carrera",
+            "bSortable": true,
+            "mRender": function(data, type, full) {
+                var grado = full.carrera;
+                return grado;
+            }
+        },{
+            "mData": "usuario",
+            "bSortable": true,
+            "mRender": function(data, type, full) {
+                var name = full.name;
+                return name;
+            }
+        }, {
+            "mData": "Acciones",
+            "bSortable": false,
+            "mRender": function(data, type, full) {
+                var bttnDelete = '<button class="btn btn-danger btn-xs" id="bttn_modal_delete" data-id="' + full.id + '" data-target="#modal_delete"  data-toggle="modal" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>';
+                var bttnUpdate = '<button class="btn btn-warning btn-xs" id="bttn_modal_update"  data-id="' + full.id + '"  data-target="#ModalSave" data-toggle="modal" title="Editar"><i class="glyphicon glyphicon-edit"></i></button> ';
+                return bttnUpdate + bttnDelete;
+            }
+        }, ],
+        "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            $("td:eq(0), td:eq(2)", nRow).attr('align', 'center');
+
+            //$("#btn_modal_eliminar", nRow).attr('disabled', aData.Activo == 1 ? false : true);
+
+            /*if (!aData.Editar) {
+                $("#bttn_modal_update", nRow).remove();
+            }
+
+            if (!aData.Eliminar) {
+                $("#bttn_modal_delete", nRow).remove();
+            }*/
+
+        },
+        "aLengthMenu": [
+            [5, 10, -1],
+            [5, 10, "Todo"]
+        ],
+        "language": {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Registros del _START_ al _END_  total: _TOTAL_ ",
+            "sInfoEmpty": "Sin registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    });
+
+
+
+    $.ajax({
+        url: $("#url_list_materias").val(),
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {
+            var x = resp.data;
+            console.log({resp} +" / "+x)
+            var itemmaterias = [];
+
+            x.forEach(function(element) {
+                itemmaterias.push({
+                    id: element.id,
+                    text: element.nombre
+                });
+            });
+
+            $('#materias').select2({
+                placeholder: {
+                    id: 0,
+                    text: 'Seleccione una materia'
+                },
+                width: '100%',
+                allowClear: true,
+                data: itemmaterias,
+            });
+
+            $("#materias").val(0).change();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                location.reload();
+            }
+        }
+    });
+
+    $.ajax({
+        url: $("#url_list_cuatrimestre").val(),
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {
+            var cuatrimestre = resp.data;
+            var itemcuatrimestre = [];
+
+            cuatrimestre.forEach(function(element) {
+                itemcuatrimestre.push({
+                    id: element.id,
+                    text: element.lapso
+                });
+            });
+
+            $('#cuatrimestre').select2({
+                placeholder: {
+                    id: 0,
+                    text: 'Seleccione un cuatrimestre'
+                },
+                width: '100%',
+                allowClear: true,
+                data: itemcuatrimestre,
+                //dropdownParent: $('#ModalSave')
+            });
+
+            $("#cuatrimestre").val(0).change();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                location.reload();
+            }
+        }
+    });
 
     $('#ModalSave').on('shown.bs.modal', function() {
         $(this).find('[autofocus]').focus();

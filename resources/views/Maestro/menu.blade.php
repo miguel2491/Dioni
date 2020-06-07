@@ -48,6 +48,21 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-md-6">
+            <a href="{{ URL::to('perfil') }}">
+                <div align="center">
+                    <img src="img/fondos/login/unimovil.png" style="width:45px" /><br>
+                    <label class="titulos_menu">Perfil</label>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-6">
+            <a href="{{ URL::to('cuestionario_maestro') }}">
+                 
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-6">
             <a href="{{ URL::to('evaluacion_maestro') }}">
                 <div align="center">
                     <img src="img/fondos/principal/evaluacion.png" style="width:75px" /><br>

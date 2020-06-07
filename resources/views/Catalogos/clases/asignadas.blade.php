@@ -13,10 +13,14 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}" id="hdd_IdUsuario">
 <input type="hidden" id="url_listado" value="{{ url('clases/lista_asignadas') }}">
+<input type="hidden" id="url_listado_alumnos" value="{{ url('alumnos/listado') }}">
 <input type="hidden" id="url_datosget" value="{{ url('clases/datos_asigadas') }}">
 <input type="hidden" id="url_guardar" value="{{ url('clases/guardar_asignadas') }}">
 <input type="hidden" id="url_actualizar" value="{{ url('clases/actualiza_asignada') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('clases/delete_asignada') }}">
+<input type="hidden" id="url_list_cuatrimestre" value="{{ url('cuatrimestres/lista') }}">
+<input type="hidden" id="url_list_materias" value="{{ url('materias/listado') }}">
+
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12">
@@ -43,11 +47,9 @@
 							<thead>
 								<tr>
 									<th class="text-center">Clave</th>
-									<th class="text-center">Carrera</th>
-									<th class="text-center">Materia</th>
-									<th class="text-center">Descripción</th>
 									<th class="text-center">Alumno</th>
-									<th class="text-center">Fecha</th>
+									<th class="text-center">Usuario</th>
+								 
 									<th class="text-center">Acciones</th>
 								</tr>
 							</thead>
@@ -67,31 +69,28 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="ModalEditar">Cuenta</h4>
+				<h4 class="modal-title" id="ModalEditar">Asignar Clase</h4>
 			</div>
 			<div class="modal-body">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="descripcion-field">Saldo Total</label>
-							<input type="text" autofocus="true" id="saldo_total" name="saldo_total" class="form-control" >
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="descripcion-field">Saldo Gasto</label>
-							<input type="text" id="saldo_gasto" name="saldo_gasto" class="form-control">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Saldo Disponible</label>
-							<input type="text" id="saldo_disponible" name="saldo_disponible" class="form-control">
-						</div>
-					</div>
-				</div>
+		 
+
+
+	<div class="row">
+				<div class="col-md-6">
+							<div class="form-group">
+								<label>Materia</label>
+								<select name="materias" id="materias" class="form-control"></select>
+							</div>
+				</div>						
+ 				<div class="col-md-6">
+							<div class="form-group">
+								<label>Cuatrimestre</label>
+								<select name="cuatrimestre" id="cuatrimestre" class="form-control"></select>
+							</div>
+				</div>								 
+			</div>
+
+		 
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-warning" data-dismiss="modal"><li class="fa fa-times"></li> Cancelar</button>

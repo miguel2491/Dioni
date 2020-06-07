@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 /******USUARIOS********/
 Route::get('usuarios/listar', 'UsuariosController@listado');
+Route::get('usuarios/getalumno/{id}', 'UsuariosController@getAlumno');
+Route::get('usuarios/getmaestro/{id}', 'UsuariosController@getMaestro');
 /****PROFESOR***/
 Route::resource('profesor', 'Catalogos\ProfesorController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('profesor/lista', 'Catalogos\ProfesorController@lista');
@@ -111,3 +113,4 @@ Route::post('select_materia_alumno/delete', 'Catalogos\ClasesController@destroyM
 Route::get('anexo/lista/{id}', 'Catalogos\AnexoController@lista_anexo');
 Route::post('anexo/guardar', 'Catalogos\AnexoController@store');
 Route::post('anexo/delete', 'Catalogos\AnexoController@destroy');
+Route::get('perfil/', 'HomeController@perfil');

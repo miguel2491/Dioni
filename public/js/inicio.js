@@ -1,9 +1,10 @@
 $(document).ready(function() {
-    materias();
+    console.log("Inicio");
+
 });
    
 function materias(){
-    console.log("HOLA");
+    
     $.ajax({
         url: '/materias/listar',
         type: 'GET',
