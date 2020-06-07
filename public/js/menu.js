@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     userx = $('#rol').val();
     if(userx == 3){
+        $("#div_carreras").append('<div class="container"><div class="col-lg-12"><p>Bienvenido alumno de click en el aqui para ver tu </p> <a href="perfil">perfil</a><hr></div></div>');
        materias();
     }else if(userx == 2){
      
@@ -25,7 +26,8 @@ function materias(){
                 var id = resp.data[x].user_id;
                 var carrera = resp.data[x].carrera;
                 var icono = resp.data[x].icono;
-                s += "<div class='col-xs-6 col-md-6' style='padding:10px'>"+
+                s +=  
+                "<div class='col-xs-6 col-md-6' style='padding:10px'>"+
                         "<a href='{{ URL::to(materia/"+id+") }}'>"+
                             "<div align='center'>"+
                                 "<img src='img/fondos/principal/"+icono+"' style='width:75px' /><br>"+

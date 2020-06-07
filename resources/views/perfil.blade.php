@@ -39,11 +39,7 @@ Inicio
     </nav>
 </div>
     <div class="row" id="perfil_div">
-
-
-
-
-
+ 
     </div>
     <div class="footer">
         <div>
