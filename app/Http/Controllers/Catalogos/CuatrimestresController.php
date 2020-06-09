@@ -109,5 +109,27 @@ class CuatrimestresController extends Controller
             DB::commit();
         }
         return response()->json($msg);
+
     }
+
+
+
+    public function cuatrimestreAlumno($id)
+    {
+        $results = DB::table('catera_materias_alumno as c')
+            ->select( 'c.id_cuatrimestre')
+            ->where('c.id_alumno', $id)->distinct()->get();
+        return response()->json($results);
+    }
+    
+    public function cuatrimestredatos($id)
+    {
+        $results = DB::table('cuatrimestre as c')
+            ->select( 'c.lapso','c.id','c.fechainicio')
+            ->where('c.id', $id)->distinct()->get();
+        return response()->json($results);
+    }
+    
+
+
 }

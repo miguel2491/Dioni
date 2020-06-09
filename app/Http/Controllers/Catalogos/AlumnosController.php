@@ -196,4 +196,17 @@ class AlumnosController extends Controller
         }
         return response()->json($msg);
     }
+
+
+    public function fromUser($id)
+    {
+        $results = DB::table('alumno as c')
+            ->select('c.id_carrera', 'c.username','c.id')
+            ->where('c.id_user', $id)->get();
+        return response()->json($results);
+    }
+   
+
+
+
 }

@@ -45,21 +45,26 @@
 <input type="hidden" id="url_datosget" value="{{ url('alumnos/datos') }}">
 <input type="hidden" id="url_guardar" value="{{ url('alumnos/guardar') }}">
 <input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
+<input type="hidden" id="id_alumno" >
+<input type="hidden" id="id_carrera" value="{{ !isset($id) ? 0 : $id }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">
-            <p><b>Carrera {{ !isset($id) ? 0 : $id }}</b></p>
+            <p><b>Carrera <div id="lbtitlecarrera"></div></b></p>
+            <div id="imgbase    "></div>
            <hr>
 
             Cuatrimestres inscritos
 
           
-            <input type="hidden" id="id_carrera" value="{{ !isset($id) ? 0 : $id }}">
             <hr>
 		</div>
 
         <div class="col-lg-12" style="text-align:center">
+        <div id="div_cuatrimestres">
+          
+        </div>
         
         </div>
 
@@ -74,5 +79,5 @@
 	<script src="{{ asset('js/plugins/autonumeric/autoNumeric.js') }}"></script>
 	<script src="{{ asset('js/plugins/touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
 	<script src="{{ asset('js/plugins/summernote/summernote.min.js') }}"></script>
-	<script src="{{ asset('js/maestro/maestro.js') }}"></script>
+	<script src="{{ asset('js/alumno/cuatrimestres.js') }}"></script>
 @endsection
