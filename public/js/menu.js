@@ -28,7 +28,7 @@ function materias(){
                 var icono = resp.data[x].icono;
                 s +=  
                 "<div class='col-xs-6 col-md-6' style='padding:10px'>"+
-                        "<a href='{{ URL::to(materia/"+id+") }}'>"+
+                        "<a href='carreras/alumno/"+id+"'>"+
                             "<div align='center'>"+
                                 "<img src='img/fondos/principal/"+icono+"' style='width:75px' /><br>"+
                                 "<label class='titulos_menu' style='text-transform:uppercase'>"+carrera+"</label>"+

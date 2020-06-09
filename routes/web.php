@@ -43,14 +43,20 @@ Route::post('carreras/guardar', 'Catalogos\CarrerasController@store');
 Route::get('carreras/datos/{id}', 'Catalogos\CarrerasController@edit');
 Route::put('carreras/update/{id}', 'Catalogos\CarrerasController@update');
 Route::delete('carreras/delete/{id}', 'Catalogos\CarrerasController@destroy');
+
+
 /****MATERIAS***/
 Route::resource('materias', 'Catalogos\MateriasController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('materias/listar', 'Catalogos\MateriasController@listar');
+
 Route::get('materias/listado', 'Catalogos\MateriasController@listado');
 Route::post('materias/guardar', 'Catalogos\MateriasController@store');
 Route::get('materias/datos/{id}', 'Catalogos\MateriasController@edit');
 Route::put('materias/update/{id}', 'Catalogos\MateriasController@update');
 Route::delete('materias/delete/{id}', 'Catalogos\MateriasController@destroy');
+
+
+
 /****CUATRIMESTRES***/
 Route::resource('cuatrimestres', 'Catalogos\CuatrimestresController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('cuatrimestres/lista', 'Catalogos\CuatrimestresController@listado');
@@ -84,8 +90,8 @@ Route::get('pan_alumno/clases', 'Alumno\AlumnoController@clase_vista');
 Route::get('evaluacion_alumno', 'Alumno\AlumnoController@evalua_alumno_vista');
 Route::get('cuestionario_alumno', 'Alumno\AlumnoController@cuestionario_alumno_vista');
 /*MATERIAS*/
-Route::get('materia/{id}', 'Materias\MateriasController@materia');
-//Route::resource('maateria/{id}', 'Materias\MateriasController@materia');
+Route::get('materia/{id}', 'Materias\MateriasController@edit');
+
 Route::get('materia/clases/{category}/post/{post}', 'Materias\MateriasController@materia_clase')->name('materia.clase');
 //*****************************/
 /********EVALUACIONES**********/
@@ -114,3 +120,4 @@ Route::post('anexo/guardar', 'Catalogos\AnexoController@store');
 Route::get('anexo/lista/{id}', 'Catalogos\AnexoController@lista_anexo');
 Route::delete('anexo/delete/{id}', 'Catalogos\AnexoController@destroy');
 Route::get('perfil/', 'HomeController@perfil');	
+Route::get('carreras/alumno/{id}', 'Catalogos\CarrerasController@carreraAlumnoView');

@@ -115,4 +115,15 @@ class CarrerasController extends Controller
             ->get();
         return response()->json($results);
     }
+
+    public function carreraAlumnoView($id_carrera)
+    {
+
+
+        $results = DB::table('carrera as c')
+        ->select('c.user_id', 'c.carrera', 'c.icono')
+        ->where('c.user_id', $id_carrera)->get();
+
+        return view('Alumno/carrerasView.index');
+    }
 }
