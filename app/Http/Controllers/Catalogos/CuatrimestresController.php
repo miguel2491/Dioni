@@ -130,6 +130,19 @@ class CuatrimestresController extends Controller
         return response()->json($results);
     }
     
+    public function cuatrimestreView($id)
+    {
+        return view('Alumno/cuatrimestreView')->with('id',$id);
+    }
 
+    public function cuatrimestremateriasDatos($id,$id_alumno){
+
+        $results = DB::table('catera_materias_alumno as c')
+        ->select( 'c.aprovado','c.id','c.id_materia')
+        ->where('c.id_cuatrimestre', $id)
+        ->where('c.id_alumno', $id_alumno)
+         ->distinct()->get();
+    return response()->json($results);
+    }
 
 }

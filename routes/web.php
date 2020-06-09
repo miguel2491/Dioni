@@ -122,4 +122,7 @@ Route::get('perfil/', 'HomeController@perfil');
 Route::get('carreras/alumno/{id}', 'Catalogos\CarrerasController@carreraAlumnoView');
 Route::get('cuatrimestres/alumno/{id}', 'Catalogos\CuatrimestresController@cuatrimestreAlumno');
 Route::get('cuatrimestres/datos_u/{id}', 'Catalogos\CuatrimestresController@cuatrimestredatos');
+Route::get('cuatrimestres/materias/{id}', 'Catalogos\CuatrimestresController@cuatrimestreView');
+Route::get('cuatrimestres/materias/datos/{id}/{id_alumno}', 'Catalogos\CuatrimestresController@cuatrimestremateriasDatos');
+
 //cuatrimestredatos

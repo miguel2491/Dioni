@@ -91,7 +91,7 @@ function cuatrimestresInfo(id){
                 '<hr>'+
                 '<label for="">'+resp[0].lapso+'</label>'+ '<br>'+
                 '<label for="">'+resp[0].fechainicio+'</label>'+ '<br>'+
-                '<a href="/'+resp[0].id+'">Acceder a cuatrimestre</a>'+ '<br>'+
+                '<a href="/cuatrimestres/materias/'+resp[0].id+'">Acceder a cuatrimestre</a>'+ '<br>'+
                 '<hr>'+
                 '<br>'
                  +''
