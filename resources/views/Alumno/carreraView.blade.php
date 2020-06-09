@@ -49,12 +49,20 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">
-            <p><b>CLASE 2</b></p>
-            <span id="">10/04/2020</span>
+            <p><b>Carrera {{ !isset($id) ? 0 : $id }}</b></p>
+           <hr>
 
-            <input type="text" id="hdd_idCliente" value="{{ !isset($id) ? 0 : $id }}">
+            Cuatrimestres inscritos
 
+          
+            <input type="hidden" id="id_carrera" value="{{ !isset($id) ? 0 : $id }}">
+            <hr>
 		</div>
+
+        <div class="col-lg-12" style="text-align:center">
+        
+        </div>
+
  
 </div>
 @endsection
