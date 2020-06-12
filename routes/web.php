@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 /******USUARIOS********/
-Route::get('usuarios/getalumno/{id}', 'UsuariosController@getAlumno');	
+Route::get('usuarios/getalumno/{id}', 'UsuariosController@getAlumno');
 Route::get('usuarios/getmaestro/{id}', 'UsuariosController@getMaestro');
 Route::get('usuarios/listar', 'UsuariosController@listado');
 /****PROFESOR***/
@@ -44,7 +44,6 @@ Route::post('carreras/guardar', 'Catalogos\CarrerasController@store');
 Route::get('carreras/datos/{id}', 'Catalogos\CarrerasController@edit');
 Route::put('carreras/update/{id}', 'Catalogos\CarrerasController@update');
 Route::delete('carreras/delete/{id}', 'Catalogos\CarrerasController@destroy');
-
 
 /****MATERIAS***/
 Route::resource('materias', 'Catalogos\MateriasController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
@@ -82,6 +81,8 @@ Route::get('pan_maestro/asignatura', 'Maestro\MaestroController@asignatura');
 Route::get('pan_maestro/asignatura_clase', 'Maestro\MaestroController@asignatura_clase');
 Route::get('evaluacion_maestro', 'Maestro\MaestroController@evalua_maestro_vista');
 Route::get('cuestionario_maestro', 'Maestro\MaestroController@cuestionario_maestro_vista');
+Route::get('maestro/clase', 'Maestro\MaestroController@clase');
+Route::post('maestro/clase_guardar', 'Maestro\MaestroController@clase_save');
 /***PANTALLA ALUMNO***/
 Route::resource('pan_alumno', 'Alumno\AlumnoController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('menu_alumno', 'Alumno\AlumnoController@menu_alumno');
@@ -107,8 +108,6 @@ Route::get('evaluacion/con_respuesta/{id}', 'Catalogos\EvaluacionesController@ev
 Route::post('cuestionario/guardar', 'Catalogos\EvaluacionesController@store_cuestionario');
 Route::get('cuestionario/consulta/{id}', 'Catalogos\EvaluacionesController@lista_cuestionario');
 
-
-
 //CHEMAS
 Route::get('catera_materia_alumno/{id}', 'Catalogos\MateriasController@lista_materia_alumno');
 Route::post('asignar_materia/guardar', 'Catalogos\AlumnosController@asigna_materia_alumno');
@@ -118,7 +117,7 @@ Route::post('delete_clase/delete', 'Catalogos\ClasesController@eliminaClase');
 Route::post('anexo/guardar', 'Catalogos\AnexoController@store');
 Route::get('anexo/lista/{id}', 'Catalogos\AnexoController@lista_anexo');
 Route::delete('anexo/delete/{id}', 'Catalogos\AnexoController@destroy');
-Route::get('perfil/', 'HomeController@perfil');	
+Route::get('perfil/', 'HomeController@perfil');
 Route::get('carreras/alumno/{id}', 'Catalogos\CarrerasController@carreraAlumnoView');
 Route::get('cuatrimestres/alumno/{id}', 'Catalogos\CuatrimestresController@cuatrimestreAlumno');
 Route::get('cuatrimestres/datos_u/{id}', 'Catalogos\CuatrimestresController@cuatrimestredatos');
