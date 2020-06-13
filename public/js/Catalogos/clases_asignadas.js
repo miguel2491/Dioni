@@ -200,12 +200,10 @@ $(document).ready(function() {
                 type: 'GET',
                 data: '',
                 success: function(data) {
+                    console.log(data);
                     //var array = $.parseJSON(data);
-                    var obj = data;
-                    $().val();
-                    $('#saldo_total').val(obj.saldo_total);
-                    $('#saldo_disponible').val(obj.saldo_disponible);
-                    $("#saldo_gasto").val(obj.saldo_gasto);
+                    $('#id_alumno').val(id);
+
                 }
 
             });

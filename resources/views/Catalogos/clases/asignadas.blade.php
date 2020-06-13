@@ -14,7 +14,7 @@
 <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}" id="hdd_IdUsuario">
 <input type="hidden" id="url_listado" value="{{ url('clases/lista_asignadas') }}">
 <input type="hidden" id="url_listado_alumnos" value="{{ url('alumnos/listado') }}">
-<input type="hidden" id="url_datosget" value="{{ url('clases/datos_asigadas') }}">
+<input type="hidden" id="url_datosget" value="{{ url('clases_asignadas/datos_asignadas') }}">
 <input type="hidden" id="url_guardar" value="{{ url('clases/guardar_asignadas') }}">
 <input type="hidden" id="url_actualizar" value="{{ url('clases/actualiza_asignada') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('clases/delete_asignada') }}">
@@ -49,7 +49,7 @@
 									<th class="text-center">Clave</th>
 									<th class="text-center">Alumno</th>
 									<th class="text-center">Usuario</th>
-								 
+
 									<th class="text-center">Acciones</th>
 								</tr>
 							</thead>
@@ -72,25 +72,21 @@
 				<h4 class="modal-title" id="ModalEditar">Asignar Clase</h4>
 			</div>
 			<div class="modal-body">
-		 
-
-
-	<div class="row">
-				<div class="col-md-6">
-							<div class="form-group">
-								<label>Materia</label>
-								<select name="materias" id="materias" class="form-control"></select>
-							</div>
-				</div>						
- 				<div class="col-md-6">
-							<div class="form-group">
-								<label>Cuatrimestre</label>
-								<select name="cuatrimestre" id="cuatrimestre" class="form-control"></select>
-							</div>
-				</div>								 
-			</div>
-
-		 
+				<div class="row">
+					<input type="text" class="form-control" id="id_alumno">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Materia</label>
+							<select name="materias" id="materias" class="form-control"></select>
+						</div>
+					</div>
+ 					<div class="col-md-6">
+						<div class="form-group">
+							<label>Cuatrimestre</label>
+							<select name="cuatrimestre" id="cuatrimestre" class="form-control"></select>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-warning" data-dismiss="modal"><li class="fa fa-times"></li> Cancelar</button>

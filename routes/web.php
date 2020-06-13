@@ -73,6 +73,7 @@ Route::delete('clases/delete/{id}', 'Catalogos\ClasesController@destroy');
 /*CLASES ASIGNADAS*/
 Route::get('clases_asignadas', 'Catalogos\ClasesController@asignadas');
 Route::get('clases/lista_asignadas', 'Catalogos\ClasesController@lista_asignadas');
+Route::get('clases_asignadas/datos_asignadas/{id}', 'Catalogos\ClasesController@alumno_asignada');
 
 /***PANTALLA MAESTRO***/
 Route::resource('pan_maestro', 'Maestro\MaestroController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);

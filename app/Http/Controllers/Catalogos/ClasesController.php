@@ -218,4 +218,12 @@ class ClasesController extends Controller
         }
         return response()->json($msg);
     }
+
+    public function alumno_asignada($id)
+    {
+        $results = DB::table('clase as c')
+            ->select('c.id', 'c.id_materia', 'c.id_cuatrimestre')
+            ->where('c.id', $id)->get();
+        return response()->json($results);
+    }
 }
