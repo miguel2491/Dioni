@@ -71,6 +71,19 @@ class AnexoController extends Controller
             ->where('a.id', $id)->get();
         return response()->json($results);
     }
+
+
+
+
+    public function anexoClase($id)
+    {
+        $results = DB::table('anexos')
+            ->select('id', 'tipo', 'link')
+           
+            ->where('id_clase', $id)->get();
+        return response()->json($results);
+    }
+
     //Update
     public function update(Request $request, $id)
     {

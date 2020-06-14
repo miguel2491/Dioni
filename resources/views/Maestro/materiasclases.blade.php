@@ -67,8 +67,10 @@
         <hr>
             <div id="info"></div>
 		</div>
-	</div>
-     
+    </div>
+    
+
+   
    
 </div>
 @endsection

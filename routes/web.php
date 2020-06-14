@@ -117,6 +117,8 @@ Route::post('select_materia_alumno/materias', 'Catalogos\ClasesController@lista_
 Route::post('delete_clase/delete', 'Catalogos\ClasesController@eliminaClase');
 Route::post('anexo/guardar', 'Catalogos\AnexoController@store');
 Route::get('anexo/lista/{id}', 'Catalogos\AnexoController@lista_anexo');
+Route::get('anexo/clase/{id}', 'Catalogos\AnexoController@anexoClase');
+
 Route::delete('anexo/delete/{id}', 'Catalogos\AnexoController@destroy');
 Route::get('perfil/', 'HomeController@perfil');
 Route::get('carreras/alumno/{id}', 'Catalogos\CarrerasController@carreraAlumnoView');

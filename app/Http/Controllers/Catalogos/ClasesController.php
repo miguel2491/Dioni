@@ -80,7 +80,8 @@ class ClasesController extends Controller
     public function edit($id)
     {
         $results = DB::table('clase as c')
-            ->select('c.id', 'c.clase', 'c.id_carrera', 'c.id_cuatrimestre')
+            ->select('c.id', 'c.clase','c.enlace', 'c.id_materia', 'c.id_cuatrimestre'
+            ,'c.actividad','c.fecha','c.id_maestro')
             ->where('c.id', $id)->get();
         return response()->json($results);
     }
