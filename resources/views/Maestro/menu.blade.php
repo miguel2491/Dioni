@@ -56,9 +56,20 @@
             </a>
         </div>
         <div class="col-xs-6 col-md-6">
-            <a href="{{ URL::to('cuestionario_maestro') }}">
-                 
+            <a href="{{ URL::to('maestro/clase') }}">
+            <img src="img/fondos/principal/evaluacion.png" style="width:75px" /><br>
+                    <label class="titulos_menu">Generar Clase</label>
             </a>
+        </div>
+
+        <div class="col-xs-6 col-md-6">
+            <a href="{{ URL::to('maestro/materias/clases') }}">
+            <img src="img/fondos/principal/evaluacion.png" style="width:75px" /><br>
+                    <label class="titulos_menu">Clases y Materias</label>
+            </a>
+        </div>
+        <div class="col-xs-12 col-md-12">
+            <hr>
         </div>
     </div>
     <div class="row">

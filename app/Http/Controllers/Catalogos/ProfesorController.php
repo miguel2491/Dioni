@@ -83,6 +83,37 @@ class ProfesorController extends Controller
             ->where('m.id', $id)->get();
         return response()->json($results);
     }
+
+    public function fromUser($id)
+    {
+        $results = DB::table('maestro as m')
+            ->select('m.id', 'm.nombre', 'm.username', 'u.email')
+            ->leftjoin('users as u', 'u.id', '=', 'm.id_user')
+            ->where('m.id_user', $id)->get();
+        return response()->json($results);
+    }
+
+    public function profesorMaterias($id)
+    {
+        $results = DB::table('materias as m')
+            ->select('m.id', 'm.nombre', 'm.id_cuatrimestre','m.id_carrera')
+            ->where('id_maestro', $id)->get();
+        return response()->json($results);
+    }
+
+
+
+    public function clasesMaterias($id_materia,$id_maestro)
+    {
+        $results = DB::table('clase as m')
+            ->select('m.id', 'm.clase', 'm.fecha','m.enlace',
+            'm.id_materia', 'm.id_cuatrimestre', 'm.actividad',
+            'm.id_maestro')
+            ->where('id_materia',$id_materia)
+            ->where('id_maestro', $id_maestro)->get();
+        return response()->json($results);
+    }
+
     //Update
     public function update(Request $request, $id)
     {

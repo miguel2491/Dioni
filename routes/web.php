@@ -124,5 +124,11 @@ Route::get('cuatrimestres/alumno/{id}', 'Catalogos\CuatrimestresController@cuatr
 Route::get('cuatrimestres/datos_u/{id}', 'Catalogos\CuatrimestresController@cuatrimestredatos');
 Route::get('cuatrimestres/materias/{id}', 'Catalogos\CuatrimestresController@cuatrimestreView');
 Route::get('cuatrimestres/materias/datos/{id}/{id_alumno}', 'Catalogos\CuatrimestresController@cuatrimestremateriasDatos');
+Route::get('maestro/materias/clases/', 'Catalogos\ClasesController@clases_materias_profesor');
+Route::get('profesor/from_u/{id}', 'Catalogos\ProfesorController@fromUser');
+Route::get('profesor/profesorMaterias/{id}', 'Catalogos\ProfesorController@profesorMaterias');
+Route::get('profesor/materia/clase/{id_materia}/{id_maestro}', 'Catalogos\ProfesorController@clasesMaterias');
+
+
 
 //cuatrimestredatos

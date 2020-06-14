@@ -226,4 +226,8 @@ class ClasesController extends Controller
             ->where('c.id', $id)->get();
         return response()->json($results);
     }
+
+    public function clases_materias_profesor(){
+        return view('Maestro/materiasclases');
+    }
 }
