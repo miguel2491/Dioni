@@ -130,7 +130,7 @@ Route::get('maestro/materias/clases/', 'Catalogos\ClasesController@clases_materi
 Route::get('profesor/from_u/{id}', 'Catalogos\ProfesorController@fromUser');
 Route::get('profesor/profesorMaterias/{id}', 'Catalogos\ProfesorController@profesorMaterias');
 Route::get('profesor/materia/clase/{id_materia}/{id_maestro}', 'Catalogos\ProfesorController@clasesMaterias');
-
+Route::get('clases/materiaCuatri/{id_materia}/{id_cuatrimestre}', 'Catalogos\ClasesController@clasesMateriaCuatri');
 
 
 //cuatrimestredatos

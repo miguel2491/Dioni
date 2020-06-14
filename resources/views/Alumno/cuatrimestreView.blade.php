@@ -51,10 +51,15 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">
-            <p> <div id="title"></div></b></p>
-            <div id="imgbase"></div>
+         
            <hr>
-                    Materias
+           <p> <div id="title"></div></p>
+            <div id="imgbase"></div>
+                  
+            <div class="pull-right">
+                <a onclick="return cleanData()" class="btn ">Volver</a>
+            </div>
+            <br>
             <hr>
 		</div>
 

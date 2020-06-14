@@ -85,6 +85,16 @@ class ClasesController extends Controller
             ->where('c.id', $id)->get();
         return response()->json($results);
     }
+
+    public function clasesMateriaCuatri($id_materia,$id_cuatrimestre)
+    {
+        $results = DB::table('clase as c')
+            ->select('c.id', 'c.clase','c.enlace', 'c.id_materia', 'c.id_cuatrimestre'
+            ,'c.actividad','c.fecha','c.id_maestro')
+            ->where('c.id_cuatrimestre', $id_cuatrimestre)
+            ->where('c.id_materia', $id_materia)->get();
+        return response()->json($results);
+    }
     //Update
     public function update(Request $request, $id)
     {
