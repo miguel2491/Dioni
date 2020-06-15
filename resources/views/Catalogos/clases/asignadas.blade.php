@@ -12,15 +12,26 @@
 @section('main-content')
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}" id="hdd_IdUsuario">
-<input type="hidden" id="url_listado" value="{{ url('clases/lista_asignadas') }}">
-<input type="hidden" id="url_listado_alumnos" value="{{ url('alumnos/listado') }}">
-<input type="hidden" id="url_datosget" value="{{ url('clases_asignadas/datos_asignadas') }}">
-<input type="hidden" id="url_guardar" value="{{ url('clases/guardar_asignadas') }}">
-<input type="hidden" id="url_actualizar" value="{{ url('clases/actualiza_asignada') }}">
-<input type="hidden" id="url_eliminar" value="{{ url('clases/delete_asignada') }}">
+<input type="hidden" id="url_listado_alumnos" value="{{ url('clases_alumnos/lista_alumno') }}">
+<input type="hidden" id="url_datosget" value="{{ url('clases_asignadas/alumno_asignado_ind') }}">
+<input type="hidden" id="url_guardar" value="{{ url('clases_asignadas/guardar_alumno_asignado') }}">
+<input type="hidden" id="url_actualizar" value="{{ url('clases_asignadas/actualizar_alumno_asignado') }}">
+<input type="hidden" id="url_eliminar" value="{{ url('clases_asignadas/alumno_asignado_delete') }}">
+<input type="hidden" id="url_list_alumno" value="{{ url('alumnos/listado') }}">
 <input type="hidden" id="url_list_cuatrimestre" value="{{ url('cuatrimestres/lista') }}">
 <input type="hidden" id="url_list_materias" value="{{ url('materias/listado') }}">
-
+<style type="text/css">
+	.select2{
+        width: 100% !important;
+    }
+    span.select2-container {
+        z-index:10050;
+    	text-transform: uppercase;
+    }
+    table{
+    	text-transform: uppercase;
+    }
+</style>
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12">
@@ -48,8 +59,8 @@
 								<tr>
 									<th class="text-center">Clave</th>
 									<th class="text-center">Alumno</th>
-									<th class="text-center">Usuario</th>
-
+									<th class="text-center">Materia</th>
+									<th class="text-center">Cuatrimestre</th>
 									<th class="text-center">Acciones</th>
 								</tr>
 							</thead>
@@ -73,7 +84,25 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<input type="text" class="form-control" id="id_alumno">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label>Alumno</label>
+							<select name="alumno" id="alumno" class="form-control"></select>
+						</div>
+					</div>
+ 					<div class="col-md-2">
+						<div class="form-group">
+							<label>Calificación Final</label>
+							<input type="text" id="calificacion" name="calificacion" maxlength="3" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							Aprobado<input type="checkbox" name="aprobado" id="aprobado" class="i-checks">
+						</div>
+					</div>
+				</div>
+				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Materia</label>

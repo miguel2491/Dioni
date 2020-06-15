@@ -16,104 +16,93 @@ $(document).ready(function() {
     });
 
     dataTable_datos =
-    $("#table-datos").dataTable({
-        "bDeferRender": true,
-        "iDisplayLength": 10,
-        "bProcessing": true,
-        "sAjaxSource": $('#url_listado_alumnos').val(),
-        "fnServerData": function(sSource, aoData, fnCallback, oSettings) {
-            oSettings.jqXHR = $.ajax({
-                "dataType": 'json',
-                "type": "GET",
-                "url": sSource,
-                "success": fnCallback,
-                "error": function(jqXHR, textStatus, errorThrown) {
-                    var data = jqXHR.responseJSON;
-                    /*
-                    if (jqXHR.status == 401 || jqXHR.status == 500) {
-                        location.reload();
-                    }*/
-                }
-            });
-        },
-        "bAutoWidth": false,
-        //"bFilter": false,
-        "aoColumns": [{
-            "mData": "id"
-        }, {
-            "mData": "username",
-            "bSortable": true,
-            "mRender": function(data, type, full) {
-                var usuario = full.nombre;
-                return usuario;
-            }
-        }, {
-            "mData": "id_carrera",
-            "bSortable": true,
-            "mRender": function(data, type, full) {
-                var grado = full.carrera;
-                return grado;
-            }
-        },{
-            "mData": "usuario",
-            "bSortable": true,
-            "mRender": function(data, type, full) {
-                var name = full.name;
-                return name;
-            }
-        }, {
-            "mData": "Acciones",
-            "bSortable": false,
-            "mRender": function(data, type, full) {
-                var bttnDelete = '<button class="btn btn-danger btn-xs" id="bttn_modal_delete" data-id="' + full.id + '" data-target="#modal_delete"  data-toggle="modal" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>';
-                var bttnUpdate = '<button class="btn btn-warning btn-xs" id="bttn_modal_update"  data-id="' + full.id + '"  data-target="#ModalSave" data-toggle="modal" title="Editar"><i class="glyphicon glyphicon-edit"></i></button> ';
-                return bttnUpdate + bttnDelete;
-            }
-        }, ],
-        "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-            $("td:eq(0), td:eq(2)", nRow).attr('align', 'center');
-
-            //$("#btn_modal_eliminar", nRow).attr('disabled', aData.Activo == 1 ? false : true);
-
-            /*if (!aData.Editar) {
-                $("#bttn_modal_update", nRow).remove();
-            }
-
-            if (!aData.Eliminar) {
-                $("#bttn_modal_delete", nRow).remove();
-            }*/
-
-        },
-        "aLengthMenu": [
-            [5, 10, -1],
-            [5, 10, "Todo"]
-        ],
-        "language": {
-            "sProcessing": "Procesando...",
-            "sLengthMenu": "Mostrar _MENU_ registros",
-            "sZeroRecords": "No se encontraron resultados",
-            "sEmptyTable": "Ningún dato disponible en esta tabla",
-            "sInfo": "Registros del _START_ al _END_  total: _TOTAL_ ",
-            "sInfoEmpty": "Sin registros",
-            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sSearch": "Buscar:",
-            "sUrl": "",
-            "sInfoThousands": ",",
-            "sLoadingRecords": "Cargando...",
-            "oPaginate": {
-                "sFirst": "Primero",
-                "sLast": "Último",
-                "sNext": "Siguiente",
-                "sPrevious": "Anterior"
+        $("#table-datos").dataTable({
+            "bDeferRender": true,
+            "iDisplayLength": 10,
+            "bProcessing": true,
+            "sAjaxSource": $('#url_listado_alumnos').val(),
+            "fnServerData": function(sSource, aoData, fnCallback, oSettings) {
+                oSettings.jqXHR = $.ajax({
+                    "dataType": 'json',
+                    "type": "GET",
+                    "url": sSource,
+                    "success": fnCallback,
+                    "error": function(jqXHR, textStatus, errorThrown) {
+                        var data = jqXHR.responseJSON;
+                        /*
+                        if (jqXHR.status == 401 || jqXHR.status == 500) {
+                            location.reload();
+                        }*/
+                    }
+                });
             },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        }
-    });
+            "bAutoWidth": false,
+            //"bFilter": false,
+            "aoColumns": [{
+                "mData": "id"
+            }, {
+                "mData": "alumno",
+                "bSortable": true,
+                "mRender": function(data, type, full) {
+                    var alumno = full.alumno;
+                    return alumno;
+                }
+            },{
+                "mData": "materia",
+                "bSortable": true,
+                "mRender": function(data, type, full) {
+                    var materia = full.materia;
+                    return materia;
+                }
+            },{
+                "mData": "cuatrimestre",
+                "bSortable": true,
+                "mRender": function(data, type, full) {
+                    var cuatrimestre = full.cuatrimestre;
+                    return cuatrimestre;
+                }
+            }, {
+                "mData": "Acciones",
+                "bSortable": false,
+                "mRender": function(data, type, full) {
+                    var bttnDelete = '<button class="btn btn-danger btn-xs" id="bttn_modal_delete" data-id="' + full.id + '" data-target="#modal_delete"  data-toggle="modal" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>';
+                    var bttnUpdate = '<button class="btn btn-warning btn-xs" id="bttn_modal_update"  data-id="' + full.id + '"  data-target="#ModalSave" data-toggle="modal" title="Editar"><i class="glyphicon glyphicon-edit"></i></button> ';
+                    return bttnUpdate + bttnDelete;
+                }
+            }, ],
+            "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $("td:eq(0), td:eq(2)", nRow).attr('align', 'center');
 
+            },
+            "aLengthMenu": [
+                [5, 10, -1],
+                [5, 10, "Todo"]
+            ],
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Registros del _START_ al _END_  total: _TOTAL_ ",
+                "sInfoEmpty": "Sin registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
+        });
 
 
     $.ajax({
@@ -121,8 +110,7 @@ $(document).ready(function() {
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
-            var x = resp.data;
-            console.log({resp} +" / "+x)
+            var x = resp;
             var itemmaterias = [];
 
             x.forEach(function(element) {
@@ -188,6 +176,42 @@ $(document).ready(function() {
         }
     });
 
+    $.ajax({
+        url: $("#url_list_alumno").val(),
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {
+            var alumno = resp.data;
+            var itemalumno = [];
+
+            alumno.forEach(function(element) {
+                itemalumno.push({
+                    id: element.id,
+                    text: element.nombre
+                });
+            });
+
+            $('#alumno').select2({
+                placeholder: {
+                    id: 0,
+                    text: 'Seleccione un alumno'
+                },
+                width: '100%',
+                allowClear: true,
+                data: itemalumno,
+                //dropdownParent: $('#ModalSave')
+            });
+
+            $("#alumno").val(0).change();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                location.reload();
+            }
+        }
+    });
+
     $('#ModalSave').on('shown.bs.modal', function() {
         $(this).find('[autofocus]').focus();
     });
@@ -202,8 +226,11 @@ $(document).ready(function() {
                 success: function(data) {
                     console.log(data);
                     //var array = $.parseJSON(data);
-                    $('#id_alumno').val(id);
-
+                    $('#alumno').val(data[0].alumno).change();
+                    $('#calificacion').val(data[0].calificacionfinal);
+                    $("input[name=aprobado]").iCheck(data[0].aprovado == 1 ? 'check' : 'uncheck');
+                    $('#materias').val(data[0].materia).change();
+                    $('#cuatrimestre').val(data[0].cuatrimestre).change();
                 }
 
             });
@@ -215,20 +242,23 @@ $(document).ready(function() {
         id = typeof button.data('id') != "undefined" ? button.data('id') : 0;
     });
     $('#ModalSave').on('show.bs.modal', function(e) {
-        $('#saldo_total').val(0);
-        $('#saldo_disponible').val(0);
-        $("#saldo_gasto").val(0);
+        $('#alumno').val(0).change();
+        $('#calificacion').val(0).change();
+        $("input[name=aprobado]").iCheck('uncheck');
+        $('#materias').val(0).change();
+        $('#cuatrimestre').val(0).change();
     });
     $('#saveform').click(function() {
         var msg = '';
 
         data_request = {
-            id: 1,
-            saldo_total: $('#saldo_total').val(),
-            saldo_disponible: $('#saldo_disponible').val(),
-            saldo_gasto: $('#saldo_gasto').val(),
+            id: id,
+            alumno: $('#alumno option:selected').val()==undefined?'0':$('#alumno option:selected').val(),
+            calificacion: $('#calificacion').val(),
+            aprobado: $('input:checkbox[name=aprobado]:checked').val() == undefined ? 0 : 1,
+            materias: $('#materias option:selected').val()==undefined?'0':$('#materias option:selected').val(),
+            cuatrimestre: $('#cuatrimestre option:selected').val()==undefined?'0':$('#cuatrimestre option:selected').val(),
         }
-        console.log(data_request);
         var get_url = id == 0 ? $("#url_guardar").val() : $("#url_actualizar").val() + '/' + id;
         var type_method = id == 0 ? 'POST' : 'PUT';
 

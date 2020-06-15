@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Catalogos;
 
 use App;
 use App\Http\Controllers\Controller;
+use App\Models\Catalogos\CateraMateriasAlumno;
 use App\Models\Catalogos\Clases;
 use DB;
 use Illuminate\Http\Request;
@@ -80,17 +81,17 @@ class ClasesController extends Controller
     public function edit($id)
     {
         $results = DB::table('clase as c')
-            ->select('c.id', 'c.clase','c.enlace', 'c.id_materia', 'c.id_cuatrimestre'
-            ,'c.actividad','c.fecha','c.id_maestro')
+            ->select('c.id', 'c.clase', 'c.enlace', 'c.id_materia', 'c.id_cuatrimestre'
+                , 'c.actividad', 'c.fecha', 'c.id_maestro')
             ->where('c.id', $id)->get();
         return response()->json($results);
     }
 
-    public function clasesMateriaCuatri($id_materia,$id_cuatrimestre)
+    public function clasesMateriaCuatri($id_materia, $id_cuatrimestre)
     {
         $results = DB::table('clase as c')
-            ->select('c.id', 'c.clase','c.enlace', 'c.id_materia', 'c.id_cuatrimestre'
-            ,'c.actividad','c.fecha','c.id_maestro')
+            ->select('c.id', 'c.clase', 'c.enlace', 'c.id_materia', 'c.id_cuatrimestre'
+                , 'c.actividad', 'c.fecha', 'c.id_maestro')
             ->where('c.id_cuatrimestre', $id_cuatrimestre)
             ->where('c.id_materia', $id_materia)->get();
         return response()->json($results);
@@ -238,7 +239,110 @@ class ClasesController extends Controller
         return response()->json($results);
     }
 
-    public function clases_materias_profesor(){
+    public function clases_materias_profesor()
+    {
         return view('Maestro/materiasclases');
+    }
+    //CAT MATERIA ALUMNO
+    public function lista_alumnos()
+    {
+        $results = DB::table('catera_materias_alumno as cma')
+            ->select('cma.id', 'cma.calificacionfinal', 'cma.aprovado', 'a.username as alumno', 'm.nombre as materia', 'cu.lapso as cuatrimestre')
+            ->leftjoin('alumno as a', 'a.id', '=', 'cma.id_alumno')
+            ->leftjoin('materias as m', 'm.id', '=', 'cma.id_materia')
+            ->leftjoin('cuatrimestre as cu', 'cu.id', '=', 'cma.id_cuatrimestre')
+            ->get();
+        return response()->json(['data' => $results]);
+    }
+
+    public function guardar_alumno_as(Request $request)
+    {
+
+        $cat_clase                    = new CateraMateriasAlumno();
+        $cat_clase->id_alumno         = request("alumno");
+        $cat_clase->id_materia        = request("materias");
+        $cat_clase->id_cuatrimestre   = request("cuatrimestre");
+        $cat_clase->calificacionfinal = request("calificacion");
+        $cat_clase->aprovado          = request("aprobado");
+        DB::beginTransaction();
+        try {
+            if ($cat_clase->save()) {
+                $id  = $cat_clase->id;
+                $msg = ['status' => 'ok', 'message' => 'Se ha guardado correctamente', 'id' => $id];
+            }
+        } catch (\Illuminate\Database\QueryException $ex) {
+            DB::rollback();
+            $msg = ['status' => 'fail', 'message' => 'No se pudo guardar correctamente, por favor consulte con el administrador del sistema.', 'exception' => $ex->getMessage()];
+            return response()->json($msg, 400);
+        } catch (\Exception $ex) {
+            DB::rollback();
+            $msg = ['status' => 'fail', 'message' => 'No se pudo guardar correctamente, por favor consulte con el administrador del sistema.', 'exception' => $ex->getMessage()];
+            return response()->json($msg, 400);
+        } finally {
+            DB::commit();
+        }
+        return response()->json($msg);
+    }
+
+    public function alumno_asignado_ind($id)
+    {
+        $results = DB::table('catera_materias_alumno as cma')
+            ->select('cma.id', 'cma.calificacionfinal', 'cma.aprovado', 'cma.id_alumno as alumno', 'cma.id_materia as materia', 'cma.id_cuatrimestre as cuatrimestre')
+            ->leftjoin('alumno as a', 'a.id', '=', 'cma.id_alumno')
+            ->leftjoin('materias as m', 'm.id', '=', 'cma.id_materia')
+            ->leftjoin('cuatrimestre as cu', 'cu.id', '=', 'cma.id_cuatrimestre')
+            ->where('cma.id', $id)->get();
+        return response()->json($results);
+    }
+
+    public function update_alumno_as(Request $request, $id)
+    {
+
+        $cat_clase                    = CateraMateriasAlumno::findOrFail($id);
+        $cat_clase->id_alumno         = request("alumno");
+        $cat_clase->id_materia        = request("materias");
+        $cat_clase->id_cuatrimestre   = request("cuatrimestre");
+        $cat_clase->calificacionfinal = request("calificacion");
+        $cat_clase->aprovado          = request("aprobado");
+        DB::beginTransaction();
+        try {
+            if ($cat_clase->save()) {
+                $msg = ['status' => 'ok', 'message' => 'Se Actualizo correctamente'];
+            }
+        } catch (\Illuminate\Database\QueryException $ex) {
+            DB::rollback();
+            $msg = ['status' => 'fail', 'message' => 'No se pudo guardar correctamente, por favor consulte con el administrador del sistema.', 'exception' => $ex->getMessage()];
+            return response()->json($msg, 400);
+        } catch (\Exception $ex) {
+            DB::rollback();
+            $msg = ['status' => 'fail', 'message' => 'No se pudo guardar correctamente, por favor consulte con el administrador del sistema.', 'exception' => $ex->getMessage()];
+            return response()->json($msg, 400);
+        } finally {
+            DB::commit();
+        }
+        return response()->json($msg);
+    }
+
+    public function destroy_asignado($id)
+    {
+        $msg       = [];
+        $cat_clase = CateraMateriasAlumno::find($id);
+        DB::beginTransaction();
+        try {
+            if ($cat_clase->delete()) {
+                $msg = ['status' => 'ok', 'message' => 'Se elimino correctamente!'];
+            }
+        } catch (\Illuminate\Database\QueryException $ex) {
+            DB::rollback();
+            $msg = ['status' => 'fail', 'message' => 'No se pudo eliminar , por favor consulte con el administrador del sistema.', 'exception' => $ex->getMessage()];
+            return response()->json($msg, 400);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $msg = ['status' => 'fail', 'message' => 'No se pudo eliminar, por favor consulte con el administrador del sistema.', 'exception' => $ex->getMessage()];
+            return response()->json($msg, 400);
+        } finally {
+            DB::commit();
+        }
+        return response()->json($msg);
     }
 }

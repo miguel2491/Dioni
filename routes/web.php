@@ -37,6 +37,7 @@ Route::get('alumnos/datos/{id}', 'Catalogos\AlumnosController@edit');
 Route::put('alumnos/update/{id}', 'Catalogos\AlumnosController@update');
 Route::delete('alumnos/delete/{id}', 'Catalogos\AlumnosController@destroy');
 Route::get('alumnos/from_u/{id}', 'Catalogos\AlumnosController@fromUser');
+
 /****CARRERAS***/
 Route::resource('carreras', 'Catalogos\CarrerasController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('carreras/listar', 'Catalogos\CarrerasController@listado');
@@ -74,6 +75,11 @@ Route::delete('clases/delete/{id}', 'Catalogos\ClasesController@destroy');
 Route::get('clases_asignadas', 'Catalogos\ClasesController@asignadas');
 Route::get('clases/lista_asignadas', 'Catalogos\ClasesController@lista_asignadas');
 Route::get('clases_asignadas/datos_asignadas/{id}', 'Catalogos\ClasesController@alumno_asignada');
+Route::get('clases_alumnos/lista_alumno', 'Catalogos\ClasesController@lista_alumnos');
+Route::post('clases_asignadas/guardar_alumno_asignado', 'Catalogos\ClasesController@guardar_alumno_as');
+Route::put('clases_asignadas/actualizar_alumno_asignado/{id}', 'Catalogos\ClasesController@update_alumno_as');
+Route::get('clases_asignadas/alumno_asignado_ind/{id}', 'Catalogos\ClasesController@alumno_asignado_ind');
+Route::delete('clases_asignadas/alumno_asignado_delete/{id}', 'Catalogos\ClasesController@destroy_asignado');
 
 /***PANTALLA MAESTRO***/
 Route::resource('pan_maestro', 'Maestro\MaestroController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
@@ -131,6 +137,5 @@ Route::get('profesor/from_u/{id}', 'Catalogos\ProfesorController@fromUser');
 Route::get('profesor/profesorMaterias/{id}', 'Catalogos\ProfesorController@profesorMaterias');
 Route::get('profesor/materia/clase/{id_materia}/{id_maestro}', 'Catalogos\ProfesorController@clasesMaterias');
 Route::get('clases/materiaCuatri/{id_materia}/{id_cuatrimestre}', 'Catalogos\ClasesController@clasesMateriaCuatri');
-
 
 //cuatrimestredatos
