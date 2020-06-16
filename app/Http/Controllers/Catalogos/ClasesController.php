@@ -25,6 +25,11 @@ class ClasesController extends Controller
         return view('Catalogos/clases.index');
     }
 
+    public function claseAlumno($id_clase)
+    {
+        return view('Alumno/claseMateria')->with('id_clase', $id_clase);
+    }
+
     public function asignadas()
     {
         return view('Catalogos/clases.asignadas');

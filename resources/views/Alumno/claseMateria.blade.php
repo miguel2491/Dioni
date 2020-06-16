@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('main-title')
-   Asignatura
+   CLASES
 @endsection
 @section('main-css')
 <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -12,26 +12,26 @@
     .skin-3 .wrapper-content{
         padding:0px 5px;
     }
-    .botonsAsigna{
-        background:#ff931e;
-        text-transform:uppercase;
-        border-radius:20px;
+    .botons{
+        background:#003c54;
+        border-radius:5px;
         color:white;
         width:80%;
         margin-left:10%;
-        margin-bottom:15%;
+        padding:5px 5px 5px 5px;
+        margin-bottom:5%;
     }
-    .btnCrearClase{
-        background:#003c54;
-        text-transform:uppercase;
-        border-radius:10px;
+    .inputs{
+        background:#ff931e;
+        border-color:#ff931e;
+        border-radius:5px;
         color:white;
-        width:40%;
-        margin-left:60%;
+    }
+    .btnVer{
+        width:100%;
+        background:#ff931e;
+        color:white;
         font-weight:bold;
-    }
-    a{
-        color:white;
     }
 </style>
 @endsection
@@ -43,59 +43,60 @@
 <input type="hidden" id="url_guardar" value="{{ url('alumnos/guardar') }}">
 <input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
-<input type="hidden" id="id_maestro" >
-<input type="hidden" id="idclase" >
-
+<input type="hidden" id="id_clase" value="{{ !isset($id) ? 0 : $id_clase }}">
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">
             <p><b><div id="title"></div></b></p>
-        </div>
-        <div class="row" >
-       
-        <a href="/maestro/clase" class="btn btnCrearClase">CREAR CLASE</a>
-        <hr>
-        </div>
-        <div class="col-lg-12" style="text-align:center">
-        <div id="profesor" class="pull-left"></div>
-        <div id="action" class="pull-right">
-            
-        </div>
-      
-
-        <br>
-        <hr>
-            <div id="info"></div>
+            <span><div id="date"></div></span>
 		</div>
+	</div>
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label col-sm-2">VIDEO</label>
+            <div class="col-sm-8">
+              <div id="mainenlace"></div>
+            </div>
+        </div>
     </div>
-    
-
-   
-   
-</div>
-
-<div class="modal" id="exampleModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="titleModal"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="bodyModal">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" click="return saveAnexo()">Agregar </button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar </button>
-      </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label col-sm-2">ACTIVIDAD</label>
+            <div class="col-sm-8">
+               <div id="actividad"></div>
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label col-sm-2">ANEXOS</label>
+            <div class="col-sm-8">
+              <div id="Anexos"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Formularios</label>
+            <div class="col-sm-8">
+                <div id="formularios"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label col-sm-2">CUESTIONARIO</label>
+            <div class="col-sm-8" style="margin-bottom:3%">
+                <button class="btn btnVer" style="letter-spacing: 3px">CREAR</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom:50px">
+        <div class="col-sm-12">
+                <button class="btn btnVer">EVALUACIÓN DEL CUESTIONARIO</button>
+            </div>
+    </div>
 </div>
-
-
-
 @endsection
 @section('main-scripts')
 	<script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
@@ -105,6 +106,5 @@
 	<script src="{{ asset('js/plugins/autonumeric/autoNumeric.js') }}"></script>
 	<script src="{{ asset('js/plugins/touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
 	<script src="{{ asset('js/plugins/summernote/summernote.min.js') }}"></script>
-	<script src="{{ asset('js/maestro/maestro.js') }}"></script>
-    <script src="{{ asset('js/maestro/clasesmaterias.js') }}"></script>
+	<script src="{{ asset('js/alumno/clase.js') }}"></script>
 @endsection

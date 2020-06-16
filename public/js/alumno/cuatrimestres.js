@@ -5,7 +5,7 @@ $(document).ready(function() {
     alumno(id_user);
     var id_carrera = $("#id_carrera").val();
     carrera(id_carrera);
-    cuatrimestres(id_user);
+    
 });
 
 function carrera(id){
@@ -40,7 +40,7 @@ function alumno(id){
             console.log(resp);
             
            $("#id_alumno").val(resp[0].id)
-
+           cuatrimestres( resp[0].id);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             var data = jqXHR.responseJSON;

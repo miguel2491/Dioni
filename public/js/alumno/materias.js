@@ -4,7 +4,7 @@ $(document).ready(function() {
     var id_cuatri = $("#id_cuatri").val();
     cuatrimestre(id_cuatri);
      alumno(id_user);
-     materias(id_user,id_cuatri)
+     
 });
 
 function cleanData(){
@@ -33,7 +33,7 @@ function getClases(id){
            if(resp.length > 0)
             {
                 resp.forEach(el => {
-                    $('#div_materias').append('<hr><a href="/'+el.id+'">'+el.clase+'<br>'+el.fecha+'</a><hr>');
+                    $('#div_materias').append('<hr><a href="/alumno/clase/'+el.id+'">'+el.clase+'<br>'+el.fecha+'</a><hr>');
                    });
             }else{
                 $('#div_materias').append('Esta clase no tiene anexos aun.<br>');
@@ -136,7 +136,7 @@ function materias(iduser,idcuatri){
             $('#div_materias').empty();
             resp.forEach(x => {
                
-                addgetmateria(x.id);
+                addgetmateria(x.id_materia);
                
             });
            
@@ -159,7 +159,9 @@ function alumno(id){
         success: function(resp) {
             console.log(resp);
             
-           $("#id_alumno").val(resp[0].id)
+           $("#id_alumno").val(resp[0].id);
+           var id_cuatri = $("#id_cuatri").val();
+           materias(resp[0].id,id_cuatri);
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
