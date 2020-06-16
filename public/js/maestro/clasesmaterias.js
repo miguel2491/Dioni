@@ -8,6 +8,24 @@ $(document).ready(function() {
 });
 
 
+function modalAnexo(){
+    $('#titleModal').empty().append('Agregar Anexo');
+    var st = ''+
+    '<label for="">Aqui deje su link</label>'+
+    '<input type="text" id="enlace" class="form-control"><hr>'+
+    
+    '<select name="tipo" id="tipo" class="form-control">'+
+        '<option value="Url">Url</option>'+
+        '<option value="Pdf">PDF</option>'+
+        '<option value="youtube">Video de youtube</option>'+
+    '</select>'+
+    '<input type="hidden" value="'+$('#idclase').val()+'" id="id_clase ">'+
+    '';
+    
+    $('#bodyModal').empty().append(st);
+    
+}
+
 function materias(id){
     $.ajax({
         url: '/profesor/profesorMaterias/'+id,
@@ -102,6 +120,7 @@ function getClase(id){
         dataType: 'json',
         success: function(resp) {
             console.log(resp);     
+            $('#idclase').val(resp[0].id);
             $('#title').empty();
             $('#title').append(resp[0].clase);                  
             $('#info').empty();
@@ -124,7 +143,7 @@ function getClase(id){
         '<div class="col-lg-12">'+
             'Anexos'+
             '<div id="anexos"></div>'+
-            '<a class="btn btn-default pull-right" >Agregar Anexo</a><br>'+
+            '<a class="btn btn-default pull-right" onclick="return modalAnexo()" data-toggle="modal" data-target="#exampleModal" >Agregar Anexo</a><br>'+
         '<hr>'+
         '</div>'+
         

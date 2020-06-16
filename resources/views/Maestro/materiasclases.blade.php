@@ -44,7 +44,7 @@
 <input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
 <input type="hidden" id="id_maestro" >
-
+<input type="hidden" id="idclase" >
 
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
@@ -73,6 +73,29 @@
    
    
 </div>
+
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModal">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" click="return saveAnexo()">Agregar </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 @endsection
 @section('main-scripts')
 	<script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
