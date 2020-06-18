@@ -68,10 +68,7 @@
             <div id="info"></div>
 		</div>
     </div>
-    
-
-   
-   
+         
 </div>
 
 <div class="modal" id="exampleModal" tabindex="-1" role="dialog">

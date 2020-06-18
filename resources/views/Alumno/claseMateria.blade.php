@@ -43,7 +43,8 @@
 <input type="hidden" id="url_guardar" value="{{ url('alumnos/guardar') }}">
 <input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
-<input type="hidden" id="id_clase" value="{{ !isset($id) ? 0 : $id_clase }}">
+<input type="hidden" id="id_clase" value="{{ !isset($id_clase) ? 0 : $id_clase }}">
+
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">
@@ -53,7 +54,7 @@
 	</div>
     <div class="row">
         <div class="form-group">
-            <label class="control-label col-sm-2">VIDEO</label>
+            <label class="control-label col-sm-2">Enlace</label>
             <div class="col-sm-8">
               <div id="mainenlace"></div>
             </div>
@@ -71,7 +72,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">ANEXOS</label>
             <div class="col-sm-8">
-              <div id="Anexos"></div>
+              <div id="anexos"></div>
             </div>
         </div>
     </div>
