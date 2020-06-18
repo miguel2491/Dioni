@@ -91,6 +91,7 @@ class ProfesorController extends Controller
             ->leftjoin('users as u', 'u.id', '=', 'm.id_user')
             ->where('m.id_user', $id)->get();
         return response()->json($results);
+        //aqui
     }
 
     public function profesorMaterias($id)

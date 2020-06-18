@@ -27,11 +27,11 @@ function getClase(id){
                 var strlink = '';
                 if( link.includes("youtu")){
                     var ytlink = resp[0].enlace.replace("watch?v=", "embed/");
-                    strlink = ''+
+                    strlink =  
                         '<iframe  height="250"'+
                             'src="'+ytlink+'" frameborder="0" allowfullscreen width="100%" >'+
                         '</iframe> '+
-                    +'<br>'+'<a href="'+resp[0].enlace+'">'+resp[0].enlace+'</a>';
+                    +'<br>'+'<a href="'+resp[0].enlace+'" >'+resp[0].enlace+'</a>';
                 }else{
                     strlink ='Enlace de tarea :  <a href="'+resp[0].enlace+'">'+resp[0].enlace+'</a>';
                 }
