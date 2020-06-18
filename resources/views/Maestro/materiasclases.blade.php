@@ -39,10 +39,14 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}" id="hdd_IdUsuario">
 <input type="hidden" id="url_listado" value="{{ url('alumnos/listado') }}">
-<input type="hidden" id="url_datosget" value="{{ url('alumnos/datos') }}">
-<input type="hidden" id="url_guardar" value="{{ url('alumnos/guardar') }}">
-<input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
-<input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
+<input type="hidden" id="url_profesor_materias" value="{{ url('profesor/profesorMaterias/') }}">
+<input type="hidden" id="url_profesor_from" value="{{ url('profesor/from_u') }}">
+<input type="hidden" id="url_profesor_materias_clase" value="{{ url('profesor/materia/clase') }}">
+<input type="hidden" id="url_clases_datos" value="{{ url('clases/datos') }}">
+<input type="hidden" id="url_anexo_clase" value="{{ url('anexo/clase') }}">
+<input type="hidden" id="url_anexo_guardar" value="{{ url('anexo/guardar') }}">
+<input type="hidden" id="url_profesor_evaluaciones" value="{{ url('evaluacion/lista_profesor') }}">
+
 <input type="hidden" id="id_maestro" >
 <input type="hidden" id="idclase" >
 
@@ -84,7 +88,7 @@
         <p>Modal body text goes here.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" click="return saveAnexo()">Agregar </button>
+        <button type="button" class="btn btn-primary btnSaveAnexo" click="saveAnexo()">Agregar </button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar </button>
       </div>
     </div>

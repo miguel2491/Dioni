@@ -4,6 +4,7 @@ $(document).ready(function() {
     var id_user = $("#id_user").val();
  
      profesor(id_user);
+     getEvaluaciones();
      //
 });
 
@@ -19,7 +20,7 @@ function modalAnexo(){
         '<option value="Pdf">PDF</option>'+
         '<option value="youtube">Video de youtube</option>'+
     '</select>'+
-    '<input type="hidden" value="'+$('#idclase').val()+'" id="id_clase ">'+
+    '<input type="hidden" value="'+$('#idclase').val()+'" id="id_clase">'+
     '';
     
     $('#bodyModal').empty().append(st);
@@ -28,7 +29,7 @@ function modalAnexo(){
 
 function materias(id){
     $.ajax({
-        url: '/profesor/profesorMaterias/'+id,
+        url: $('#url_profesor_materias').val() + '/' + id,
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
@@ -50,11 +51,9 @@ function materias(id){
     });
 }
 
-
-
 function profesor(id){    
     $.ajax({
-        url: '/profesor/from_u/'+id,
+        url: $('#url_profesor_from').val() + '/' + id,
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
@@ -74,13 +73,12 @@ function profesor(id){
     });
 }
 
-
 function clases(id){         
      var id_maestro = $('#id_maestro').val();
    //profesor/materia/clase/id_maestro/id
   
    $.ajax({
-       url: '/profesor/materia/clase/'+id+'/'+id_maestro,
+    url: $('#url_profesor_materias_clase').val() + '/' + id + '/' + id_maestro,
        type: 'GET',
        dataType: 'json',
        success: function(resp) {
@@ -110,12 +108,11 @@ function clases(id){
    
 }
 
-
 function getClase(id){
     //clases/datos/ getAnexos(id);
     
     $.ajax({
-        url: '/clases/datos/'+id,
+        url: $('#url_clases_datos').val() + '/' + id ,
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
@@ -150,7 +147,7 @@ function getClase(id){
         '<div class="col-lg-12">'+
             'Formularios'+
             '<div id="formularios"></div>'+
-            '<a class="btn btn-default pull-right" >Agregar Formulario</a><br>'+
+            '<a class="btn btn-default pull-right" id="btnAddForm" onclick="getEvaluaciones()">Agregar Formulario</a><br>'+
         '</div>';
 
             
@@ -169,11 +166,8 @@ function getClase(id){
 }
 
 function getAnexos(id){
-    
-    
-    
     $.ajax({
-        url: '/anexo/clase/'+id,
+        url: $('#url_anexo_clase').val() + '/' + id ,
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
@@ -183,11 +177,9 @@ function getAnexos(id){
                 resp.forEach(el => {
                     $('#anexos').append('<a href="'+el.link+'">'+el.link+'</a><br><hr>');
                 });
-            }else{console.log('no anexos');
-            $('#anexos').append('Esta clase no tiene anexos aun.<br>');
+            }else{
+                $('#anexos').append('Esta clase no tiene anexos aun.<br>');
             }
-            //$("#anexos").append(resp[0].username);
- 
         },
         error: function(jqXHR, textStatus, errorThrown) {
             var data = jqXHR.responseJSON;
@@ -198,7 +190,6 @@ function getAnexos(id){
         }
     });
 }
-
 
 function getmateria(id){
     $.ajax({
@@ -229,6 +220,59 @@ function getcuatrimestre(id){
             console.log(resp);
             return resp.lapso
 
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                //location.reload();
+            }
+
+        }
+    });
+}
+
+$(".btnSaveAnexo").click(function() {
+    var data = {
+        id_clase : $("#id_clase").val(),
+        link : $("#enlace").val(),
+        tipo: $('#tipo option:selected').val()==undefined?'0':$('#tipo option:selected').val()
+    };
+    $.ajax({
+        url: $('#url_anexo_guardar').val(),
+        type: 'POST',
+        data:data,
+        dataType: 'json',
+        success: function(resp) {
+            console.log(resp);
+            $("#exampleModal").modal('hide');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                //location.reload();
+            }
+
+        }
+    });
+
+});
+
+function getEvaluaciones()
+{
+    var idprofe = $("#id_user").val();
+    $.ajax({
+        url: $('#url_profesor_evaluaciones').val() + '/' + idprofe,
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {
+            console.log(resp);
+            if(resp.length > 0){
+                resp.forEach(el => {
+                    $('#formularios').append('<a href="'+el.id_evaluacion+'">'+el.nombre_evaluacion+'</a><br><hr>');
+                });
+            }else{
+                $('#formularios').append('Profesor sin evaluaciones.<br>');
+            }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             var data = jqXHR.responseJSON;

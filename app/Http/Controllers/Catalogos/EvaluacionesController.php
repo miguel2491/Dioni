@@ -39,6 +39,13 @@ class EvaluacionesController extends Controller
         }
         return response()->json($msg);
     }
+
+    public function evaluacion_profe($id)
+    {
+        $results = DB::table('evaluacion')->where('id_profesor', $id)->get();
+        return response()->json($results);
+    }
+
     //Evaluaciones
     public function store(Request $request)
     {

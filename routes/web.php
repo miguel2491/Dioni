@@ -29,6 +29,7 @@ Route::post('profesor/guardar', 'Catalogos\ProfesorController@store');
 Route::get('profesor/datos/{id}', 'Catalogos\ProfesorController@edit');
 Route::put('profesor/update/{id}', 'Catalogos\ProfesorController@update');
 Route::delete('profesor/delete/{id}', 'Catalogos\ProfesorController@destroy');
+Route::get('profesor/evaluaciones', 'Catalogos\ProfesorController@lista_evaluaciones');
 /****ALUMNOS***/
 Route::resource('alumnos', 'Catalogos\AlumnosController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('alumnos/listado', 'Catalogos\AlumnosController@lista');
@@ -104,6 +105,8 @@ Route::get('materia/clases/{category}/post/{post}', 'Materias\MateriasController
 /********EVALUACIONES**********/
 /*****************************/
 Route::get('evaluacion/profesor/{id}', 'Catalogos\EvaluacionesController@con_eva_profe');
+Route::get('evaluacion/lista_profesor/{id}', 'Catalogos\EvaluacionesController@evaluacion_profe');
+
 
 Route::post('evaluacion/guardar', 'Catalogos\EvaluacionesController@store');
 Route::get('evaluacion/listar', 'Catalogos\EvaluacionesController@listado');
