@@ -4,7 +4,6 @@ $(document).ready(function() {
     var id_user = $("#id_user").val();
  
      profesor(id_user);
-     getEvaluaciones();
      //
 });
 
@@ -33,7 +32,6 @@ function materias(id){
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
-            console.log(resp);     
             $('#title').empty();
             $('#title').append("Materias");                  
             $('#info').empty();
@@ -57,7 +55,6 @@ function profesor(id){
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
-            console.log(resp);
             $('#id_maestro').val(resp[0].id);
            $("#profesor").append(resp[0].username);
            materias(resp[0].id)
@@ -82,7 +79,6 @@ function clases(id){
        type: 'GET',
        dataType: 'json',
        success: function(resp) {
-           console.log(resp);
            $('#title').empty();
            $('#title').append("Clases");
            $('#info').empty();
@@ -116,7 +112,6 @@ function getClase(id){
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
-            console.log(resp);     
             $('#idclase').val(resp[0].id);
             $('#title').empty();
             $('#title').append(resp[0].clase);                  
@@ -171,8 +166,6 @@ function getAnexos(id){
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
-            console.log(resp);
-
             if(resp.length > 0){
                 resp.forEach(el => {
                     $('#anexos').append('<a href="'+el.link+'">'+el.link+'</a><br><hr>');
@@ -197,7 +190,6 @@ function getmateria(id){
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
-            console.log(resp);
            return resp[0].carrera
 
         },
@@ -217,7 +209,6 @@ function getcuatrimestre(id){
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
-            console.log(resp);
             return resp.lapso
 
         },
@@ -243,7 +234,6 @@ $(".btnSaveAnexo").click(function() {
         data:data,
         dataType: 'json',
         success: function(resp) {
-            console.log(resp);
             $("#exampleModal").modal('hide');
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -265,13 +255,18 @@ function getEvaluaciones()
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
-            console.log(resp);
+            $("#ListaEvaluacion").modal('show');
             if(resp.length > 0){
-                resp.forEach(el => {
-                    $('#formularios').append('<a href="'+el.id_evaluacion+'">'+el.nombre_evaluacion+'</a><br><hr>');
-                });
+                var cd = "";
+                for(var r = 0; r < resp.length;r++){
+                    var id = resp[r].id_evaluacion;
+                    var nombre = resp[r].nombre_evaluacion;
+                    cd += "<input type='radio' class='minimal ev' name='evaluacion' id='ev" + id + "' value=" + id + " />"+nombre+"<br><hr>";
+                    //cd += '<a href="'+resp[r].id_evaluacion+'" style="color:black">'+resp[r].nombre_evaluacion+'</a><br><hr>';
+                }
+                $('#evaluaciones').empty().append(cd);
             }else{
-                $('#formularios').append('Profesor sin evaluaciones.<br>');
+                $('#evaluaciones').append('Profesor sin evaluaciones.<br>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -283,3 +278,34 @@ function getEvaluaciones()
         }
     });
 }
+
+$(".btnAceptarEva").click(function(){
+    var ide = "";
+    $("input:radio[name=evaluacion]:checked").each(function () {
+        ide = $(this).val();
+    });
+    var data = {
+        "id":$("#idclase").val(),
+        "id_evaluacion":ide
+    };
+    console.log(data);
+    $.ajax({
+        url: $('#url_update_clase').val(),
+        type: 'POST',
+        data:data,
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+        },
+        success: function(resp) {
+            console.log(resp);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                //location.reload();
+            }
+
+        }
+    });
+});

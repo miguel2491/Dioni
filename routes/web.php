@@ -81,6 +81,7 @@ Route::post('clases_asignadas/guardar_alumno_asignado', 'Catalogos\ClasesControl
 Route::put('clases_asignadas/actualizar_alumno_asignado/{id}', 'Catalogos\ClasesController@update_alumno_as');
 Route::get('clases_asignadas/alumno_asignado_ind/{id}', 'Catalogos\ClasesController@alumno_asignado_ind');
 Route::delete('clases_asignadas/alumno_asignado_delete/{id}', 'Catalogos\ClasesController@destroy_asignado');
+Route::post('clase/update_evalua', 'Catalogos\ClasesController@update_clase_eva');
 
 /***PANTALLA MAESTRO***/
 Route::resource('pan_maestro', 'Maestro\MaestroController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);

@@ -46,6 +46,7 @@
 <input type="hidden" id="url_anexo_clase" value="{{ url('anexo/clase') }}">
 <input type="hidden" id="url_anexo_guardar" value="{{ url('anexo/guardar') }}">
 <input type="hidden" id="url_profesor_evaluaciones" value="{{ url('evaluacion/lista_profesor') }}">
+<input type="hidden" id="url_update_clase" value="{{ url('clase/update_evalua') }}">
 
 <input type="hidden" id="id_maestro" >
 <input type="hidden" id="idclase" >
@@ -94,8 +95,26 @@
     </div>
   </div>
 </div>
-
-
+<!-- MODAL LISTA EVALUACIONES -->
+<div class="modal" id="ListaEvaluacion" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="evaluaciones" style="text-align: center;">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btnAceptarEva" data-dismiss="modal">Aceptar </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection
 @section('main-scripts')
