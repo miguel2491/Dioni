@@ -13,6 +13,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
-        'http://192.168.90.165:8080/Dio/public/*',
+        'http://192.168.1.67:8080/Dio/public/*',
     ];
 }
