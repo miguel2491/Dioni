@@ -287,6 +287,25 @@ function ir_eva(id)
         "id_evaluacion":id
     };
     var url = $("#url_update_clase").val();
-    window.location = url+'/'+ id
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data:data,
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+        },
+        success: function(resp) {
+            var url2 = $("#url_view_clase").val();
+            window.location = url2+'/'+ id;   
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                //location.reload();
+            }
+
+        }
+    });
     console.log(id);
 }

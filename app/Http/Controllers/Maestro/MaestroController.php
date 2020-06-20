@@ -50,7 +50,31 @@ class MaestroController extends Controller
         return view('Maestro/cuestionario');
     }
 
-    public function update_clase_eva($id)
+    public function update_clase_eva(Request $request)
+    {
+        $id = request("id");
+        $cat_clase                    = Clases::find($id);
+        $cat_clase->id_evaluacion         = request("id_evaluacion");
+        DB::beginTransaction();
+        try {
+            if ($cat_clase->save()) {
+                $msg = ['status' => 'ok', 'message' => 'Se Actualizo correctamente'];
+            }
+        } catch (\Illuminate\Database\QueryException $ex) {
+            DB::rollback();
+            $msg = ['status' => 'fail', 'message' => 'No se pudo guardar correctamente, por favor consulte con el administrador del sistema.', 'exception' => $ex->getMessage()];
+            return response()->json($msg, 400);
+        } catch (\Exception $ex) {
+            DB::rollback();
+            $msg = ['status' => 'fail', 'message' => 'No se pudo guardar correctamente, por favor consulte con el administrador del sistema.', 'exception' => $ex->getMessage()];
+            return response()->json($msg, 400);
+        } finally {
+            DB::commit();
+        }
+        return response()->json($msg);
+    }
+
+    public function update_clase_view($id)
     {
         return view('Maestro/cuestionario')->with('id', $id);
     }
