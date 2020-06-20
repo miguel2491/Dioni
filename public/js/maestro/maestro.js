@@ -1,9 +1,51 @@
-
-
 //cuestionario/consulta/
 $(document).ready(function() {
-	info_evaluacion();
+    var id_aux = $("#id_evaluacion").val(); 
+    console.log(id_aux);
+    if(id_aux != 0){
+        info_evaluacion_ind(id_aux);
+    }else{
+        info_evaluacion();
+    }
+    
 });
+
+function info_evaluacion_ind(eva)
+{
+    var id_profesor = $("#hdd_IdProfesor").val();
+    var data = {
+        "id_profesor":id_profesor,
+        "id_evaluacion":eva
+    };
+    var url = $("#url_evalua_profe").val();
+    $.ajax({
+		url: url,
+        type: 'POST',
+        data:data,
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+        },
+        success: function(data) {
+            var obj = data[0].id_evaluacion;
+            if(obj != 0){
+            	$("#id_evaluacion").val(obj);
+            	$("#btn_add_eva").css('display','none');
+            	$("#title_eva").css('display','block');
+            	$("#name_evalua").text(data[0].nombre_evaluacion);
+            	$("#btn_add_preguntas").css('display','block');
+            	consultar_preguntas(obj);
+            }else{
+            	$("#id_evaluacion").val(0);
+            	$("#id_evaluacion").val(0);
+            	$("#btn_add_eva").css('display','block');
+            	$("#title_eva").css('display','none');
+            	$("#name_evalua").text("");
+            	$("#btn_add_preguntas").css('display','none');
+            }
+        }
+    });    
+}
 
 function info_evaluacion()
 {
@@ -14,7 +56,6 @@ function info_evaluacion()
         dataType: 'json',
         success: function(data) {
         	var obj = data.id_evaluacion;
-            console.log(obj);
             if(obj != 0){
             	$("#id_evaluacion").val(obj);
             	$("#btn_add_eva").css('display','none');
@@ -36,12 +77,12 @@ function info_evaluacion()
 
 function consultar_preguntas(ide)
 {
-	$.ajax({
-		url: 'evaluacion/con_pregunta/' + ide,
+    var url = $("#url_preguntas").val();
+    $.ajax({
+		url: url +'/' + ide,
         type: 'GET',
         dataType: 'json',
-        success: function(data) {
-            console.log(data);
+        success: function(data) {console.log(data);
             var c = "";
             for(var x = 0; x < data.length; x++){
             	var i = x+1;
@@ -60,12 +101,12 @@ function consultar_preguntas(ide)
 
 function cons_res(idp)
 {
+    var url = $("#url_resp").val();
 	$.ajax({
-		url: 'evaluacion/con_respuesta/' + idp,
+		url: url+'/' + idp,
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-            console.log(data);
             var c = "";
             for(var x = 0; x < data.length; x++){
             	var respuesta = data[x].respuesta;
@@ -97,7 +138,6 @@ $('#btn_eva').click(function() {
         },
         data: data,
         success: function(data) {
-            console.log(data);
             if(data.status == "ok"){
                 location.reload();
                 toastr.success(data.message);
@@ -141,7 +181,6 @@ $('#btn_agregar_preg').click(function() {
         },
         data: data,
         success: function(data) {
-            console.log(data);
             if(data.status == "ok"){
                 $("#div_res").css('display','block');
                 $("#btn_agregar_preg").css('display','none');
@@ -191,7 +230,6 @@ $("#btn_agregar_respuesta").click(function() {
         },
         data: data,
         success: function(data) {
-            console.log(data);
             if(data.status == "ok"){
                 $("#Respuesta").val("");
                 toastr.success(data.message);

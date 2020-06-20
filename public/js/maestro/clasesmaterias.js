@@ -257,13 +257,14 @@ function getEvaluaciones()
         success: function(resp) {
             $("#ListaEvaluacion").modal('show');
             if(resp.length > 0){
-                var cd = "";
+                var cd = "<div class='col-xs-12'>";
                 for(var r = 0; r < resp.length;r++){
                     var id = resp[r].id_evaluacion;
                     var nombre = resp[r].nombre_evaluacion;
-                    cd += "<input type='radio' class='minimal ev' name='evaluacion' id='ev" + id + "' value=" + id + " />"+nombre+"<br><hr>";
-                    //cd += '<a href="'+resp[r].id_evaluacion+'" style="color:black">'+resp[r].nombre_evaluacion+'</a><br><hr>';
+                    cd += "<div class='row'><div class='col-xs-9'><label>"+nombre+"</label></div>"+
+                    "<div class='col-xs-3'><button class='btn btn-xs btn-primary btnEva' onclick='ir_eva("+id+")'>Seleccionar</button></div></div>";
                 }
+                cd = cd +"</div>";
                 $('#evaluaciones').empty().append(cd);
             }else{
                 $('#evaluaciones').append('Profesor sin evaluaciones.<br>');
@@ -279,33 +280,13 @@ function getEvaluaciones()
     });
 }
 
-$(".btnAceptarEva").click(function(){
-    var ide = "";
-    $("input:radio[name=evaluacion]:checked").each(function () {
-        ide = $(this).val();
-    });
+function ir_eva(id)
+{
     var data = {
         "id":$("#idclase").val(),
-        "id_evaluacion":ide
+        "id_evaluacion":id
     };
-    console.log(data);
-    $.ajax({
-        url: $('#url_update_clase').val(),
-        type: 'POST',
-        data:data,
-        dataType: 'json',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
-        },
-        success: function(resp) {
-            console.log(resp);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            var data = jqXHR.responseJSON;
-            if (jqXHR.status == 401) {
-                //location.reload();
-            }
-
-        }
-    });
-});
+    var url = $("#url_update_clase").val();
+    window.location = url+'/'+ id
+    console.log(id);
+}

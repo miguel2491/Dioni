@@ -81,7 +81,7 @@ Route::post('clases_asignadas/guardar_alumno_asignado', 'Catalogos\ClasesControl
 Route::put('clases_asignadas/actualizar_alumno_asignado/{id}', 'Catalogos\ClasesController@update_alumno_as');
 Route::get('clases_asignadas/alumno_asignado_ind/{id}', 'Catalogos\ClasesController@alumno_asignado_ind');
 Route::delete('clases_asignadas/alumno_asignado_delete/{id}', 'Catalogos\ClasesController@destroy_asignado');
-Route::post('clase/update_evalua', 'Catalogos\ClasesController@update_clase_eva');
+
 
 /***PANTALLA MAESTRO***/
 Route::resource('pan_maestro', 'Maestro\MaestroController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
@@ -92,6 +92,8 @@ Route::get('evaluacion_maestro', 'Maestro\MaestroController@evalua_maestro_vista
 Route::get('cuestionario_maestro', 'Maestro\MaestroController@cuestionario_maestro_vista');
 Route::get('maestro/clase', 'Maestro\MaestroController@clase');
 Route::post('maestro/clase_guardar', 'Maestro\MaestroController@clase_save');
+Route::get('cuestionario_maestro/clase', 'Maestro\MaestroController@cuestionario_maestro_clase');
+Route::get('clase/update_evalua/{id}', 'Maestro\MaestroController@update_clase_eva');
 /***PANTALLA ALUMNO***/
 Route::resource('pan_alumno', 'Alumno\AlumnoController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('menu_alumno', 'Alumno\AlumnoController@menu_alumno');
@@ -107,7 +109,7 @@ Route::get('materia/clases/{category}/post/{post}', 'Materias\MateriasController
 /*****************************/
 Route::get('evaluacion/profesor/{id}', 'Catalogos\EvaluacionesController@con_eva_profe');
 Route::get('evaluacion/lista_profesor/{id}', 'Catalogos\EvaluacionesController@evaluacion_profe');
-
+Route::post('evaluacion/profesor_ind', 'Catalogos\EvaluacionesController@con_eva_ind');
 
 Route::post('evaluacion/guardar', 'Catalogos\EvaluacionesController@store');
 Route::get('evaluacion/listar', 'Catalogos\EvaluacionesController@listado');

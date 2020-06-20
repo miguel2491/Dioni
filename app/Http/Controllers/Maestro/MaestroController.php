@@ -50,6 +50,11 @@ class MaestroController extends Controller
         return view('Maestro/cuestionario');
     }
 
+    public function update_clase_eva($id)
+    {
+        return view('Maestro/cuestionario')->with('id', $id);
+    }
+
     public function clase()
     {
         return view('Maestro/clase_');

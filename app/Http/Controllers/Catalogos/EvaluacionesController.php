@@ -40,6 +40,14 @@ class EvaluacionesController extends Controller
         return response()->json($msg);
     }
 
+    public function con_eva_ind(Request $request)
+    {
+        $id_evaluacion = request("id_evaluacion");
+        $id_profesor = request("id_profesor");
+        $evaluacion = DB::table('evaluacion')->where('id_profesor', $id_profesor)->where('id_evaluacion', $id_evaluacion)->get();
+        return response()->json($evaluacion);
+    }
+
     public function evaluacion_profe($id)
     {
         $results = DB::table('evaluacion')->where('id_profesor', $id)->get();

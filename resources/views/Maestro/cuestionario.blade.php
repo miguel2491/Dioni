@@ -52,8 +52,13 @@
 @section('main-content')
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}" id="hdd_IdUsuario">
+<input type="hidden" name="id_evaluacion" value="{{ !isset($id) ? 0 : $id }}" id="id_evaluacion">
 <input type="hidden" name="id_profesor" value="{{ Auth::user()->id }}" id="hdd_IdProfesor">
 <input type="hidden" id="url_listado" value="{{ url('alumnos/listado') }}">
+<input type="hidden" id="url_preguntas" value="{{ url('evaluacion/con_pregunta') }}">
+<input type="hidden" id="url_resp" value="{{ url('evaluacion/con_respuesta') }}">
+<input type="hidden" id="url_evalua_profe" value="{{ url('evaluacion/profesor_ind') }}">
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row border-bottom">
         <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
