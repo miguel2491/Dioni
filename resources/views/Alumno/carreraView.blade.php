@@ -46,6 +46,12 @@
 <input type="hidden" id="url_guardar" value="{{ url('alumnos/guardar') }}">
 <input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
 <input type="hidden" id="id_alumno" >
+
+<input type="hidden" id="carreras_datos" value="{{ url('carreras/datos') }}">
+<input type="hidden" id="alumnos_from_u" value="{{ url('alumnos/from_u') }}">
+<input type="hidden" id="cuatrimestres_datos_u" value="{{ url('cuatrimestres/datos_u') }}">
+<input type="hidden" id="cuatrimestres_alumno" value="{{ url('cuatrimestres/alumno') }}">
+
 <input type="hidden" id="id_carrera" value="{{ !isset($id) ? 0 : $id }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
 <div class="wrapper wrapper-content animated fadeInRight">

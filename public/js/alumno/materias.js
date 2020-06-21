@@ -23,7 +23,7 @@ function getClases(id){
     //clases/materiaCuatri
 
     $.ajax({
-        url: '/clases/materiaCuatri/'+id+'/'+id_cuatri,
+        url: $('#clases_materiaCuatri').val()+'/'+id+'/'+id_cuatri,
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
@@ -53,7 +53,7 @@ function getClases(id){
 
 function cuatrimestre(id){
     $.ajax({
-        url: '/cuatrimestres/datos_u/'+id,
+        url: $('#cuatrimestres_datos_u').val()+'/'+id,
         type: 'GET',
         dataType: 'json',
         success: function(resp) {

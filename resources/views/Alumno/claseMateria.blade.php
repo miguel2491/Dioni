@@ -53,6 +53,8 @@
 
 
 
+<input type="hidden" id="clases_materiaCuatri" value="{{ url('clases/materiaCuatri') }}">
+<input type="hidden" id="cuatrimestres_datos_u" value="{{ url('cuatrimestres/datos_u') }}">
 
 
 <div class="wrapper wrapper-content animated fadeInRight">

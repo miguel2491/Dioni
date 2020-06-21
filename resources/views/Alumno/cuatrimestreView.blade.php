@@ -48,6 +48,22 @@
 <input type="hidden" id="id_alumno" >
 <input type="hidden" id="id_cuatri" value="{{ !isset($id) ? 0 : $id }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
+<input type="hidden" id="clases_materiaCuatri" value="{{ url('clases/materiaCuatri') }}">
+<input type="hidden" id="cuatrimestres_datos_u" value="{{ url('cuatrimestres/datos_u') }}">
+<input type="hidden" id="cuatrimestres_alumno" value="{{ url('cuatrimestres/alumno') }}">
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">

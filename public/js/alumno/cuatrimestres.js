@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 function carrera(id){
     $.ajax({
-        url: 'carreras/datos/'+id,
+        url: $('#carreras_datos').val()+'/'+id,
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
@@ -33,7 +33,7 @@ function carrera(id){
 
 function alumno(id){    
     $.ajax({
-        url: 'alumnos/from_u/'+id,
+        url: $('#alumnos_from_u').val()+'/'+id,
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
@@ -52,9 +52,9 @@ function alumno(id){
     });
 }
 
-function cuatrimestres(id){
+function cuatrimestres(id){ 
     $.ajax({
-    url: 'cuatrimestres/alumno/'+id,
+        url: $('#cuatrimestres_alumno').val()+'/'+id,
     type: 'GET',
     dataType: 'json',
     success: function(resp) {
@@ -82,7 +82,7 @@ function cuatrimestres(id){
 
 function cuatrimestresInfo(id){
     $.ajax({
-        url: 'cuatrimestres/datos_u/'+id,
+        url: $('#cuatrimestres_datos_u').val()+'/'+id,
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
