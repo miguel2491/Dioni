@@ -54,7 +54,7 @@ function getEvaluaciones()
                     
 
                     cd += "<div class='row'><div class='col-xs-12'><label>"+nombre+"</label></div>"+                   
-                    "<div class='col-xs-12'> <a class='btn btn-xs btn-primary btnEva' href='/clase/update_view/"+id+"'>Ver evaluacion</a><hr></div></div>";
+                    "<div class='col-xs-12'> <a class='btn btn-xs btn-primary btnEva' href='"+$('#url_evaluacion').val()+"/"+id+"'>Ver evaluacion</a><hr></div></div>";
                 }
                 cd = cd +"</div>";
                 $('#evaluaciones').empty().append(cd);

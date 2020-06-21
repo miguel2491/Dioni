@@ -57,6 +57,11 @@
 <input type="hidden" id="url_guardar" value="{{ url('alumnos/guardar') }}">
 <input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
+
+<input type="hidden" id="url_evalguardar" value="{{ url('evaluacion/guardar') }}">
+<input type="hidden" id="url_preguntaguardar" value="{{ url('pregunta/guardar') }}">
+<input type="hidden" id="url_respuesta_guardar" value="{{ url('respuesta/guardar') }}">
+<input type="hidden" id="url_evaluacion" value="{{ url('clase/update_view') }}">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="container-fluid">
         <div class="row">

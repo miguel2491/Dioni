@@ -45,6 +45,16 @@
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
 <input type="hidden" id="id_clase" value="{{ !isset($id_clase) ? 0 : $id_clase }}">
 <input type="hidden" id="url_anexo_clase" value="{{ url('anexo/clase') }}">
+<input type="hidden" id="url_evalguardar" value="{{ url('evaluacion/guardar') }}">
+<input type="hidden" id="url_preguntaguardar" value="{{ url('pregunta/guardar') }}">
+<input type="hidden" id="url_respuesta_guardar" value="{{ url('respuesta/guardar') }}">
+<input type="hidden" id="url_evaluacion" value="{{ url('clase/update_view') }}">
+
+
+
+
+
+
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">

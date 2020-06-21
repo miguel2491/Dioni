@@ -130,7 +130,7 @@ $('#btn_eva').click(function() {
         "id_profesor":$("#hdd_IdProfesor").val()
     };
     $.ajax({
-        url: 'evaluacion/guardar',
+        url: $('#url_evalguardar').val(),
         type: 'POST',
         dataType: 'json',
         headers: {
@@ -173,7 +173,7 @@ $('#btn_agregar_preg').click(function() {
 		"nombre_pregunta":$("#Pregunta").val()
 	};
 	$.ajax({
-        url: 'pregunta/guardar',
+        url: $('#url_preguntaguardar').val(),
         type: 'POST',
         dataType: 'json',
         headers: {
@@ -222,7 +222,8 @@ $("#btn_agregar_respuesta").click(function() {
         "respuesta":$("#Respuesta").val()
     };
     $.ajax({
-        url: 'respuesta/guardar',
+        url: $('#url_respuesta_guardar').val(),
+        
         type: 'POST',
         dataType: 'json',
         headers: {
