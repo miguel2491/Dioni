@@ -44,7 +44,7 @@
 <input type="hidden" id="url_actualizar" value="{{ url('alumnos/update') }}">
 <input type="hidden" id="url_eliminar" value="{{ url('alumnos/delete') }}">
 <input type="hidden" id="id_clase" value="{{ !isset($id_clase) ? 0 : $id_clase }}">
-
+<input type="hidden" id="url_anexo_clase" value="{{ url('anexo/clase') }}">
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
 		<div class="col-lg-12" style="text-align:center">
@@ -84,17 +84,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="form-group">
-            <label class="control-label col-sm-2">CUESTIONARIO</label>
-            <div class="col-sm-8" style="margin-bottom:3%">
-                <button class="btn btnVer" style="letter-spacing: 3px">CREAR</button>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="padding-bottom:50px">
+   
+    <div id="evaluacionBtn" class="row" style="padding-bottom:50px">
         <div class="col-sm-12">
-                <button class="btn btnVer">EVALUACIÓN DEL CUESTIONARIO</button>
+              <div id="btnireval"></div>
             </div>
     </div>
 </div>

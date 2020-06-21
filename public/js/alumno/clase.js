@@ -3,10 +3,35 @@ $(document).ready(function() {
     var id_user = $("#id_user").val();
     var id_clase = $("#id_clase").val();
     getClase(id_clase);
-    
+    getAnexos(id_clase);
 });
 
+function getAnexos(id){
+    $.ajax({
+        url: $('#url_anexo_clase').val() + '/' + id ,
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {
+            console.log(resp);
+            if(resp.length > 0){
+                resp.forEach(el => {
+                    $('#anexos').append('<br><a href="'+el.link+'"><h3>'+el.link+'</h3></a>  <hr>');
+                });
+            }else{
+                $('#anexos').append('Esta clase no tiene anexos aun.<br>');
+            }
 
+            
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                location.reload();
+            }
+
+        }
+    });
+}
 
 function getClase(id){
     $.ajax({
@@ -34,6 +59,12 @@ function getClase(id){
                     +'<br>'+'<a href="'+resp[0].enlace+'" >'+resp[0].enlace+'</a>';
                 }else{
                     strlink ='Enlace de tarea :  <a href="'+resp[0].enlace+'">'+resp[0].enlace+'</a>';
+                }
+
+                if(resp[0].id_evaluacion != null){
+                        $('#btnireval').empty().append('<a class="btn btnVer" href="/cuestionario_alumno">EVALUACIÓN DEL CUESTIONARIO</a>');
+                }else{
+                    $('#evaluacionBtn').hide();
                 }
 
             $('#mainenlace').empty().append(strlink);    
