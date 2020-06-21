@@ -25,6 +25,11 @@ class MaestroController extends Controller
         return view('Maestro/index');
     }
 
+    public function nuevaEvaluacion()
+    {
+        return view('Maestro/nuevoCuestionario');
+    }
+
     public function menu_profe()
     {
         return view('Maestro/menu');

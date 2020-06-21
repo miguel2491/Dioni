@@ -112,6 +112,15 @@ function getClase(id){
         type: 'GET',
         dataType: 'json',
         success: function(resp) {
+            console.log('aqui');console.log(resp);
+            var formulario = resp[0].id_evaluacion;
+            var formtxt;
+            if(formulario = null){
+                formtxt= 'No hay evaluacion para esta clase';
+            }else{
+                formtxt="<br><button class='btn btn-xs btn-primary btnEva' onclick='ir_eva("+ resp[0].id_evaluacion+")'>Evaluacion asignada</button>";
+            }
+            
             $('#idclase').val(resp[0].id);
             $('#title').empty();
             $('#title').append(resp[0].clase);                  
@@ -141,13 +150,12 @@ function getClase(id){
         
         '<div class="col-lg-12">'+
             'Formularios'+
-            '<div id="formularios"></div>'+
-            '<a class="btn btn-default pull-right" id="btnAddForm" onclick="getEvaluaciones()">Agregar Formulario</a><br>'+
-        '</div>';
-
-            
-           
+            '<div id="formularios">'+formtxt+'</div><br>'+
+            '<a class="btn btn-default pull-right" id="btnAddForm" onclick="getEvaluaciones()">Agregar Evaluacion</a><br><hr>'+
+        '</div>';        
             $('#info').append(st);
+
+           
             
         },
         error: function(jqXHR, textStatus, errorThrown) {

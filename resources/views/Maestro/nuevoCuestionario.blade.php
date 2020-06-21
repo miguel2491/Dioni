@@ -58,7 +58,7 @@
 <input type="hidden" id="url_preguntas" value="{{ url('evaluacion/con_pregunta') }}">
 <input type="hidden" id="url_resp" value="{{ url('evaluacion/con_respuesta') }}">
 <input type="hidden" id="url_evalua_profe" value="{{ url('evaluacion/profesor_ind') }}">
-
+<input type="hidden" id="url_profesor_evaluaciones" value="{{ url('evaluacion/lista_profesor') }}">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row border-bottom">
         <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
@@ -70,12 +70,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12" style="text-align:center">
-                <p><b>CUESTIONARIO</b></p>
+                <p><b>CUESTIONARIOS / Evaluaciones</b></p>
             </div>
         </div>
         <input type="hidden" id="id_evaluacion" value="0">
         <div class="row" id="btn_add_eva" style="display: none" align="left">
-           <!-- <a data-toggle="modal" data-target="#modal_add"><i class="fa fa-plus-circle"></i></a>-->
+            <a data-toggle="modal" data-target="#modal_add"><i class="fa fa-plus-circle"></i></a>
         </div>
         <div class="row" align="center" id="title_eva" style="display: none">
             <h2 id="name_evalua"></h2>
@@ -87,11 +87,9 @@
 
         </div>
         <div class="row" align="right">
-            <a data-toggle="modal" data-target="#modal_add"><i class="fa fa-upload"></i></a>
+            <a data-toggle="modal" data-target="#modal_add">Agregar Evaluacion<i class="fa fa-upload"></i></a>
         </div>
-        <div class="row" align="right" style="margin-top: 3%;margin-bottom: 3%">
-            <label>CALIFICACIÓN:<b>0</b></label>
-        </div>
+        <div id="evaluaciones"></div>
         <!--
 
 
@@ -177,5 +175,5 @@
     <script src="{{ asset('js/plugins/autonumeric/autoNumeric.js') }}"></script>
     <script src="{{ asset('js/plugins/touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
     <script src="{{ asset('js/plugins/summernote/summernote.min.js') }}"></script>
-    <script src="{{ asset('js/maestro/maestro.js') }}"></script>
+    <script src="{{ asset('js/maestro/evaluacionNueva.js') }}"></script>
 @endsection

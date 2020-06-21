@@ -47,7 +47,9 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-md-6">
+        <br>
+        <hr>
+        <div class="col-xs-3 col-md-3 col-lg-3 col-sm-3">
             <a href="{{ URL::to('perfil') }}">
                 <div align="center">
                     <img src="img/fondos/login/unimovil.png" style="width:45px" /><br>
@@ -55,23 +57,34 @@
                 </div>
             </a>
         </div>
-        <div class="col-xs-6 col-md-6">
+        <div class="col-xs-3 col-md-3 col-lg-3 col-sm-3">
             <a href="{{ URL::to('maestro/clase') }}">
             <img src="img/fondos/principal/evaluacion.png" style="width:75px" /><br>
                     <label class="titulos_menu">Generar Clase</label>
             </a>
         </div>
 
-        <div class="col-xs-6 col-md-6">
+        <div class="col-xs-3 col-md-3 col-lg-3 col-sm-3">
             <a href="{{ URL::to('maestro/materias/clases') }}">
             <img src="img/fondos/principal/evaluacion.png" style="width:75px" /><br>
                     <label class="titulos_menu">Clases y Materias</label>
             </a>
         </div>
+        <div class="col-xs-3 col-md-3 col-lg-3 col-sm-3">
+            <a href="{{ URL::to('maestro/evaluaciones') }}">
+                <div align="center">
+                    <img src="img/fondos/principal/cuestionarios.png" style="width:70px" />
+                    <label class="titulos_menu">Generar cuestionarios</label><br>
+                </div>
+            </a>
+        </div>
         <div class="col-xs-12 col-md-12">
+            <br>
+            <br>
             <hr>
         </div>
     </div>
+    <!--
     <div class="row">
         <div class="col-xs-6 col-md-6">
             <a href="{{ URL::to('evaluacion_maestro') }}">
@@ -90,7 +103,7 @@
             </a>
         </div>
     </div>
-    <div class="row" style="padding-bottom: 85%">
+  <div class="row" style="padding-bottom: 85%">
         <div class="col-xs-6 col-md-6">
             <a href="{{ URL::to('evaluacion_alumno') }}">
                 <div align="center">
@@ -108,6 +121,10 @@
             </a>
         </div>
     </div>
+
+-->
+  
+
     <div class="footer">
         <div>
              <a href="{{ route('home') }}">

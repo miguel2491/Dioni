@@ -95,6 +95,8 @@ Route::post('maestro/clase_guardar', 'Maestro\MaestroController@clase_save');
 Route::get('cuestionario_maestro/clase', 'Maestro\MaestroController@cuestionario_maestro_clase');
 Route::post('clase/update_evalua', 'Maestro\MaestroController@update_clase_eva');
 Route::get('clase/update_view/{id}', 'Maestro\MaestroController@update_clase_view');
+Route::get('maestro/evaluaciones', 'Maestro\MaestroController@nuevaEvaluacion');
+
 /***PANTALLA ALUMNO***/
 Route::resource('pan_alumno', 'Alumno\AlumnoController', ['except' => ['create', 'store', 'update', 'destroy', 'edit', 'show']]);
 Route::get('menu_alumno', 'Alumno\AlumnoController@menu_alumno');

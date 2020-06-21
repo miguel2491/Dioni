@@ -87,7 +87,7 @@ class ClasesController extends Controller
     {
         $results = DB::table('clase as c')
             ->select('c.id', 'c.clase', 'c.enlace', 'c.id_materia', 'c.id_cuatrimestre'
-                , 'c.actividad', 'c.fecha', 'c.id_maestro')
+                , 'c.actividad', 'c.fecha', 'c.id_maestro','c.id_evaluacion')
             ->where('c.id', $id)->get();
         return response()->json($results);
     }
