@@ -45,6 +45,9 @@
 <input type="hidden" id="url_clases_datos" value="{{ url('clases/datos') }}">
 <input type="hidden" id="url_anexo_clase" value="{{ url('anexo/clase') }}">
 <input type="hidden" id="url_anexo_guardar" value="{{ url('anexo/guardar') }}">
+<input type="hidden" id="url_anexo_delete" value="{{ url('anexo/delete') }}">
+
+
 <input type="hidden" id="url_profesor_evaluaciones" value="{{ url('evaluacion/lista_profesor') }}">
 <input type="hidden" id="url_update_clase" value="{{ url('clase/update_evalua') }}">
 <input type="hidden" id="url_view_clase" value="{{ url('clase/update_view') }}">

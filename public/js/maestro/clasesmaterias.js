@@ -159,7 +159,26 @@ function getClase(id){
         }
     });
 }
+function anexoDelete(id){
+   
 
+    $.ajax({
+        url: $('#url_anexo_delete').val() + '/' + id ,
+        type: 'GET',
+        dataType: 'json',
+        success: function(resp) {
+            location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            if (jqXHR.status == 401) {
+                //location.reload();
+            }
+
+        }
+    });
+
+}
 function getAnexos(id){
     $.ajax({
         url: $('#url_anexo_clase').val() + '/' + id ,
@@ -168,7 +187,7 @@ function getAnexos(id){
         success: function(resp) {
             if(resp.length > 0){
                 resp.forEach(el => {
-                    $('#anexos').append('<a href="'+el.link+'">'+el.link+'</a><br><hr>');
+                    $('#anexos').append('<br><a href="'+el.link+'"><h3>'+el.link+'</h3></a> <a class="btn btn-sm pull-right btn-danger" onclick="return anexoDelete('+el.id+')" >Eliminar </a><br><hr>');
                 });
             }else{
                 $('#anexos').append('Esta clase no tiene anexos aun.<br>');
@@ -232,9 +251,49 @@ $(".btnSaveAnexo").click(function() {
         url: $('#url_anexo_guardar').val(),
         type: 'POST',
         data:data,
+      
         dataType: 'json',
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         success: function(resp) {
+            console.log(resp);
             $("#exampleModal").modal('hide');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseJSON;
+            
+            if (jqXHR.status == 401) {
+                //location.reload();
+            }
+
+            alert(textStatus);
+
+        }
+    });
+
+});
+
+
+
+$(".btnAceptarEva").click(function(){
+    var ide = "";
+    $("input:radio[name=evaluacion]:checked").each(function () {
+        ide = $(this).val();
+    });
+    var data = {
+        "id":$("#idclase").val(),
+        "id_evaluacion":ide
+    };
+    console.log(data);
+    $.ajax({
+        url: $('#url_update_clase').val(),
+        type: 'POST',
+        data:data,
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+        },
+        success: function(resp) {
+            console.log(resp);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             var data = jqXHR.responseJSON;
@@ -244,8 +303,9 @@ $(".btnSaveAnexo").click(function() {
 
         }
     });
-
 });
+
+
 
 function getEvaluaciones()
 {
@@ -261,8 +321,13 @@ function getEvaluaciones()
                 for(var r = 0; r < resp.length;r++){
                     var id = resp[r].id_evaluacion;
                     var nombre = resp[r].nombre_evaluacion;
-                    cd += "<div class='row'><div class='col-xs-9'><label>"+nombre+"</label></div>"+
-                    "<div class='col-xs-3'><button class='btn btn-xs btn-primary btnEva' onclick='ir_eva("+id+")'>Seleccionar</button></div></div>";
+
+                   
+                    
+
+                    cd += "<div class='row'><div class='col-xs-12'><label>"+nombre+"</label></div>"+
+                    " <div class='col-xs-12'> selecionar <input type='radio' class='minimal ev' name='evaluacion' id='ev" + id + "' value=" + id + " /> "+nombre+"<br><br></div>"
+                    +"<div class='col-xs-12'> <button class='btn btn-xs btn-primary btnEva' onclick='ir_eva("+id+")'>Ver evaluacion</button><hr></div></div>";
                 }
                 cd = cd +"</div>";
                 $('#evaluaciones').empty().append(cd);
